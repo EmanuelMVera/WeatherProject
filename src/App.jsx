@@ -7,7 +7,6 @@ function App() {
 
   return (
     <>
-      <h1>Clima</h1>
       <CitySearch setDatos={setDatos} />
       {console.log(datos)}
     </>

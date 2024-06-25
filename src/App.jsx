@@ -1,14 +1,28 @@
 import React, { useState } from "react";
 import "./App.css";
 import CitySearch from "./components/CitySearch";
+import Header from "./components/Header";
 
 function App() {
-  const [datos, setDatos] = useState(null);
+  const datosDefault = {
+    name: "-",
+    min: "-",
+    max: "-",
+    img: "-",
+    id: "-",
+    wind: "-",
+    temp: "-",
+    date: "-",
+    hour: "-",
+  };
+  const [datos, setDatos] = useState(datosDefault);
 
   return (
     <>
       <CitySearch setDatos={setDatos} />
-      {console.log(datos)}
+      <div className="weather-app">
+        <Header location={datos.name} date={datos.date} />
+      </div>
     </>
   );
 }

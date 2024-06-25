@@ -30,6 +30,8 @@ const CitySearch = ({ setDatos }) => {
           id: recurso.id,
           wind: recurso.wind.speed,
           temp: recurso.main.temp,
+          date: "-",
+          hour: "-",
         };
         setDatos(ciudadData);
         setError(null); // Limpiar cualquier error previo

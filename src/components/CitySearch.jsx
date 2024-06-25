@@ -27,6 +27,8 @@ const CitySearch = ({ setDatos }) => {
           min: Math.round(recurso.main.temp_min),
           max: Math.round(recurso.main.temp_max),
           img: recurso.weather[0].icon,
+          description: recurso.weather[0].description,
+          humidity: recurso.main.humidity,
           id: recurso.id,
           wind: recurso.wind.speed,
           temp: recurso.main.temp,

@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
 import PropTypes from "prop-types";
 import { fetchWeatherData } from "../utils/fetchApi.js";
-import styles from "./citySearch.module.css";
+import styles from "./styles/citySearch.module.css";
 
 /**
  * Componente CitySearch que permite buscar el clima de una ciudad.
@@ -70,8 +70,8 @@ const CitySearch = ({ setDatos }) => {
   }, []);
 
   return (
-    <div className={styles.search}>
-      <form onSubmit={handleSubmit}>
+    <div className={styles.citySearchContainer}>
+      <form onSubmit={handleSubmit} className={styles.form}>
         <input
           type="text"
           value={city}

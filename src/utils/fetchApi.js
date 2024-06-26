@@ -21,7 +21,7 @@ export const fetchWeatherData = async (city) => {
     }
 
     const data = await response.json();
-    console.log(data);
+    console.log("Datos Puros de la Api Externa: " + data);
     return data;
   } catch (error) {
     if (error.name === "TypeError") {

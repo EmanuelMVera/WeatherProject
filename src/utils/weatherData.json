@@ -1,0 +1,29 @@
+{
+    "location": "Guernica",
+    "date": "26.06.2024",
+    "temperature": 20,
+    "description": "Cloudy",
+    "windSpeed": 6.1,
+    "humidity": 90,
+    "greeting": "Good Morning",
+    "time": "12:27 PM",
+    "currentTemp": 20,
+    "feelsLike": 19,
+    "currentCondition": "Cloudy",
+    "hourlyForecast": [
+      { "time": "1 PM", "temp": 20, "condition": "Cloudy" },
+      { "time": "2 PM", "temp": 21, "condition": "Rainy" },
+      { "time": "3 PM", "temp": 21, "condition": "Rainy" },
+      { "time": "4 PM", "temp": 20, "condition": "Cloudy" },
+      { "time": "5 PM", "temp": 21, "condition": "Rainy" },
+      { "time": "6 PM", "temp": 21, "condition": "Rainy" }
+    ],
+    "forecast": [
+      { "day": "Tue", "temp": 32, "condition": "Sunny" },
+      { "day": "Wed", "temp": 12, "condition": "Rainy" },
+      { "day": "Thu", "temp": 13, "condition": "Rainy" },
+      { "day": "Fri", "temp": 22, "condition": "Mist" },
+      { "day": "Sat", "temp": 22, "condition": "Mist" }
+    ]
+  }
+  

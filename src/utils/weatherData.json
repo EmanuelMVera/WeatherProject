@@ -1,12 +1,10 @@
 {
     "location": "Guernica",
-    "date": "26.06.2024",
     "temperature": 20,
     "description": "Cloudy",
     "windSpeed": 6.1,
     "humidity": 90,
     "greeting": "Good Morning",
-    "time": "12:27 PM",
     "currentTemp": 20,
     "feelsLike": 19,
     "currentCondition": "Cloudy",

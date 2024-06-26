@@ -1,15 +1,17 @@
 import React from "react";
 import styles from "./styles/weatherDetail.module.css";
 import weatherData from "../utils/weatherData.json";
+import { getCurrentDateTime } from "../utils/getCurrentDateTime";
 import Header from "./Header";
 import Main from "./Main";
 import Sidebar from "./Sidebar";
 import Forecast from "./Forecast";
 
 const WeatherDetail = ({ datos }) => {
+  const { fecha, hora } = getCurrentDateTime();
   return (
     <div className={styles.weatherDetailContainer}>
-      <Header location={weatherData.location} date={weatherData.date} />
+      <Header location={weatherData.location} date={fecha} />
       <Main
         temperature={weatherData.temperature}
         description={weatherData.description}
@@ -18,7 +20,7 @@ const WeatherDetail = ({ datos }) => {
       />
       <Sidebar
         greeting={weatherData.greeting}
-        time={weatherData.time}
+        time={hora}
         currentTemp={weatherData.currentTemp}
         feelsLike={weatherData.feelsLike}
         currentCondition={weatherData.currentCondition}

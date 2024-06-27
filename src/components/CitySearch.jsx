@@ -1,70 +1,50 @@
 import React, { useState, useCallback } from "react";
 import PropTypes from "prop-types";
-import { fetchWeatherData } from "../utils/fetchApi.js";
+import { fetchWeatherData } from "../utils/fetchApiWeather.js";
 import styles from "./styles/citySearch.module.css";
+import { fetchForecastData } from "../utils/fetchApiForecast.js";
 
-/**
- * Componente CitySearch que permite buscar el clima de una ciudad.
- *
- * @param {Object} props - Las propiedades del componente.
- * @param {Function} props.setDatos - Función para establecer los datos del clima de la ciudad.
- */
 const CitySearch = ({ setDatos }) => {
   const [city, setCity] = useState("");
-  const [error, setError] = useState(null);
+  const [state, setState] = useState({
+    error: null,
+    weather: null,
+    forecast: null,
+  });
 
-  /**
-   * Busca el clima de una ciudad y establece los datos en el estado.
-   *
-   * @param {string} ciudad - El nombre de la ciudad a buscar.
-   */
-  const buscarCiudad = async (ciudad) => {
-    try {
-      const recurso = await fetchWeatherData(ciudad);
-      if (recurso.main) {
-        const ciudadData = {
-          name: recurso.name,
-          min: Math.round(recurso.main.temp_min),
-          max: Math.round(recurso.main.temp_max),
-          img: recurso.weather[0].icon,
-          description: recurso.weather[0].description,
-          humidity: recurso.main.humidity,
-          id: recurso.id,
-          wind: recurso.wind.speed,
-          temp: recurso.main.temp,
-          date: "-",
-          hour: "-",
-        };
-        setDatos(ciudadData);
-        setError(null); // Limpiar cualquier error previo
-      } else {
-        setError("Ciudad no encontrada");
+  const buscarCiudad = useCallback(
+    async (ciudad) => {
+      try {
+        const weatherData = await fetchWeatherData(ciudad);
+        const forecastData = await fetchForecastData(ciudad);
+
+        setState({
+          error: null,
+          weather: weatherData,
+          forecast: forecastData,
+        });
+
+        setDatos(weatherData, forecastData);
+      } catch (error) {
+        console.error("Error fetching city data:", error);
+        setState((prevState) => ({
+          ...prevState,
+          error: "Error fetching city data",
+        }));
       }
-    } catch (error) {
-      console.error("Error fetching city data:", error);
-      setError("Error fetching city data");
-    }
-  };
+    },
+    [setDatos]
+  );
 
-  /**
-   * Manejador para el evento de envío del formulario.
-   *
-   * @param {Event} event - El evento del formulario.
-   */
   const handleSubmit = useCallback(
     (event) => {
       event.preventDefault();
       buscarCiudad(city);
-      setCity(""); // Limpiar el campo de entrada después de enviar
+      setCity("");
     },
-    [city]
+    [city, buscarCiudad]
   );
 
-  /**
-   * Manejador para el cambio en el campo de entrada de la ciudad.
-   *
-   * @param {Event} event - El evento de cambio del campo de entrada.
-   */
   const handleInputChange = useCallback((event) => {
     setCity(event.target.value);
   }, []);
@@ -84,7 +64,7 @@ const CitySearch = ({ setDatos }) => {
           Buscar Ciudad
         </button>
       </form>
-      {error && <p className={styles.error}>{error}</p>}
+      {state.error && <p className={styles.error}>{error}</p>}
     </div>
   );
 };

@@ -1,12 +1,5 @@
-// Importa la clave API desde las variables de entorno cargadas por dotenv
 const apiKey = import.meta.env.VITE_API_KEY;
 
-/**
- * Fetches weather data for a given city.
- * @param {string} city - The name of the city to fetch weather data for.
- * @returns {Promise<Object>} A promise that resolves to the weather data for the specified city.
- * @throws Will throw an error if the fetch request fails or the response is not ok.
- */
 export const fetchWeatherData = async (city) => {
   try {
     const response = await fetch(
@@ -21,14 +14,29 @@ export const fetchWeatherData = async (city) => {
     }
 
     const data = await response.json();
-    console.log("Datos Puros de la Api Externa: " + data);
-    return data;
+
+    const weatherData = {
+      temperature: data.main.temp,
+      feels_like: data.main.feels_like,
+      wind_speed: data.wind.speed,
+      humidity: data.main.humidity,
+      date: new Date(data.dt * 1000).toLocaleDateString(),
+      time: new Date(data.dt * 1000).toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
+      weather: data.weather[0].main,
+      description: data.weather[0].description,
+      icon: `https://openweathermap.org/img/wn/${data.weather[0].icon}.png`,
+    };
+
+    return weatherData;
   } catch (error) {
     if (error.name === "TypeError") {
       console.error("Network error or resource not found:", error);
     } else {
       console.error("Failed to fetch weather data:", error);
     }
-    throw error; // re-throw the error after logging it
+    throw error;
   }
 };

@@ -7,7 +7,7 @@ import Main from "./Main";
 import Sidebar from "./Sidebar";
 import Forecast from "./Forecast";
 
-const WeatherDetail = ({ datos }) => {
+const WeatherDetail = ({ weatherData1, forecastData }) => {
   const { fecha, hora } = getCurrentDateTime();
   return (
     <div className={styles.weatherDetailContainer}>

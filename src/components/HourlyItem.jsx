@@ -1,12 +1,13 @@
 import React from "react";
 import styles from "./styles/hourlyItem.module.css";
 
-const HourlyItem = ({ time, temp, condition }) => {
+const HourlyItem = ({ time, temp, weather, icon }) => {
   return (
     <div className={styles.hourlyItem}>
+      <img src={icon} alt="" />
       <div>{time}</div>
-      <div>{temp}°C</div>
-      <div>{condition}</div>
+      <div>{temp}</div>
+      <div>{weather}</div>
     </div>
   );
 };

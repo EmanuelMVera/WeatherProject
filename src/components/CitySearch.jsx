@@ -1,30 +1,34 @@
 import React, { useState, useCallback } from "react";
 import PropTypes from "prop-types";
 import { fetchWeatherData } from "../utils/fetchApiWeather.js";
-import styles from "./styles/citySearch.module.css";
 import { fetchForecastData } from "../utils/fetchApiForecast.js";
+import styles from "./styles/citySearch.module.css";
 
 const CitySearch = ({ setDatos }) => {
   const [city, setCity] = useState("");
   const [state, setState] = useState({
     error: null,
     weather: null,
-    forecast: null,
+    dailyForecast: null,
+    hourlyForecast: null,
   });
 
   const buscarCiudad = useCallback(
     async (ciudad) => {
       try {
         const weatherData = await fetchWeatherData(ciudad);
-        const forecastData = await fetchForecastData(ciudad);
+        const { dailyForecast, hourlyForecast } = await fetchForecastData(
+          ciudad
+        );
 
         setState({
           error: null,
           weather: weatherData,
-          forecast: forecastData,
+          dailyForecast: dailyForecast,
+          hourlyForecast: hourlyForecast,
         });
 
-        setDatos(weatherData, forecastData);
+        setDatos(weatherData, dailyForecast, hourlyForecast);
       } catch (error) {
         console.error("Error fetching city data:", error);
         setState((prevState) => ({
@@ -64,7 +68,7 @@ const CitySearch = ({ setDatos }) => {
           Buscar Ciudad
         </button>
       </form>
-      {state.error && <p className={styles.error}>{error}</p>}
+      {state.error && <p className={styles.error}>{state.error}</p>}
     </div>
   );
 };

@@ -8,7 +8,7 @@ const Sidebar = ({
   currentTemp,
   feelsLike,
   currentCondition,
-  hourlyForecast,
+  forecast,
 }) => {
   return (
     <div className={styles.sidebar}>
@@ -20,8 +20,8 @@ const Sidebar = ({
         <div className={styles.currentCondition}>{currentCondition}</div>
       </div>
       <div className={styles.hourlyForecast}>
-        {hourlyForecast.map((item, index) => (
-          <HourlyItem key={index} {...item} />
+        {forecast.map((hour, index) => (
+          <HourlyItem key={index} {...hour} />
         ))}
       </div>
     </div>

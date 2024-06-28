@@ -5,22 +5,29 @@ import WeatherDetail from "./components/WeatherDetail";
 
 function App() {
   const [weatherData, setWeatherData] = useState(null);
-  const [forecastData, setForecastData] = useState(null);
+  const [dailyForecast, setDailyForecast] = useState(null);
+  const [hourlyForecast, setHourlyForecast] = useState(null);
 
-  const setDatos = (weather, forecast) => {
+  const setDatos = (weather, daily, hourly) => {
     console.log("Weather Data:", weather);
-    console.log("Forecast Data:", forecast);
+    console.log("Daily Forecast Data:", daily);
+    console.log("Hourly Forecast Data:", hourly);
     setWeatherData(weather);
-    setForecastData(forecast);
+    setDailyForecast(daily);
+    setHourlyForecast(hourly);
   };
 
   return (
     <div className="app-container">
       <CitySearch setDatos={setDatos} />
-      {weatherData != null ? (
-        <WeatherDetail weatherData1={weatherData} forecastData={forecastData} />
+      {weatherData && dailyForecast && hourlyForecast ? (
+        <WeatherDetail
+          weatherData={weatherData}
+          dailyForecast={dailyForecast}
+          hourlyForecast={hourlyForecast}
+        />
       ) : (
-        <h1>Cargando...</h1>
+        <img src="../public/weather-icon.svg" alt="Weather icon" />
       )}
     </div>
   );

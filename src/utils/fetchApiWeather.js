@@ -16,6 +16,7 @@ export const fetchWeatherData = async (city) => {
     const data = await response.json();
 
     const weatherData = {
+      name: data.name,
       temperature: data.main.temp,
       feels_like: data.main.feels_like,
       wind_speed: data.wind.speed,

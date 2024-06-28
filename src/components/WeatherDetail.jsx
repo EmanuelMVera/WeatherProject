@@ -1,34 +1,40 @@
 import React from "react";
 import styles from "./styles/weatherDetail.module.css";
-import weatherData from "../utils/weatherData.json";
+import PropTypes from "prop-types";
 import { getCurrentDateTime } from "../utils/getCurrentDateTime";
 import Header from "./Header";
 import Main from "./Main";
 import Sidebar from "./Sidebar";
-import Forecast from "./Forecast";
+import DailyForecast from "./DailyForecast";
 
-const WeatherDetail = ({ weatherData1, forecastData }) => {
+const WeatherDetail = ({ weatherData, dailyForecast, hourlyForecast }) => {
   const { fecha, hora } = getCurrentDateTime();
   return (
     <div className={styles.weatherDetailContainer}>
-      <Header location={weatherData.location} date={fecha} />
+      <Header location={weatherData.name} date={fecha} />
       <Main
         temperature={weatherData.temperature}
-        description={weatherData.description}
-        windSpeed={weatherData.windSpeed}
+        description={weatherData.weather}
+        windSpeed={weatherData.wind_speed}
         humidity={weatherData.humidity}
       />
       <Sidebar
-        greeting={weatherData.greeting}
+        greeting="Good Morning"
         time={hora}
-        currentTemp={weatherData.currentTemp}
-        feelsLike={weatherData.feelsLike}
-        currentCondition={weatherData.currentCondition}
-        hourlyForecast={weatherData.hourlyForecast}
+        currentTemp={weatherData.temperature}
+        feelsLike={weatherData.feels_like}
+        currentCondition={weatherData.description}
+        forecast={hourlyForecast}
       />
-      <Forecast forecast={weatherData.forecast} />
+      <DailyForecast forecastData={dailyForecast} />
     </div>
   );
+};
+
+WeatherDetail.propTypes = {
+  weatherData: PropTypes.object.isRequired,
+  dailyForecast: PropTypes.array.isRequired,
+  hourlyForecast: PropTypes.array.isRequired,
 };
 
 export default WeatherDetail;

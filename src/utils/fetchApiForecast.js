@@ -46,7 +46,7 @@ export const fetchForecastData = async (city) => {
       .map((item) => ({
         time: item.dt_txt.split(" ")[1].slice(0, 5),
         weather: item.weather[0].main,
-        icon: `https://openweathermap.org/img/wn/${item.weather[0].icon}.png`,
+        icon: item.weather[0].icon,
         temp: item.main.temp + "°C",
       }));
 

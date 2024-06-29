@@ -28,7 +28,7 @@ export const fetchWeatherData = async (city) => {
       }),
       weather: data.weather[0].main,
       description: data.weather[0].description,
-      icon: `https://openweathermap.org/img/wn/${data.weather[0].icon}.png`,
+      icon: data.weather[0].icon,
     };
 
     return weatherData;

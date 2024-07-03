@@ -4,7 +4,7 @@ import CitySearch from "./components/CitySearch";
 import WeatherDetail from "./components/WeatherDetail";
 
 function App() {
-  const [weatherData, setWeatherData] = useState(null);
+  const [currentWeather, setCurrentWeather] = useState(null);
   const [dailyForecast, setDailyForecast] = useState(null);
   const [hourlyForecast, setHourlyForecast] = useState(null);
 
@@ -12,7 +12,7 @@ function App() {
     console.log("Weather Data:", weather);
     console.log("Daily Forecast Data:", daily);
     console.log("Hourly Forecast Data:", hourly);
-    setWeatherData(weather);
+    setCurrentWeather(weather);
     setDailyForecast(daily);
     setHourlyForecast(hourly);
   };
@@ -20,9 +20,9 @@ function App() {
   return (
     <div className="app-container">
       <CitySearch setDatos={setDatos} />
-      {weatherData && dailyForecast && hourlyForecast ? (
+      {currentWeather && dailyForecast && hourlyForecast ? (
         <WeatherDetail
-          weatherData={weatherData}
+          weatherData={currentWeather}
           dailyForecast={dailyForecast}
           hourlyForecast={hourlyForecast}
         />

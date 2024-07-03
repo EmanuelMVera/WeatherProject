@@ -1,6 +1,6 @@
 const apiKey = import.meta.env.VITE_API_KEY;
 
-export const fetchWeatherData = async (city) => {
+export const fetchCurrentWeather  = async (city) => {
   try {
     const response = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
@@ -15,9 +15,11 @@ export const fetchWeatherData = async (city) => {
 
     const data = await response.json();
 
-    const weatherData = {
+    return {
       name: data.name,
       temperature: data.main.temp,
+      minTemp: data.main.temp_min,
+      maxTemp: data.main.temp_max,
       feels_like: data.main.feels_like,
       wind_speed: data.wind.speed,
       humidity: data.main.humidity,
@@ -29,9 +31,9 @@ export const fetchWeatherData = async (city) => {
       weather: data.weather[0].main,
       description: data.weather[0].description,
       icon: data.weather[0].icon,
+      pressure: data.main.pressure,
     };
 
-    return weatherData;
   } catch (error) {
     if (error.name === "TypeError") {
       console.error("Network error or resource not found:", error);

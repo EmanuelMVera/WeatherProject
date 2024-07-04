@@ -20,7 +20,7 @@ function App() {
   return (
     <div className="app-container">
       <CitySearch setDatos={setDatos} />
-      {currentWeather && dailyForecast && hourlyForecast ? (
+      {/* {currentWeather && dailyForecast && hourlyForecast ? (
         <WeatherDetail
           weatherData={currentWeather}
           dailyForecast={dailyForecast}
@@ -28,7 +28,7 @@ function App() {
         />
       ) : (
         <img src="../public/weather-icon.svg" alt="Weather icon" />
-      )}
+      )} */}
     </div>
   );
 }

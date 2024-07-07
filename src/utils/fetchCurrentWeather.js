@@ -1,14 +1,9 @@
 const apiKey = import.meta.env.VITE_API_KEY;
-const apiKey2 = import.meta.env.VITE_API_KEY2;
 
 export const fetchCurrentWeather = async (city) => {
   try {
     const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
-    );
-
-    const response2 = await fetch(
-      `http://api.weatherapi.com/v1/current.json?key=${apiKey2}&q=${city}&current_fields=temp_c,condition:text,icon`
+      `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}&current_fields=temp_c,condition:text,icon`
     );
 
     if (!response.ok) {
@@ -18,11 +13,9 @@ export const fetchCurrentWeather = async (city) => {
       );
     }
 
-    const data2 = await response2.json();
+    const data = await response2.json();
+    return data;
 
-    const data = await response.json();
-
-    return data2;
     // return {
     //   name: data.name,
     //   temperature: data.main.temp,

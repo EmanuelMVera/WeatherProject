@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import CitySearch from "./components/CitySearch";
-import WeatherDetail from "./components/WeatherDetail";
+import Weather from "./components/Weather";
 
 function App() {
   const [currentWeather, setCurrentWeather] = useState(null);
@@ -9,9 +9,6 @@ function App() {
   const [hourlyForecast, setHourlyForecast] = useState(null);
 
   const setDatos = (weather, daily, hourly) => {
-    console.log("Weather Data:", weather);
-    console.log("Daily Forecast Data:", daily);
-    console.log("Hourly Forecast Data:", hourly);
     setCurrentWeather(weather);
     setDailyForecast(daily);
     setHourlyForecast(hourly);
@@ -20,15 +17,15 @@ function App() {
   return (
     <div className="app-container">
       <CitySearch setDatos={setDatos} />
-      {/* {currentWeather && dailyForecast && hourlyForecast ? (
-        <WeatherDetail
-          weatherData={currentWeather}
+      {currentWeather && dailyForecast && hourlyForecast ? (
+        <Weather
+          currentWeather={currentWeather}
           dailyForecast={dailyForecast}
           hourlyForecast={hourlyForecast}
         />
       ) : (
         <img src="../public/weather-icon.svg" alt="Weather icon" />
-      )} */}
+      )}
     </div>
   );
 }

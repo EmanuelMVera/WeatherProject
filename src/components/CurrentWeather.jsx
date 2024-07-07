@@ -3,7 +3,7 @@ import styles from "./styles/weatherMain.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWind, faDroplet } from "@fortawesome/free-solid-svg-icons";
 
-const WeatherMain = ({ temperature, description, windSpeed, humidity }) => {
+const CurrentWeather = ({ temperature, description, windSpeed, humidity }) => {
   return (
     <div className={styles.weatherMain}>
       <div className={styles.temperature}>{temperature}°</div>
@@ -22,4 +22,4 @@ const WeatherMain = ({ temperature, description, windSpeed, humidity }) => {
   );
 };
 
-export default WeatherMain;
+export default CurrentWeather;

@@ -1,13 +1,9 @@
 const apiKey = import.meta.env.VITE_API_KEY;
-const apiKey2 = import.meta.env.VITE_API_KEY2;
 
 export const fetchDailyForecast = async (city) => {
   try {
     const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`
-    );
-    const response2 = await fetch(
-      `http://api.weatherapi.com/v1/forecast.json?key=${apiKey2}&q=${city}&days=${14}&day_fields=date,temp_max,temp_min,condition:text,icon`
+      `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=${14}&day_fields=date,temp_max,temp_min,condition:text,icon`
     );
 
     if (!response.ok) {
@@ -17,10 +13,9 @@ export const fetchDailyForecast = async (city) => {
       );
     }
 
-    const data2 = await response2.json();
+    const data2 = await response.json();
     return data2;
 
-    const data = await response.json();
     // const daysOfWeek = [
     //   "Sunday",
     //   "Monday",

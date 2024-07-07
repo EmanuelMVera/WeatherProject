@@ -1,27 +1,17 @@
 import React from "react";
-import styles from "./styles/forecast.module.css";
-import PropTypes from "prop-types";
+// import styles from "./DailyForecast.module.css";
 
-const DailyForecast = ({ forecastData }) => {
+const DailyForecast = () => {
   return (
-    <div className={styles.forecast}>
-      {forecastData.map((day) => (
-        <div key={day.date} className={styles.forecastItem}>
-          <div>
-            {new Date(day.date).toLocaleDateString("en-EN", {
-              weekday: "long",
-            })}
-          </div>
-          <div>{day.avgTemp}°C</div>
-          <div>{day.weather}</div>
-        </div>
-      ))}
+    <div className={styles.dailyForecast}>
+      <div className={styles.day}>
+        <span>Sat</span>
+        <img src="icon.png" alt="weather icon" className={styles.weatherIcon} />
+        <span>10°/4°</span>
+      </div>
+      {/* Repetir para cada día */}
     </div>
   );
-};
-
-DailyForecast.propTypes = {
-  forecastData: PropTypes.array.isRequired,
 };
 
 export default DailyForecast;

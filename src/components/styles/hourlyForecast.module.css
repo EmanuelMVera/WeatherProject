@@ -1,0 +1,19 @@
+.hourlyForecast {
+  display: flex;
+  justify-content: space-around;
+}
+
+.hour {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hour span {
+  margin: 5px 0;
+}
+
+.weatherIcon {
+  width: 40px;
+  height: 40px;
+}

@@ -5,3 +5,20 @@
   gap: 20px;
   width: 100%;
 } */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #1e1e1e;
+  color: white;
+}
+
+@media (max-width: 400px) {
+  .temperature .temp {
+    font-size: 36px;
+  }
+
+  .weatherIcon {
+    width: 40px;
+    height: 40px;
+  }
+}

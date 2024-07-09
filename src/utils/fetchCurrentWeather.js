@@ -13,7 +13,7 @@ export const fetchCurrentWeather = async (city) => {
       );
     }
 
-    const data = await response2.json();
+    const data = await response.json();
     return data;
 
     // return {

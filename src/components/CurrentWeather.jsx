@@ -1,22 +1,22 @@
 import React from "react";
-import styles from "./styles/weatherMain.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faWind, faDroplet } from "@fortawesome/free-solid-svg-icons";
+import styles from "./styles/currentWeather.module.css";
 
-const CurrentWeather = ({ temperature, description, windSpeed, humidity }) => {
+const CurrentWeather = ({ currentWeather }) => {
   return (
-    <div className={styles.weatherMain}>
-      <div className={styles.temperature}>{temperature}°</div>
-      <div className={styles.description}>{description}</div>
-      <div className={styles.details}>
-        <div className={styles.detailItem}>
-          <FontAwesomeIcon icon={faWind} />
-          {windSpeed} m/s
-        </div>
-        <div className={styles.detailItem}>
-          <FontAwesomeIcon icon={faDroplet} />
-          {humidity}%
-        </div>
+    <div className={styles.currentWeather}>
+      <div className={styles.temperature}>
+        <span className={styles.temp}>{currentWeather.current.temp_c}°</span>
+        <img
+          src={currentWeather.current.condition.icon}
+          alt="weather icon"
+          className={styles.weatherIcon}
+        />
+      </div>
+      <div className={styles.weatherDetails}>
+        <span>{currentWeather.current.condition.text}</span>
+        <span>Precip: {currentWeather.current.precip_mm}%</span>
+        <span>Humedad: {currentWeather.current.humidity}%</span>
+        <span>Viento: {currentWeather.current.wind_kph} km/h</span>
       </div>
     </div>
   );

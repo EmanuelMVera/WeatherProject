@@ -13,8 +13,8 @@ export const fetchDailyForecast = async (city) => {
       );
     }
 
-    const data2 = await response.json();
-    return data2;
+    const data = await response.json();
+    return data;
 
     // const daysOfWeek = [
     //   "Sunday",

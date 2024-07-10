@@ -1,5 +1,4 @@
 import React from "react";
-// import styles from "./styles/weatherDetail.module.css";
 import styles from "./styles/weather.module.css";
 import CurrentWeather from "./CurrentWeather";
 import HourlyForecast from "./HourlyForecast";

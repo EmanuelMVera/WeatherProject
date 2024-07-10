@@ -1,7 +1,0 @@
-.header {
-  grid-column: span 2;
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-  font-size: 1.2rem;
-}

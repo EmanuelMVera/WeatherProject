@@ -11,7 +11,7 @@ const Weather = ({ currentWeather, dailyForecast, hourlyForecast }) => {
       <CurrentWeather currentWeather={currentWeather} />
       <div className={styles.forecast}>
         <HourlyForecast hourlyForecast={hourlyForecast} />
-        <DailyForecast />
+        <DailyForecast dailyForecast={dailyForecast} />
       </div>
     </div>
   );

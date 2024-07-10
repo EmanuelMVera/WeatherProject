@@ -7,34 +7,23 @@ import styles from "./styles/citySearch.module.css";
 
 const CitySearch = ({ setDatos }) => {
   const [city, setCity] = useState("");
-  const [state, setState] = useState({
-    error: null,
-    currentWeather: null,
-    hourlyForecast: null,
-    dailyForecast: null,
-  });
+  const [error, setError] = useState(null);
 
   const buscarCiudad = useCallback(
     async (ciudad) => {
       try {
-        const currentWeather = await fetchCurrentWeather(ciudad);
-        const hourlyForecast = await fetchHourlyForecast(ciudad);
-        const dailyForecast = await fetchDailyForecast(ciudad);
+        const [currentWeather, hourlyForecast, dailyForecast] =
+          await Promise.all([
+            fetchCurrentWeather(ciudad),
+            fetchHourlyForecast(ciudad),
+            fetchDailyForecast(ciudad),
+          ]);
 
-        setState({
-          error: null,
-          currentWeather,
-          hourlyForecast,
-          dailyForecast,
-        });
-
+        setError(null);
         setDatos(currentWeather, dailyForecast, hourlyForecast);
       } catch (error) {
         console.error("Error fetching city data:", error);
-        setState((prevState) => ({
-          ...prevState,
-          error: "Error fetching city data",
-        }));
+        setError("Error fetching city data");
       }
     },
     [setDatos]
@@ -49,26 +38,21 @@ const CitySearch = ({ setDatos }) => {
     [city, buscarCiudad]
   );
 
-  const handleInputChange = useCallback((event) => {
-    setCity(event.target.value);
-  }, []);
-
   return (
     <div className={styles.citySearchContainer}>
       <form onSubmit={handleSubmit} className={styles.form}>
         <input
           type="text"
           value={city}
-          onChange={handleInputChange}
-          name="name"
-          placeholder="Enter city name"
+          onChange={(e) => setCity(e.target.value)}
+          placeholder="Ingrese nombre de ciudad..."
           className={styles.input}
         />
         <button type="submit" className={styles.button}>
           Buscar Ciudad
         </button>
       </form>
-      {state.error && <p className={styles.error}>{state.error}</p>}
+      {error && <p className={styles.error}>{error}</p>}
     </div>
   );
 };

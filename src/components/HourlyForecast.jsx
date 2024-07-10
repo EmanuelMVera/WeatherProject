@@ -15,8 +15,6 @@ const HourlyForecast = ({ hourlyForecast }) => {
           <span>{hour.temp_c}°</span>
         </div>
       ))}
-
-      {/* Repetir para cada hora */}
     </div>
   );
 };

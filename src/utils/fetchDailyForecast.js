@@ -3,60 +3,48 @@ const apiKey = import.meta.env.VITE_API_KEY;
 export const fetchDailyForecast = async (city) => {
   try {
     const response = await fetch(
-      `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=${14}&day_fields=date,temp_max,temp_min,condition:text,icon`
+      `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=14`
     );
 
     if (!response.ok) {
-      const errorData = await response.json();
+      const { message } = await response.json();
       throw new Error(
-        `Error fetching weather data: ${errorData.message} (status: ${response.status})`
+        `Error fetching weather data: ${message} (status: ${response.status})`
       );
     }
 
     const data = await response.json();
-    return data;
 
-    // const daysOfWeek = [
-    //   "Sunday",
-    //   "Monday",
-    //   "Tuesday",
-    //   "Wednesday",
-    //   "Thursday",
-    //   "Friday",
-    //   "Saturday",
-    // ];
+    const daysOfWeek = [
+      "Domingo",
+      "Lunes",
+      "Martes",
+      "Miércoles",
+      "Jueves",
+      "Viernes",
+      "Sábado",
+    ];
+    const shortDaysOfWeek = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
 
-    // const dailyForecast = data.list.reduce((acc, item) => {
-    //   const date = new Date(item.dt_txt);
-    //   const day = daysOfWeek[date.getDay()];
-    //   const formattedDate = `${day}`;
+    const daily = data.forecast.forecastday.map((day) => {
+      const date = new Date(day.date);
+      return {
+        icon: day.day.condition.icon,
+        maxTemp: day.day.maxtemp_c,
+        minTemp: day.day.mintemp_c,
+        fullDay: daysOfWeek[date.getDay()],
+        shortDay: shortDaysOfWeek[date.getDay()],
+      };
+    });
 
-    //   if (!acc[formattedDate]) {
-    //     acc[formattedDate] = {
-    //       date: formattedDate,
-    //       minTemp: item.main.temp_min,
-    //       maxTemp: item.main.temp_max,
-    //     };
-    //   } else {
-    //     acc[formattedDate].minTemp = Math.min(
-    //       acc[formattedDate].minTemp,
-    //       item.main.temp_min
-    //     );
-    //     acc[formattedDate].maxTemp = Math.max(
-    //       acc[formattedDate].maxTemp,
-    //       item.main.temp_max
-    //     );
-    //   }
-    //   return acc;
-    // }, {});
-
-    // return Object.values(dailyForecast);
+    return daily;
   } catch (error) {
-    if (error.name === "TypeError") {
-      console.error("Network error or resource not found:", error);
-    } else {
-      console.error("Failed to fetch weather data:", error);
-    }
+    console.error(
+      error.name === "TypeError"
+        ? "Network error or resource not found:"
+        : "Failed to fetch weather data:",
+      error
+    );
     throw error;
   }
 };

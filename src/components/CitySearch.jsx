@@ -1,8 +1,6 @@
 import React, { useState, useCallback } from "react";
 import PropTypes from "prop-types";
 import { fetchCurrentWeather } from "../utils/fetchCurrentWeather.js";
-// import { fetchHourlyForecast } from "../utils/fetchHourlyForecast.js";
-// import { fetchDailyForecast } from "../utils/fetchDailyForecast.js";
 import styles from "./styles/citySearch.module.css";
 import { fetchWeatherForecasts } from "../utils/fetchWeatherForecasts.js";
 
@@ -13,15 +11,8 @@ const CitySearch = ({ setDatos }) => {
   const buscarCiudad = useCallback(
     async (ciudad) => {
       try {
-        const [
-          currentWeather,
-          // hourlyForecast,
-          // dailyForecast,
-          weatherForecasts,
-        ] = await Promise.all([
+        const [currentWeather, weatherForecasts] = await Promise.all([
           fetchCurrentWeather(ciudad),
-          // fetchHourlyForecast(ciudad),
-          // fetchDailyForecast(ciudad),
           fetchWeatherForecasts(ciudad),
         ]);
 

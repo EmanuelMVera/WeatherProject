@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 import CitySearch from "./components/CitySearch";
 import Weather from "./components/Weather";
+import Navbar from "./components/NavBar";
 
 function App() {
   const [currentWeather, setCurrentWeather] = useState(null);
@@ -16,7 +17,8 @@ function App() {
 
   return (
     <div className="app-container">
-      <CitySearch setDatos={setDatos} />
+      <Navbar setDatos={setDatos} currentWeather={currentWeather} />
+      {/* <CitySearch setDatos={setDatos} /> */}
       {currentWeather && dailyForecast && hourlyForecast ? (
         <Weather
           currentWeather={currentWeather}

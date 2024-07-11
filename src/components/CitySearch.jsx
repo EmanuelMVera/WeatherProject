@@ -1,8 +1,8 @@
 import React, { useState, useCallback } from "react";
 import PropTypes from "prop-types";
 import { fetchCurrentWeather } from "../utils/fetchCurrentWeather.js";
-import styles from "./styles/citySearch.module.css";
 import { fetchWeatherForecasts } from "../utils/fetchWeatherForecasts.js";
+import styles from "./styles/citySearch.module.css";
 
 const CitySearch = ({ setDatos }) => {
   const [city, setCity] = useState("");
@@ -50,7 +50,7 @@ const CitySearch = ({ setDatos }) => {
           className={styles.input}
         />
         <button type="submit" className={styles.button}>
-          Buscar Ciudad
+          Buscar
         </button>
       </form>
       {error && <p className={styles.error}>{error}</p>}

@@ -3,7 +3,7 @@ const apiKey = import.meta.env.VITE_API_KEY;
 export const fetchHourlyForecast = async (city) => {
   try {
     const response = await fetch(
-      `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=2&hour_fields=time,temp_c`
+      `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=14&hour_fields=time,temp_c`
     );
 
     if (!response.ok) {

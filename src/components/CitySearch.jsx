@@ -1,9 +1,10 @@
 import React, { useState, useCallback } from "react";
 import PropTypes from "prop-types";
 import { fetchCurrentWeather } from "../utils/fetchCurrentWeather.js";
-import { fetchHourlyForecast } from "../utils/fetchHourlyForecast.js";
-import { fetchDailyForecast } from "../utils/fetchDailyForecast.js";
+// import { fetchHourlyForecast } from "../utils/fetchHourlyForecast.js";
+// import { fetchDailyForecast } from "../utils/fetchDailyForecast.js";
 import styles from "./styles/citySearch.module.css";
+import { fetchWeatherForecasts } from "../utils/fetchWeatherForecasts.js";
 
 const CitySearch = ({ setDatos }) => {
   const [city, setCity] = useState("");
@@ -12,15 +13,24 @@ const CitySearch = ({ setDatos }) => {
   const buscarCiudad = useCallback(
     async (ciudad) => {
       try {
-        const [currentWeather, hourlyForecast, dailyForecast] =
-          await Promise.all([
-            fetchCurrentWeather(ciudad),
-            fetchHourlyForecast(ciudad),
-            fetchDailyForecast(ciudad),
-          ]);
+        const [
+          currentWeather,
+          // hourlyForecast,
+          // dailyForecast,
+          weatherForecasts,
+        ] = await Promise.all([
+          fetchCurrentWeather(ciudad),
+          // fetchHourlyForecast(ciudad),
+          // fetchDailyForecast(ciudad),
+          fetchWeatherForecasts(ciudad),
+        ]);
 
         setError(null);
-        setDatos(currentWeather, dailyForecast, hourlyForecast);
+        setDatos(
+          currentWeather,
+          weatherForecasts["dailyForecast"],
+          weatherForecasts["hourlyForecast"]
+        );
       } catch (error) {
         console.error("Error fetching city data:", error);
         setError("Error fetching city data");

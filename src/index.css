@@ -32,9 +32,9 @@ dd {
 
 /* Estilos básicos del cuerpo y fuentes */
 body {
-  font-family: Robot, "Arial", sans-serif;
+  font-family: Roboto, "Arial", sans-serif;
   line-height: 1.6;
-  background-color: #333;
+  background-color: #030212;
   color: #f0f0f0;
 }
 
@@ -51,7 +51,6 @@ a:hover {
 /* Estilos para contenedor raíz de la aplicación */
 #root {
   display: flex;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
+  align-items: flex-start;
 }

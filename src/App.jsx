@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import CitySearch from "./components/CitySearch";
 import Weather from "./components/Weather";
-import Navbar from "./components/NavBar";
 import fetchIPGeolocation from "./utils/ipGeolocation";
 
 function App() {
@@ -35,12 +34,7 @@ function App() {
 
   return (
     <div className="app-container">
-      <Navbar
-        setDatos={setDatos}
-        currentWeather={currentWeather}
-        location={location}
-      />
-      {/* <CitySearch setDatos={setDatos} /> */}
+      <CitySearch setDatos={setDatos} location={location} />
       {currentWeather && dailyForecast && hourlyForecast ? (
         <Weather
           currentWeather={currentWeather}
@@ -48,7 +42,7 @@ function App() {
           hourlyForecast={hourlyForecast}
         />
       ) : (
-        <img src="../public/weather-icon.svg" alt="Weather icon" />
+        <p>cargando...</p>
       )}
     </div>
   );

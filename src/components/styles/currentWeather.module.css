@@ -1,17 +1,10 @@
 .currentWeather {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 400px;
-  margin: auto;
   padding: 10px 10px 50px 10px;
-  background-color: #2b2b2b;
   background-image: url("../../assets/fondo.png");
   background-size: cover;
-  /* background-position: center; */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  background-position: center;
+  text-shadow: 3px 3px 4px rgb(0 0 0);
 }
-
 .temperature {
   display: flex;
   align-items: center;

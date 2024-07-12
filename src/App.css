@@ -1,7 +1,7 @@
 .app-container {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 @media (max-width: 400px) {

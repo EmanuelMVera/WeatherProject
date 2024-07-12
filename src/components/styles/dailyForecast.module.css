@@ -1,11 +1,12 @@
 .dailyForecast {
   display: flex;
-  overflow-x: auto; /* Permite desplazamiento horizontal */
-  -webkit-overflow-scrolling: touch; /* Mejora el rendimiento del scroll en iOS */
-  scrollbar-width: none; /* Oculta la barra de desplazamiento en Firefox */
-  -ms-overflow-style: none; /* Oculta la barra de desplazamiento en IE/Edge */
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   margin: 10px;
   gap: 5px;
+  justify-content: center;
 }
 
 .day {

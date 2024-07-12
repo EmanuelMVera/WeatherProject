@@ -1,12 +1,19 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import PropTypes from "prop-types";
 import { fetchCurrentWeather } from "../utils/fetchCurrentWeather.js";
 import { fetchWeatherForecasts } from "../utils/fetchWeatherForecasts.js";
 import styles from "./styles/citySearch.module.css";
 
-const CitySearch = ({ setDatos }) => {
+const CitySearch = ({ setDatos, location }) => {
   const [city, setCity] = useState("");
+  const [searchCity, setSearchCity] = useState("");
   const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (location && !searchCity) {
+      buscarCiudad(location.city); // Usar la ciudad obtenida por IP como búsqueda inicial
+    }
+  }, [location, searchCity]);
 
   const buscarCiudad = useCallback(
     async (ciudad) => {
@@ -22,6 +29,7 @@ const CitySearch = ({ setDatos }) => {
           weatherForecasts["dailyForecast"],
           weatherForecasts["hourlyForecast"]
         );
+        setSearchCity(ciudad);
       } catch (error) {
         console.error("Error fetching city data:", error);
         setError("Error fetching city data");

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import CitySearch from "./CitySearch";
 import styles from "./styles/navBar.module.css";
 
-const Navbar = ({ currentWeather, setDatos }) => {
+const Navbar = ({ currentWeather, setDatos, location }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleMenuToggle = () => {
@@ -20,7 +20,7 @@ const Navbar = ({ currentWeather, setDatos }) => {
         <div></div>
       )}
       <div className={`${styles.searchForm} ${isMenuOpen ? styles.open : ""}`}>
-        <CitySearch setDatos={setDatos} />
+        <CitySearch setDatos={setDatos} location={location} />
       </div>
     </nav>
   );

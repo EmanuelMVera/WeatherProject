@@ -1,9 +1,9 @@
-const apiKey = import.meta.env.VITE_API_KEY;
+// const apiKey = import.meta.env.VITE_API_KEY;
 
-export const fetchCurrentWeather = async (city) => {
+export const fetchWeatherForecasts = async (city) => {
   try {
     const response = await fetch(
-      `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}&lang=es&current_fields=temp_c,condition:text,icon`
+      `http://localhost:5000/api/weatherForecasts?city=${city}`
     );
 
     if (!response.ok) {

@@ -1,7 +1,7 @@
-const apiToken = import.meta.env.VITE_API_KEY_IP;
+// const apiToken = import.meta.env.VITE_API_KEY_IP;
 
 const fetchIPGeolocation = async () => {
-  const url = `https://ipinfo.io/json?token=${apiToken}`;
+  const url = `/api/ip-geolocation`;
 
   try {
     const response = await fetch(url);

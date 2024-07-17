@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import CitySearch from "./components/CitySearch";
 import Weather from "./components/Weather";
-import fetchIPGeolocation from "./utils/ipGeolocation";
 
 function App() {
   const [currentWeather, setCurrentWeather] = useState(null);
@@ -11,8 +10,8 @@ function App() {
   const [location, setLocation] = useState(null);
   const [error, setError] = useState(null);
 
-  const setDatos = (weather, daily, hourly) => {
-    setCurrentWeather(weather);
+  const setDatos = (current, daily, hourly) => {
+    setCurrentWeather(current);
     setDailyForecast(daily);
     setHourlyForecast(hourly);
   };
@@ -20,7 +19,11 @@ function App() {
   useEffect(() => {
     const getLocation = async () => {
       try {
-        const data = await fetchIPGeolocation();
+        const response = await fetch(`http://localhost:3001/ipGeolocation`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch location data");
+        }
+        const data = await response.json();
         setLocation(data);
       } catch (error) {
         setError(error.message);
@@ -29,8 +32,6 @@ function App() {
 
     getLocation();
   }, []);
-
-  console.log(location);
 
   return (
     <div className="app-container">
@@ -44,6 +45,7 @@ function App() {
       ) : (
         <p>cargando...</p>
       )}
+      {error && <p>Error: {error}</p>}
     </div>
   );
 }

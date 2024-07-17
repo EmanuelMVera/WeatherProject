@@ -1,35 +1,41 @@
 import React, { useState, useCallback, useEffect } from "react";
 import PropTypes from "prop-types";
-import { fetchCurrentWeather } from "../utils/fetchCurrentWeather.js";
-import { fetchWeatherForecasts } from "../utils/fetchWeatherForecasts.js";
 import styles from "./styles/citySearch.module.css";
 
 const CitySearch = ({ setDatos, location }) => {
   const [city, setCity] = useState("");
-  const [searchCity, setSearchCity] = useState("");
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (location && !searchCity) {
-      buscarCiudad(location.city); // Usar la ciudad obtenida por IP como búsqueda inicial
+    if (location && !city) {
+      buscarCiudad(location.cityName); // Usar la ciudad obtenida por IP como búsqueda inicial
     }
-  }, [location, searchCity]);
+  }, [location, city]);
 
   const buscarCiudad = useCallback(
     async (ciudad) => {
       try {
-        const [currentWeather, weatherForecasts] = await Promise.all([
-          fetchCurrentWeather(ciudad),
-          fetchWeatherForecasts(ciudad),
-        ]);
+        const currentWeatherResponse = await fetch(
+          `http://localhost:3001/currentWeather?city=${ciudad}`
+        );
+        const forecastWeatherResponse = await fetch(
+          `http://localhost:3001/forecastWeather?city=${ciudad}`
+        );
 
-        setError(null);
+        if (!currentWeatherResponse.ok || !forecastWeatherResponse.ok) {
+          throw new Error("Failed to fetch weather data");
+        }
+
+        const currentWeather = await currentWeatherResponse.json();
+        const weatherForecasts = await forecastWeatherResponse.json();
+
         setDatos(
           currentWeather,
-          weatherForecasts["dailyForecast"],
-          weatherForecasts["hourlyForecast"]
+          weatherForecasts.dailyForecast,
+          weatherForecasts.hourlyForecast
         );
-        setSearchCity(ciudad);
+        setCity(ciudad);
+        setError(null);
       } catch (error) {
         console.error("Error fetching city data:", error);
         setError("Error fetching city data");

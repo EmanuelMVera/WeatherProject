@@ -7,11 +7,11 @@ import DailyForecast from "./DailyForecast";
 const Weather = ({ currentWeather, dailyForecast, hourlyForecast }) => {
   return (
     <div className={styles.weatherContainer}>
-      <CurrentWeather currentWeather={currentWeather} />
+      {/* <CurrentWeather currentWeather={currentWeather} />
       <div className={styles.forecast}>
         <HourlyForecast hourlyForecast={hourlyForecast} />
         <DailyForecast dailyForecast={dailyForecast} />
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -1,5 +1,38 @@
-const currentWeather = (req, res) => {
-  res.json({ message: "Current weather data" });
+const currentWeather = async (req, res) => {
+  const { city } = req.query;
+
+  try {
+    const url = `http://api.weatherapi.com/v1/current.json?key=${process.env.WEATHER_API_KEY}&q=${city}&lang=es&current_fields=temp_c,condition:text,icon,feelslike_c,uv,wind_kph,humidity,pressure_in,localtime`;
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error("Error obteniendo la ubicación");
+    }
+
+    const data = await response.json();
+
+    const currentWeather = {
+      name: data.location.name,
+      temperature: data.current.temp_c,
+      feels_like: data.current.feelslike_c,
+      uv: data.current.uv,
+      wind_speed: data.current.wind_kph,
+      humidity: data.current.humidity,
+      date: new Date(data.location.localtime_epoch * 1000).toLocaleDateString(),
+      time: new Date(data.location.localtime).toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
+      description: data.current.condition.text,
+      icon: data.current.icon,
+      pressure: data.current.pressure_in,
+    };
+
+    res.json(currentWeather);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error al obtener el pronóstico del clima" });
+  }
 };
 
 export default currentWeather;

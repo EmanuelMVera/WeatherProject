@@ -1,13 +1,15 @@
 .currentWeather {
-  padding: 10px 10px 50px 10px;
+  padding: 10px;
   background-image: url("../../assets/fondo.png");
   background-size: cover;
   background-position: center;
   text-shadow: 3px 3px 4px rgb(0 0 0);
+  background-color: rgba(255, 255, 255, 0.5);
 }
 .temperature {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  flex-direction: column;
 }
 
 .temp {

@@ -10,22 +10,23 @@ const currentWeather = async (req, res) => {
     }
 
     const data = await response.json();
+    console.log(data);
 
     const currentWeather = {
       name: data.location.name,
       temperature: data.current.temp_c,
       feels_like: data.current.feelslike_c,
-      uv: data.current.uv,
+      precip_mm: data.current.precip_mm,
       wind_speed: data.current.wind_kph,
       humidity: data.current.humidity,
+      uv: data.current.uv,
       date: new Date(data.location.localtime_epoch * 1000).toLocaleDateString(),
       time: new Date(data.location.localtime).toLocaleTimeString([], {
         hour: "2-digit",
         minute: "2-digit",
       }),
       description: data.current.condition.text,
-      icon: data.current.icon,
-      pressure: data.current.pressure_in,
+      icon: data.current.condition.icon,
     };
 
     res.json(currentWeather);

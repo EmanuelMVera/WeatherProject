@@ -5,18 +5,22 @@ const CurrentWeather = ({ currentWeather }) => {
   return (
     <div className={styles.currentWeather}>
       <div className={styles.temperature}>
-        <span className={styles.temp}>{currentWeather.current.temp_c}°</span>
-        <img
-          src={currentWeather.current.condition.icon}
-          alt="weather icon"
-          className={styles.weatherIcon}
-        />
+        <span>{currentWeather.name}</span>
+        <div className={styles.temp}>
+          <span>{currentWeather.temperature}°</span>
+          <img
+            src={currentWeather.icon}
+            alt="weather icon"
+            className={styles.weatherIcon}
+          />
+        </div>
+        <span>{currentWeather.feels_like}°</span>
+        <span>{currentWeather.date}</span>
+        <span>{currentWeather.time}</span>
       </div>
       <div className={styles.weatherDetails}>
-        <span>{currentWeather.current.condition.text}</span>
-        <span>Precip: {currentWeather.current.precip_mm}%</span>
-        <span>Humedad: {currentWeather.current.humidity}%</span>
-        <span>Viento: {currentWeather.current.wind_kph} km/h</span>
+        <span>{currentWeather.precip}</span>
+        <span>{currentWeather.description}</span>
       </div>
     </div>
   );

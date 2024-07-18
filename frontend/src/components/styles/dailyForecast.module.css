@@ -1,36 +1,50 @@
 .dailyForecast {
-  display: flex;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  margin: 10px;
-  gap: 5px;
-  justify-content: center;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  max-width: 500px;
+  min-width: 320px;
+  overflow: hidden;
+  gap: 10px;
+  font-size: 1rem;
+  border: 1px solid white;
 }
 
 .day {
-  flex: 0 0 auto; /* Evita que los elementos flexibles se redimensionen */
-  display: flex;
-  flex-direction: column;
-  text-align: center;
+  display: grid;
+  grid-template-columns: 50px 1fr 2fr auto;
   align-items: center;
-  border: 1px solid white;
-  border-radius: 17px;
-  width: 75px;
-}
-
-.day span {
-  margin: 5px 0;
-  width: 90%;
+  gap: 10px;
+  margin-bottom: 10px;
 }
 
 .weatherIcon {
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
 }
 
-/* Oculta la barra de desplazamiento en Chrome, Safari y Edge */
-.hourlyForecast::-webkit-scrollbar {
-  display: none;
+.dayText,
+.condition,
+.temperature {
+  font-size: 1rem;
+}
+
+.dayText,
+.condition {
+  text-align: left;
+}
+
+.condition {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.temperature {
+  text-align: right;
+}
+
+p {
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+  text-align: center;
 }

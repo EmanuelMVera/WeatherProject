@@ -4,7 +4,7 @@
   width: 100%;
 }
 
-@media (max-width: 400px) {
+/* @media (max-width: 400px) {
   .temperature .temp {
     font-size: 36px;
   }
@@ -13,4 +13,4 @@
     width: 40px;
     height: 40px;
   }
-}
+} */

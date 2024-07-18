@@ -31,6 +31,7 @@ const forecastWeather = async (req, res) => {
       const date = new Date(day.date);
       return {
         icon: day.day.condition.icon,
+        condition: day.day.condition.text,
         maxTemp: day.day.maxtemp_c,
         minTemp: day.day.mintemp_c,
         fullDay: [

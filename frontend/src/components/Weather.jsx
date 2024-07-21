@@ -8,11 +8,11 @@ const Weather = ({ currentWeather, forecastWeather }) => {
   const { dailyForecast, hourlyForecast } = forecastWeather;
   return (
     <div className={styles.weatherContainer}>
-      <CurrentWeather currentWeather={currentWeather} />
-      {/* <div className={styles.forecast}> */}
-      {/* <HourlyForecast hourlyForecast={hourlyForecast} /> */}
+      <CurrentWeather
+        currentWeather={currentWeather}
+        hourlyForecast={hourlyForecast}
+      />
       <DailyForecast dailyForecast={dailyForecast} />
-      {/* </div> */}
     </div>
   );
 };

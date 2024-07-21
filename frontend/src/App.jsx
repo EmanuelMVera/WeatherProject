@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import CitySearch from "./components/CitySearch";
-import Weather from "./components/Weather";
+// import CurrentWeather from "./components/CurrentWeather";
+// import HourlyForecast from "./components/HourlyForecast";
+import DailyForecast from "./components/DailyForecast";
+import WeatherInfo from "./components/WeatherInfo";
+import WeatherDetail from "./components/WeatherDetail";
 
 function App() {
   const [currentWeather, setCurrentWeather] = useState(null);
@@ -52,16 +56,24 @@ function App() {
 
   return (
     <div className="app-container">
-      <CitySearch fetchWeatherData={fetchWeatherData} />
-      {currentWeather && forecastWeather ? (
-        <Weather
-          currentWeather={currentWeather}
-          forecastWeather={forecastWeather}
-        />
-      ) : (
-        <p>Cargando...</p>
-      )}
-      {error && <p>Error: {error}</p>}
+      <header>
+        <CitySearch fetchWeatherData={fetchWeatherData} />
+      </header>
+      <main>
+        {currentWeather && forecastWeather ? (
+          <>
+            <WeatherInfo
+              currentWeather={currentWeather}
+              hourlyForecast={forecastWeather.hourlyForecast}
+            />
+            <DailyForecast dailyForecast={forecastWeather.dailyForecast} />
+            <WeatherDetail />
+          </>
+        ) : (
+          <p>Cargando...</p>
+        )}
+        {error && console.log(error)}
+      </main>
     </div>
   );
 }

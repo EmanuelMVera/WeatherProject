@@ -1,0 +1,16 @@
+.weatherInfoContainer {
+  display: flex;
+  /* width: 100vw; */
+  /* overflow: hidden; */
+  /* position: relative; */
+  justify-content: space-between;
+  background-image: url("../../assets/fondo.png");
+  background-size: cover;
+  background-position: center;
+}
+
+@media (max-width: 700px) {
+  .weatherInfoContainer {
+    flex-direction: column;
+  }
+}

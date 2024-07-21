@@ -1,3 +1,5 @@
+const capitalize = (string) => string.charAt(0).toUpperCase() + string.slice(1);
+
 const currentWeather = async (req, res) => {
   const { city } = req.query;
 
@@ -12,6 +14,12 @@ const currentWeather = async (req, res) => {
     const data = await response.json();
     console.log(data);
 
+    const dateOptions = { weekday: "long", day: "numeric", month: "long" };
+    const formattedDate = new Date(
+      data.location.localtime_epoch * 1000
+    ).toLocaleDateString("es-ES", dateOptions);
+    const capitalizedDate = formattedDate.split(" ").map(capitalize).join(" ");
+
     const currentWeather = {
       name: data.location.name,
       temperature: data.current.temp_c,
@@ -20,7 +28,7 @@ const currentWeather = async (req, res) => {
       wind_speed: data.current.wind_kph,
       humidity: data.current.humidity,
       uv: data.current.uv,
-      date: new Date(data.location.localtime_epoch * 1000).toLocaleDateString(),
+      date: capitalizedDate,
       time: new Date(data.location.localtime).toLocaleTimeString([], {
         hour: "2-digit",
         minute: "2-digit",

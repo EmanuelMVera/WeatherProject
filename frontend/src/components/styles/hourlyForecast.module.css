@@ -1,21 +1,17 @@
 .hourlyForecast {
-  display: flex;
-  overflow-x: auto; /* Permite desplazamiento horizontal */
-  -webkit-overflow-scrolling: touch; /* Mejora el rendimiento del scroll en iOS */
-  scrollbar-width: none; /* Oculta la barra de desplazamiento en Firefox */
-  -ms-overflow-style: none; /* Oculta la barra de desplazamiento en IE/Edge */
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-auto-rows: 100px;
+  gap: 10px;
+  background-color: #00000057;
 }
 
 .hour {
-  flex: 0 0 auto; /* Evita que los elementos flexibles se redimensionen */
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-right: 10px; /* Espacio entre cada hora */
-}
-
-.hour span {
-  margin: 5px 0;
+  justify-content: center;
+  line-height: 1;
 }
 
 .weatherIcon {

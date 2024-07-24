@@ -2,7 +2,7 @@ const forecastWeather = async (req, res) => {
   const { city } = req.query;
 
   try {
-    const url = `http://api.weatherapi.com/v1/forecast.json?key=${process.env.WEATHER_API_KEY}&q=${city}&lang=es&days=14`;
+    const url = `http://api.weatherapi.com/v1/forecast.json?key=${process.env.WEATHER_API_KEY}&q=${city}&days=3&lang=es`;
     const response = await fetch(url);
 
     if (!response.ok) {
@@ -10,6 +10,7 @@ const forecastWeather = async (req, res) => {
     }
 
     const data = await response.json();
+    console.log("Datos de Forecast: ", data.forecast);
 
     const today = new Date();
     const tomorrow = new Date(today.getTime() + 24 * 60 * 60 * 1000);

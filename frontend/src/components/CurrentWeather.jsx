@@ -4,8 +4,7 @@ import styles from "./styles/currentWeather.module.css";
 const CurrentWeather = ({ currentWeather }) => {
   return (
     <div className={styles.currentWeather}>
-      <span>{currentWeather.name}</span>
-      <span>{currentWeather.date}</span>
+      <h2>{currentWeather.name}</h2>
       <div className={styles.temp}>
         <span>{currentWeather.temperature}°</span>
         <img
@@ -14,7 +13,7 @@ const CurrentWeather = ({ currentWeather }) => {
           className={styles.weatherIcon}
         />
       </div>
-      <span>{currentWeather.description}</span>
+      <p>{currentWeather.description}</p>
     </div>
   );
 };

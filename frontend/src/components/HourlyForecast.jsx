@@ -2,7 +2,6 @@ import React from "react";
 import styles from "./styles/hourlyForecast.module.css";
 
 const HourlyForecast = ({ hourlyForecast }) => {
-  console.log(hourlyForecast);
   return (
     <div className={styles.hourlyForecast}>
       {hourlyForecast.map((hour, index) => (

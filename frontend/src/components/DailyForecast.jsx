@@ -4,8 +4,8 @@ import styles from "./styles/dailyForecast.module.css";
 const DailyForecast = ({ dailyForecast }) => {
   return (
     <div className={styles.dailyForecast}>
-      <p>Pronóstico por día</p>
-      {dailyForecast?.map((daily, index) => (
+      <h3>Pronóstico por día</h3>
+      {dailyForecast.map((daily, index) => (
         <div className={styles.day} key={index}>
           <img
             src={daily.icon}

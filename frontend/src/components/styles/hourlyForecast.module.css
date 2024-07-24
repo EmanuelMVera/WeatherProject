@@ -23,3 +23,18 @@
 .hourlyForecast::-webkit-scrollbar {
   display: none;
 }
+
+@media (max-width: 768px) {
+  .hourlyForecast {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+/* .hourlyForecast {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border-radius: 10px;
+} */

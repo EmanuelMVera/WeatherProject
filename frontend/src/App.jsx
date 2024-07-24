@@ -1,28 +1,25 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import CitySearch from "./components/CitySearch";
-// import CurrentWeather from "./components/CurrentWeather";
-// import HourlyForecast from "./components/HourlyForecast";
-import DailyForecast from "./components/DailyForecast";
 import WeatherInfo from "./components/WeatherInfo";
-import WeatherDetail from "./components/WeatherDetail";
 
 function App() {
-  const [currentWeather, setCurrentWeather] = useState(null);
-  const [forecastWeather, setForecastWeather] = useState(null);
+  const [weatherData, setWeatherData] = useState({
+    current: null,
+    forecast: null,
+  });
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchLocationData = async () => {
       try {
-        const response = await fetch(`http://localhost:3001/ipGeolocation`);
-        if (!response.ok) {
-          throw new Error("Failed to fetch location data");
-        }
+        const response = await fetch("http://localhost:3001/ipGeolocation");
+        if (!response.ok) throw new Error("Failed to fetch location data");
+
         const location = await response.json();
         fetchWeatherData(location?.cityName);
       } catch (error) {
-        setError(error.message);
+        setError("Error al obtener ubicación");
       }
     };
 
@@ -45,8 +42,10 @@ function App() {
       const currentWeatherData = await currentResponse.json();
       const forecastWeatherData = await forecastResponse.json();
 
-      setCurrentWeather(currentWeatherData);
-      setForecastWeather(forecastWeatherData);
+      setWeatherData({
+        current: currentWeatherData,
+        forecast: forecastWeatherData,
+      });
       setError(null);
     } catch (error) {
       console.error("Error fetching weather data:", error);
@@ -56,24 +55,17 @@ function App() {
 
   return (
     <div className="app-container">
-      <header>
-        <CitySearch fetchWeatherData={fetchWeatherData} />
-      </header>
-      <main>
-        {currentWeather && forecastWeather ? (
-          <>
-            <WeatherInfo
-              currentWeather={currentWeather}
-              hourlyForecast={forecastWeather.hourlyForecast}
-            />
-            <DailyForecast dailyForecast={forecastWeather.dailyForecast} />
-            <WeatherDetail />
-          </>
-        ) : (
-          <p>Cargando...</p>
-        )}
-        {error && console.log(error)}
-      </main>
+      <CitySearch onSearch={fetchWeatherData} />
+      {weatherData.current && weatherData.forecast ? (
+        <WeatherInfo
+          currentWeather={weatherData.current}
+          hourlyForecast={weatherData.forecast.hourlyForecast}
+          dailyForecast={weatherData.forecast.dailyForecast}
+        />
+      ) : (
+        <p>Cargando...</p>
+      )}
+      {error && <p className="error-message">{error}</p>}
     </div>
   );
 }

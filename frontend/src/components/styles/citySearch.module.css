@@ -1,5 +1,7 @@
 .citySearchContainer {
   padding: 10px;
+  max-width: 400px;
+  margin: 0 auto;
 }
 
 .form {
@@ -9,12 +11,11 @@
 }
 
 .input {
+  flex-grow: 1;
   padding: 0.6em;
   font-size: 1em;
   border: 2px solid #ccc;
   border-radius: 4px 0 0 4px;
-  outline: none;
-  flex-grow: 1;
   background-color: #f0f0f0;
   transition: border-color 0.3s;
 }
@@ -26,7 +27,6 @@
 .button {
   padding: 0.6em 1.2em;
   font-size: 1em;
-  font-weight: 500;
   border: 2px solid #646cff;
   border-radius: 0 4px 4px 0;
   background-color: #646cff;
@@ -40,8 +40,7 @@
   border-color: #535bf2;
 }
 
-.button:focus,
-.button:focus-visible {
+.button:focus {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
@@ -49,4 +48,21 @@
   margin-top: 10px;
   color: red;
   font-size: 0.9em;
+}
+
+@media (max-width: 600px) {
+  .form {
+    flex-direction: column;
+  }
+
+  .input,
+  .button {
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 4px;
+  }
+
+  .button {
+    margin-bottom: 0;
+  }
 }

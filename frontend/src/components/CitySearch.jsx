@@ -4,13 +4,14 @@ import styles from "./styles/citySearch.module.css";
 
 const CitySearch = ({ fetchWeatherData }) => {
   const [city, setCity] = useState("");
-  const [error, setError] = useState(null);
 
   const handleSubmit = useCallback(
     (event) => {
       event.preventDefault();
-      fetchWeatherData(city);
-      setCity("");
+      if (city.trim()) {
+        fetchWeatherData(city);
+        setCity("");
+      }
     },
     [city, fetchWeatherData]
   );
@@ -29,7 +30,6 @@ const CitySearch = ({ fetchWeatherData }) => {
           Buscar
         </button>
       </form>
-      {error && <p className={styles.error}>{error}</p>}
     </div>
   );
 };

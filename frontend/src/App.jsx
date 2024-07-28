@@ -4,10 +4,7 @@ import CitySearch from "./components/CitySearch";
 import WeatherInfo from "./components/WeatherInfo";
 
 function App() {
-  const [weatherData, setWeatherData] = useState({
-    current: null,
-    forecast: null,
-  });
+  const [weatherData, setWeatherData] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -18,7 +15,7 @@ function App() {
 
         const location = await response.json();
         fetchWeatherData(location?.cityName);
-      } catch (error) {
+      } catch {
         setError("Error al obtener ubicación");
       }
     };
@@ -30,33 +27,33 @@ function App() {
     if (!city) return;
 
     try {
-      const [currentResponse, forecastResponse] = await Promise.all([
+      const responses = await Promise.all([
         fetch(`http://localhost:3001/currentWeather?city=${city}`),
         fetch(`http://localhost:3001/forecastWeather?city=${city}`),
       ]);
 
-      if (!currentResponse.ok || !forecastResponse.ok) {
+      if (responses.some((res) => !res.ok)) {
         throw new Error("Failed to fetch weather data");
       }
 
-      const currentWeatherData = await currentResponse.json();
-      const forecastWeatherData = await forecastResponse.json();
+      const [currentWeatherData, forecastWeatherData] = await Promise.all(
+        responses.map((res) => res.json())
+      );
 
       setWeatherData({
         current: currentWeatherData,
         forecast: forecastWeatherData,
       });
       setError(null);
-    } catch (error) {
-      console.error("Error fetching weather data:", error);
+    } catch {
       setError("Error al obtener el pronóstico del clima");
     }
   };
 
   return (
     <div className="app-container">
-      <CitySearch onSearch={fetchWeatherData} />
-      {weatherData.current && weatherData.forecast ? (
+      <CitySearch fetchWeatherData={fetchWeatherData} />
+      {weatherData ? (
         <WeatherInfo
           currentWeather={weatherData.current}
           hourlyForecast={weatherData.forecast.hourlyForecast}

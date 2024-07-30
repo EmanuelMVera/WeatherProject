@@ -12,7 +12,6 @@ const WeatherDetail = ({ currentWeather }) => {
 
   return (
     <div className={styles.weatherDetail}>
-      <h2>Detalles del Clima</h2>
       <p>
         <strong>Sensación térmica:</strong> {feelsLike}°C
       </p>
@@ -20,10 +19,10 @@ const WeatherDetail = ({ currentWeather }) => {
         <strong>Humedad:</strong> {humidity}%
       </p>
       <p>
-        <strong>Salida del sol:</strong> {sunrise}
+        <strong>Amanecer:</strong> {sunrise}AM
       </p>
       <p>
-        <strong>Puesta del sol:</strong> {sunset}
+        <strong>Atardecer:</strong> {sunset}PM
       </p>
       <p>
         <strong>Velocidad del viento:</strong> {speed} km/h

@@ -2,21 +2,17 @@ import React from "react";
 import styles from "./styles/currentWeather.module.css";
 
 const CurrentWeather = ({ currentWeather }) => {
-  const { city, temperature } = currentWeather;
-  const { current, description, icon } = temperature;
+  const { city, temperature, date } = currentWeather;
+  const { current, description } = temperature;
 
   return (
     <div className={styles.currentWeather}>
       <h2>{city}</h2>
+      <h3>{date}</h3>
       <div className={styles.temp}>
         <span>{current}°</span>
-        <img
-          src={`https://openweathermap.org/img/wn/${icon}.png`}
-          alt="weather icon"
-          className={styles.weatherIcon}
-        />
       </div>
-      <p>{description}</p>
+      <h3>{description}</h3>
     </div>
   );
 };

@@ -8,10 +8,14 @@ import styles from "./styles/weatherInfo.module.css";
 function WeatherInfo({ currentWeather, hourlyForecast, dailyForecast }) {
   return (
     <div className={styles.weatherInfoContainer}>
-      <CurrentWeather currentWeather={currentWeather} />
-      <HourlyForecast hourlyForecast={hourlyForecast} />
-      <DailyForecast dailyForecast={dailyForecast} />
-      <WeatherDetail currentWeather={currentWeather} />
+      <main>
+        <CurrentWeather currentWeather={currentWeather} />
+        <HourlyForecast hourlyForecast={hourlyForecast} />
+      </main>
+      <footer>
+        <DailyForecast dailyForecast={dailyForecast} />
+        <WeatherDetail currentWeather={currentWeather} />
+      </footer>
     </div>
   );
 }

@@ -1,20 +1,23 @@
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import styles from "./styles/dailyForecast.module.css";
 
 const DailyForecast = ({ dailyForecast }) => (
   <div className={styles.dailyForecast}>
-    <h3>Pronóstico por día</h3>
     {dailyForecast.map(({ icon, day, condition, tempMin, tempMax }, index) => (
       <div className={styles.day} key={index}>
+        <span className={styles.dayText}>{day}</span>
         <img
           src={`https://openweathermap.org/img/wn/${icon}.png`}
           alt="daily icon"
           className={styles.weatherIcon}
         />
-        <span className={styles.dayText}>{day}</span>
-        <span className={styles.condition}>{condition}</span>
         <span className={styles.temperature}>
-          {tempMin}°/{tempMax}°
+          <FontAwesomeIcon icon={faArrowDown} style={{ color: "blue" }} />
+          {tempMin}°{" "}
+          <FontAwesomeIcon icon={faArrowUp} style={{ color: "red" }} />
+          {tempMax}°
         </span>
       </div>
     ))}

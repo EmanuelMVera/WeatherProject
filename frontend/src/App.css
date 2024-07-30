@@ -3,11 +3,11 @@
   flex-direction: column;
   width: 100vw;
   min-height: 100vh;
-  background-image: url("../src/assets/fondo.png");
+  background-image: url(/src/assets/fondo.png);
   background-size: cover;
   background-position: center;
-  padding: 20px;
-  box-sizing: border-box;
+  align-items: stretch;
+  justify-content: space-between;
 }
 
 .error-message {
@@ -20,3 +20,9 @@
     overflow-x: hidden;
   }
 }
+
+/* @media (min-width: 1440px) {
+  .app-container {
+    font-size: 3.5rem;
+  }
+} */

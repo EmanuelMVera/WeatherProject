@@ -1,7 +1,6 @@
 .citySearchContainer {
   padding: 10px;
-  max-width: 400px;
-  margin: 0 auto;
+  height: 10vh;
 }
 
 .form {
@@ -21,23 +20,23 @@
 }
 
 .input:focus {
-  border-color: #646cff;
+  border-color: #9b9b9b;
 }
 
 .button {
   padding: 0.6em 1.2em;
   font-size: 1em;
-  border: 2px solid #646cff;
+  border: 2px solid #ffffff;
   border-radius: 0 4px 4px 0;
-  background-color: #646cff;
+  background-color: #1a1a1a;
   color: #fff;
   cursor: pointer;
   transition: background-color 0.3s, border-color 0.3s;
 }
 
 .button:hover {
-  background-color: #535bf2;
-  border-color: #535bf2;
+  background-color: #505050;
+  border-color: #1a1a1a;
 }
 
 .button:focus {
@@ -50,7 +49,10 @@
   font-size: 0.9em;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+  .citySearchContainer {
+    height: auto;
+  }
   .form {
     flex-direction: column;
   }

@@ -1,3 +1,6 @@
+import { format } from "date-fns";
+import { es } from "date-fns/locale";
+
 const currentWeather = async (req, res) => {
   const { city } = req.query;
 
@@ -13,6 +16,17 @@ const currentWeather = async (req, res) => {
     };
   };
 
+  const formatFullDate = (unixTimestamp, timezoneOffset) => {
+    const date = new Date((unixTimestamp + timezoneOffset) * 1000);
+    let formattedDate = format(date, "EEEE, d 'de' MMMM", { locale: es });
+
+    // Capitalize the first letter of the day and month
+    formattedDate = formattedDate.replace(/(^\w|\s\w)/g, (m) =>
+      m.toUpperCase()
+    );
+    return formattedDate;
+  };
+
   try {
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.OPENWEATHER_API_KEY}&lang=es&units=metric`;
     const response = await fetch(url);
@@ -24,7 +38,7 @@ const currentWeather = async (req, res) => {
     const { main, weather, wind, clouds, sys, visibility, timezone, dt, name } =
       data;
 
-    const formattedDate = formatTimestamp(dt, timezone);
+    const formattedDate = formatFullDate(dt, timezone);
     const formattedSunrise = formatTimestamp(sys.sunrise, 0);
     const formattedSunset = formatTimestamp(sys.sunset, 0);
 
@@ -48,7 +62,7 @@ const currentWeather = async (req, res) => {
       clouds: clouds.all,
       city: name,
       country: sys.country,
-      date: formattedDate.date,
+      date: formattedDate,
       time: formattedDate.time,
       sunrise: formattedSunrise.time,
       sunset: formattedSunset.time,

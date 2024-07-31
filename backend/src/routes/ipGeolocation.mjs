@@ -8,8 +8,6 @@ async function ipGeolocation(req, res) {
     }
     const data = await response.json();
 
-    // console.log("Ip Geo: ", data);
-
     res.json({ cityName: data.city });
   } catch (error) {
     console.error(error);

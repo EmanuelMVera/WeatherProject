@@ -1,54 +1,58 @@
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 
+const formatTimestamp = (unixTimestamp, timezoneOffset) => {
+  const date = new Date((unixTimestamp + timezoneOffset) * 1000);
+  return {
+    date: date.toLocaleDateString("es-AR"),
+    time: date.toLocaleTimeString("es-AR", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    }),
+  };
+};
+
+const formatFullDate = (unixTimestamp, timezoneOffset) => {
+  const date = new Date((unixTimestamp + timezoneOffset) * 1000);
+  let formattedDate = format(date, "EEEE, d 'de' MMMM", { locale: es });
+
+  // Capitalize the first letter of the day and month
+  return formattedDate.replace(/(^\w|\s\w)/g, (m) => m.toUpperCase());
+};
+
+const fetchWeatherData = async (url) => {
+  const response = await fetch(url);
+  if (!response.ok) throw new Error("Error obteniendo la ubicación");
+  return response.json();
+};
+
 const currentWeather = async (req, res) => {
   const { city } = req.query;
 
-  const formatTimestamp = (unixTimestamp, timezoneOffset) => {
-    const date = new Date((unixTimestamp + timezoneOffset) * 1000);
-    return {
-      date: date.toLocaleDateString("es-AR"),
-      time: date.toLocaleTimeString("es-AR", {
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: false,
-      }),
-    };
-  };
-
-  const formatFullDate = (unixTimestamp, timezoneOffset) => {
-    const date = new Date((unixTimestamp + timezoneOffset) * 1000);
-    let formattedDate = format(date, "EEEE, d 'de' MMMM", { locale: es });
-
-    // Capitalize the first letter of the day and month
-    formattedDate = formattedDate.replace(/(^\w|\s\w)/g, (m) =>
-      m.toUpperCase()
-    );
-    return formattedDate;
-  };
-
   try {
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.OPENWEATHER_API_KEY}&lang=es&units=metric`;
-    const response = await fetch(url);
+    const urlOpenWeather = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.OPENWEATHER_API_KEY}&lang=es&units=metric`;
+    const urlWeatherAPI = `http://api.weatherapi.com/v1/current.json?key=${process.env.WEATHER_API_KEY}&q=${city}&lang=es`;
 
-    if (!response.ok) throw new Error("Error obteniendo la ubicación");
-
-    const data = await response.json();
+    const [dataOpenWeather, dataWeatherAPI] = await Promise.all([
+      fetchWeatherData(urlOpenWeather),
+      fetchWeatherData(urlWeatherAPI),
+    ]);
 
     const { main, weather, wind, clouds, sys, visibility, timezone, dt, name } =
-      data;
+      dataOpenWeather;
 
     const formattedDate = formatFullDate(dt, timezone);
-    const formattedSunrise = formatTimestamp(sys.sunrise, 0);
-    const formattedSunset = formatTimestamp(sys.sunset, 0);
+    const formattedSunrise = formatTimestamp(sys.sunrise, timezone).time;
+    const formattedSunset = formatTimestamp(sys.sunset, timezone).time;
 
-    const currentWeather = {
+    const currentWeatherData = {
       temperature: {
         current: main.temp,
         feelsLike: main.feels_like,
         min: main.temp_min,
         max: main.temp_max,
-        description: weather[0].description,
+        description: dataWeatherAPI.current.condition.text,
         icon: weather[0].icon,
       },
       pressure: main.pressure,
@@ -64,11 +68,11 @@ const currentWeather = async (req, res) => {
       country: sys.country,
       date: formattedDate,
       time: formattedDate.time,
-      sunrise: formattedSunrise.time,
-      sunset: formattedSunset.time,
+      sunrise: formattedSunrise,
+      sunset: formattedSunset,
     };
 
-    res.json(currentWeather);
+    res.json(currentWeatherData);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Error al obtener el pronóstico del clima" });

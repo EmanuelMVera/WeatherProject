@@ -1,6 +1,7 @@
 .citySearchContainer {
+  background: #00000061;
   padding: 10px;
-  height: 10vh;
+  /* height: 10vh; */
 }
 
 .form {
@@ -28,7 +29,7 @@
   font-size: 1em;
   border: 2px solid #ffffff;
   border-radius: 0 4px 4px 0;
-  background-color: #1a1a1a;
+  background-color: #222223bf;
   color: #fff;
   cursor: pointer;
   transition: background-color 0.3s, border-color 0.3s;

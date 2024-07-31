@@ -29,11 +29,13 @@
     grid-template-columns: repeat(6, 1fr);
   }
 }
+
 @media (min-width: 1024px) {
   .hourlyForecast {
     grid-template-columns: repeat(12, 1fr);
   }
 }
+
 @media (min-width: 1440px) {
   .hourlyForecast {
     grid-template-columns: repeat(6, 1fr);
@@ -41,10 +43,12 @@
     gap: 1.5rem;
     font-size: 2.5rem;
   }
+
   .weatherIcon {
     width: 3.5rem;
     height: 3.5rem;
   }
+
   .hour {
     line-height: normal;
   }

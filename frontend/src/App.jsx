@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import CitySearch from "./components/CitySearch";
 import WeatherInfo from "./components/WeatherInfo";
+import Modal from "./components/Modal";
 
 function App() {
   const [weatherData, setWeatherData] = useState(null);
   const [error, setError] = useState(null);
+  const [showErrorModal, setShowErrorModal] = useState(false);
 
   useEffect(() => {
     const fetchLocationData = async () => {
@@ -17,6 +19,7 @@ function App() {
         fetchWeatherData(location?.cityName);
       } catch {
         setError("Error al obtener ubicación");
+        setShowErrorModal(true);
       }
     };
 
@@ -47,7 +50,13 @@ function App() {
       setError(null);
     } catch {
       setError("Error al obtener el pronóstico del clima");
+      setShowErrorModal(true);
     }
+  };
+
+  const handleCloseModal = () => {
+    setShowErrorModal(false);
+    setError(null);
   };
 
   return (
@@ -62,7 +71,9 @@ function App() {
       ) : (
         <p>Cargando...</p>
       )}
-      {error && <p className="error-message">{error}</p>}
+      <Modal show={showErrorModal} onClose={handleCloseModal}>
+        <p>{error}</p>
+      </Modal>
     </div>
   );
 }

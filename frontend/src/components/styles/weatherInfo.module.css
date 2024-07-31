@@ -12,14 +12,16 @@ main {
   width: 100%;
   align-items: flex-start;
 }
+
 footer {
   display: flex;
   width: 100%;
   align-items: center;
-  background: #1a1a1a;
+  background: var(--button-bg);
   border-top: 3px solid gray;
   flex-direction: column;
 }
+
 @media (max-width: 768px) {
   main,
   footer {
@@ -28,11 +30,7 @@ footer {
     gap: 5px;
   }
 }
-@media (max-width: 768px) {
-  footer {
-    flex-direction: column;
-  }
-}
+
 @media (max-width: 600px) {
   main {
     flex-direction: column;

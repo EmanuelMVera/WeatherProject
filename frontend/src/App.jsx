@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import CitySearch from "./components/CitySearch";
 import WeatherInfo from "./components/WeatherInfo";
-import Modal from "./components/Modal";
+import ErrorModal from "./components/ErrorModal";
 
 function App() {
   const [weatherData, setWeatherData] = useState(null);
@@ -30,17 +30,28 @@ function App() {
     if (!city) return;
 
     try {
-      const responses = await Promise.all([
-        fetch(`http://localhost:3001/currentWeather?city=${city}`),
-        fetch(`http://localhost:3001/forecastWeather?city=${city}`),
-      ]);
+      const urls = [
+        `http://localhost:3001/currentWeather?city=${city}`,
+        `http://localhost:3001/forecastWeather?city=${city}`,
+      ];
 
-      if (responses.some((res) => !res.ok)) {
-        throw new Error("Failed to fetch weather data");
+      const responses = await Promise.all(urls.map((url) => fetch(url)));
+
+      // version 1
+      // if (responses.some((res) => !res.ok)) {
+      //   throw new Error("Failed to fetch weather data");
+      // }
+      // version 2
+      for (const response of responses) {
+        if (!response.ok) {
+          const errorText = await response.text();
+          const errorData = JSON.parse(errorText);
+          throw new Error(errorData.error || "Error al obtener datos");
+        }
       }
 
       const [currentWeatherData, forecastWeatherData] = await Promise.all(
-        responses.map((res) => res.json())
+        responses.map((response) => response.json())
       );
 
       setWeatherData({
@@ -48,8 +59,10 @@ function App() {
         forecast: forecastWeatherData,
       });
       setError(null);
-    } catch {
-      setError("Error al obtener el pronóstico del clima");
+    } catch (error) {
+      error.message === "Ciudad no encontrada"
+        ? setError(error.message)
+        : setError("Error al obtener datos");
       setShowErrorModal(true);
     }
   };
@@ -71,9 +84,9 @@ function App() {
       ) : (
         <p>Cargando...</p>
       )}
-      <Modal show={showErrorModal} onClose={handleCloseModal}>
+      <ErrorModal show={showErrorModal} onClose={handleCloseModal}>
         <p>{error}</p>
-      </Modal>
+      </ErrorModal>
     </div>
   );
 }

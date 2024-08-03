@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styles from "./styles/modal.module.css";
 
-const Modal = ({ show, onClose, children }) => {
+const ErrorModal = ({ show, onClose, children }) => {
   if (!show) {
     return null;
   }
@@ -19,10 +19,10 @@ const Modal = ({ show, onClose, children }) => {
   );
 };
 
-Modal.propTypes = {
+ErrorModal.propTypes = {
   show: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   children: PropTypes.node,
 };
 
-export default Modal;
+export default ErrorModal;

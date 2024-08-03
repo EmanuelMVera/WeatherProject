@@ -30,6 +30,10 @@ const fetchWeatherData = async (url) => {
 const currentWeather = async (req, res) => {
   const { city } = req.query;
 
+  if (!city) {
+    return res.status(400).json({ error: "Ciudad no proporcionada" });
+  }
+
   try {
     const urlOpenWeather = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.OPENWEATHER_API_KEY}&lang=es&units=metric`;
     const urlWeatherAPI = `http://api.weatherapi.com/v1/current.json?key=${process.env.WEATHER_API_KEY}&q=${city}&lang=es`;
@@ -67,15 +71,13 @@ const currentWeather = async (req, res) => {
       city: name,
       country: sys.country,
       date: formattedDate,
-      time: formattedDate.time,
       sunrise: formattedSunrise,
       sunset: formattedSunset,
     };
 
     res.json(currentWeatherData);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Error al obtener el pronóstico del clima" });
+    res.status(404).json({ error: "Ciudad no encontrada" });
   }
 };
 

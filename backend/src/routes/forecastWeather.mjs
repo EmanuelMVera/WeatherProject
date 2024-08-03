@@ -1,60 +1,64 @@
+const fetchWeatherData = async (url) => {
+  const response = await fetch(url);
+  if (!response.ok) throw new Error("Error obteniendo la ubicación");
+  return response.json();
+};
+
+const getDailyWeather = (data) => {
+  const dailyWeather = {};
+  const currentDate = new Date();
+
+  data.list.forEach((entry) => {
+    const date = new Date(entry.dt * 1000);
+    const hour = date.getUTCHours();
+    const dayDiff = Math.floor((date - currentDate) / (1000 * 60 * 60 * 24));
+
+    const dayOfWeek =
+      dayDiff === 0
+        ? "Hoy"
+        : dayDiff === 1
+        ? "Mañana"
+        : date.toLocaleDateString("es-ES", { weekday: "long" });
+
+    const { description: weatherCondition, icon } = entry.weather[0];
+    const { temp_min: tempMin, temp_max: tempMax } = entry.main;
+    const dayIcon = icon.replace("n", "d");
+
+    if (hour >= 9 && hour <= 18) {
+      if (!dailyWeather[dayOfWeek]) {
+        dailyWeather[dayOfWeek] = {
+          condition: weatherCondition,
+          tempMin,
+          tempMax,
+          icon: dayIcon,
+        };
+      } else {
+        dailyWeather[dayOfWeek].tempMin = Math.min(
+          dailyWeather[dayOfWeek].tempMin,
+          tempMin
+        );
+        dailyWeather[dayOfWeek].tempMax = Math.max(
+          dailyWeather[dayOfWeek].tempMax,
+          tempMax
+        );
+      }
+    }
+  });
+
+  return Object.keys(dailyWeather)
+    .slice(0, 5)
+    .map((day) => ({
+      day: day.charAt(0).toUpperCase() + day.slice(1),
+      ...dailyWeather[day],
+    }));
+};
+
 const forecastWeather = async (req, res) => {
   const { city } = req.query;
 
-  const fetchWeatherData = async (url) => {
-    const response = await fetch(url);
-    if (!response.ok) throw new Error("Error fetching data");
-    return response.json();
-  };
-
-  const getDailyWeather = (data) => {
-    const dailyWeather = {};
-    const currentDate = new Date();
-
-    data.list.forEach((entry) => {
-      const date = new Date(entry.dt * 1000);
-      const hour = date.getUTCHours();
-      const dayDiff = Math.floor((date - currentDate) / (1000 * 60 * 60 * 24));
-
-      const dayOfWeek =
-        dayDiff === 0
-          ? "Hoy"
-          : dayDiff === 1
-          ? "Mañana"
-          : date.toLocaleDateString("es-ES", { weekday: "long" });
-
-      const { description: weatherCondition, icon } = entry.weather[0];
-      const { temp_min: tempMin, temp_max: tempMax } = entry.main;
-      const dayIcon = icon.replace("n", "d");
-
-      if (hour >= 9 && hour <= 18) {
-        if (!dailyWeather[dayOfWeek]) {
-          dailyWeather[dayOfWeek] = {
-            condition: weatherCondition,
-            tempMin,
-            tempMax,
-            icon: dayIcon,
-          };
-        } else {
-          dailyWeather[dayOfWeek].tempMin = Math.min(
-            dailyWeather[dayOfWeek].tempMin,
-            tempMin
-          );
-          dailyWeather[dayOfWeek].tempMax = Math.max(
-            dailyWeather[dayOfWeek].tempMax,
-            tempMax
-          );
-        }
-      }
-    });
-
-    return Object.keys(dailyWeather)
-      .slice(0, 5)
-      .map((day) => ({
-        day: day.charAt(0).toUpperCase() + day.slice(1),
-        ...dailyWeather[day],
-      }));
-  };
+  if (!city) {
+    return res.status(400).json({ error: "Ciudad no proporcionada" });
+  }
 
   try {
     const weatherApiKey = process.env.WEATHER_API_KEY;
@@ -86,8 +90,7 @@ const forecastWeather = async (req, res) => {
 
     res.json({ hourlyForecast, dailyForecast });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Error al obtener el pronóstico del clima" });
+    res.status(404).json({ error: "Ciudad no encontrada" });
   }
 };
 

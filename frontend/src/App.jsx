@@ -13,7 +13,9 @@ function App() {
   useEffect(() => {
     const fetchLocationData = async () => {
       try {
-        const response = await fetch(`${apiUrl}/ipGeolocation`);
+        const response = await fetch(
+          `https://weatherproject-s62b.onrender.com/ipGeolocation`
+        );
         if (!response.ok) throw new Error("Failed to fetch location data");
 
         const location = await response.json();
@@ -32,8 +34,8 @@ function App() {
 
     try {
       const urls = [
-        `${apiUrl}/currentWeather?city=${city}`,
-        `${apiUrl}/forecastWeather?city=${city}`,
+        `https://weatherproject-s62b.onrender.com/currentWeather?city=${city}`,
+        `https://weatherproject-s62b.onrender.com/forecastWeather?city=${city}`,
       ];
 
       const responses = await Promise.all(urls.map((url) => fetch(url)));

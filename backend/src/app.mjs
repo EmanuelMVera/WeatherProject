@@ -6,6 +6,7 @@ import routes from "./routes/index.mjs";
 import errorHandler from "./middleware/errorHandler.mjs";
 
 const app = express();
+const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN;
 
 // Middleware de seguridad
 app.use(helmet());
@@ -20,7 +21,7 @@ app.use(json({ limit: "10mb" }));
 // Configuración de CORS
 app.use(
   cors({
-    origin: "https://weatherproject-yfkx.onrender.com",
+    origin: ALLOWED_ORIGIN,
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
     exposedHeaders: ["Content-Length", "X-Kuma-Revision"],

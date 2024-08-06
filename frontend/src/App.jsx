@@ -9,6 +9,7 @@ function App() {
   const [weatherData, setWeatherData] = useState(null);
   const [error, setError] = useState(null);
   const [showErrorModal, setShowErrorModal] = useState(false);
+  console.log("API URL:", apiUrl);
 
   useEffect(() => {
     const fetchLocationData = async () => {

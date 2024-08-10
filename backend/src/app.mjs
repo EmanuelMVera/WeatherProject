@@ -15,10 +15,12 @@ if (process.env.NODE_ENV === "development") {
 
 app.use(
   cors({
-    origin: process.env.ALLOWED_ORIGIN || "http://localhost:3000",
+    // origin: process.env.ALLOWED_ORIGIN || "http://localhost:3000",
+    origin: "*",
     credentials: true,
   })
 );
+
 app.use("/", routes);
 
 app.use(errorHandler);

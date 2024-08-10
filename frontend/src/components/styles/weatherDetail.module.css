@@ -1,14 +1,16 @@
 .weatherDetail {
-  display: flex;
+  background: #0e112b;
+  padding: 10px;
+  /* display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   gap: 0.3rem;
   padding: 10px;
   width: 100%;
-  border-top: 5px outset #fff;
+  border-top: 5px outset #fff; */
   color: #fff;
 }
-
+/* 
 p {
   margin-bottom: 15px;
 }
@@ -17,4 +19,4 @@ p {
   p {
     font-size: 1.5rem;
   }
-}
+} */

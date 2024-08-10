@@ -1,28 +1,72 @@
 .app-container {
-  display: flex;
-  flex-direction: column;
-  width: 100vw;
-  min-height: 100vh;
-  background-image: url(/src/assets/fondo.png);
+  background-image: url(../src/assets/fondo.png);
   background-size: cover;
   background-position: center;
-  align-items: stretch;
-  justify-content: space-between;
+  min-height: 100vh;
+  color: white;
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  grid-template-rows: auto auto auto auto;
+  /* gap: 10px; */
+  /* padding: 10px; */
 }
 
-.error-message {
-  color: red;
-  margin-top: 10px;
+.block {
+  overflow: hidden;
+  /* padding: 5px; */
+  text-align: center;
+}
+
+.block1 {
+  background: #0e112b;
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+}
+
+.block2 {
+  /* background-image: url(../src/assets/fondo.png); */
+  /* background-size: cover; */
+  /* background-position: center; */
+  grid-column: 2 / 4;
+  grid-row: 1 / 3;
+}
+
+.block3 {
+  grid-column: 2 / 4;
+  grid-row: 3 / 4;
+}
+
+.block4 {
+  background: #0e112b;
+  grid-column: 1 / 2;
+  grid-row: 2 / 5;
+}
+
+.block5 {
+  padding: 10px;
+  grid-column: 2 / 3;
+  grid-row: 4 / 5;
+}
+
+.block6 {
+  padding: 10px;
+  grid-column: 3 / 4;
+  grid-row: 4 / 5;
 }
 
 @media (max-width: 768px) {
   .app-container {
-    overflow-x: hidden;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(6, auto);
+  }
+
+  .block1,
+  .block2,
+  .block3,
+  .block4,
+  .block5,
+  .block6 {
+    grid-column: 1 / 2;
+    grid-row: auto;
   }
 }
-
-/* @media (min-width: 1440px) {
-  .app-container {
-    font-size: 3.5rem;
-  }
-} */

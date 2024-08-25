@@ -6,12 +6,10 @@ const CurrentWeather = ({ currentWeather }) => {
   const { current, description } = temperature;
 
   return (
-    // <div className={styles.currentWeather}>
-    <div>
+    <div className={styles.currentWeather}>
       <h2>{city}</h2>
       <h3>{date}</h3>
-      {/* <div className={styles.temp}> */}
-      <div>
+      <div className={styles.temp}>
         <span>{current}°</span>
       </div>
       <h3>{description}</h3>

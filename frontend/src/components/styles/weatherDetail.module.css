@@ -1,22 +1,21 @@
 .weatherDetail {
   background: #0e112b;
-  padding: 10px;
-  /* display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  gap: 0.3rem;
-  padding: 10px;
-  width: 100%;
-  border-top: 5px outset #fff; */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
   color: #fff;
 }
-/* 
+
 p {
-  margin-bottom: 15px;
+  font-size: 1.2rem;
+  margin: 0;
 }
 
 @media (min-width: 1440px) {
   p {
     font-size: 1.5rem;
   }
-} */
+}

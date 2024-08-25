@@ -98,20 +98,17 @@ function App() {
       {weatherData ? (
         <>
           <div className="block block2">
-            <CurrentWeather currentWeather={weatherData.current} />
-          </div>
-          <div className="block block3">
             <HourlyForecast
               hourlyForecast={weatherData.forecast.hourlyForecast}
             />
+          </div>
+          <div className="block block3">
+            <CurrentWeather currentWeather={weatherData.current} />
           </div>
           <div className="block block4">
             <DailyForecast dailyForecast={weatherData.forecast.dailyForecast} />
           </div>
           <div className="block block5">
-            <WeatherDetail currentWeather={weatherData.current} />
-          </div>
-          <div className="block block6">
             <WeatherDetail currentWeather={weatherData.current} />
           </div>
         </>
@@ -121,7 +118,6 @@ function App() {
           <div className="block block3">3</div>
           <div className="block block4">4</div>
           <div className="block block5">5</div>
-          <div className="block block6">6</div>
         </>
       )}
       <ErrorModal show={showErrorModal} onClose={handleCloseModal}>

@@ -75,6 +75,9 @@ const currentWeather = async (req, res) => {
       sunset: formattedSunset,
     };
 
+    console.log("dataOpenWeather: " + JSON.stringify(dataOpenWeather, null, 2));
+    console.log("dataWeatherAPI: " + JSON.stringify(dataWeatherAPI, null, 2));
+
     res.json(currentWeatherData);
   } catch (error) {
     res.status(404).json({ error: "Ciudad no encontrada" });

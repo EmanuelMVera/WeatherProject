@@ -14,10 +14,14 @@ const DailyForecast = ({ dailyForecast }) => (
           className={styles.weatherIcon}
         />
         <span className={styles.temperature}>
-          <FontAwesomeIcon icon={faArrowDown} style={{ color: "blue" }} />
-          {tempMin}°{" "}
-          <FontAwesomeIcon icon={faArrowUp} style={{ color: "red" }} />
-          {tempMax}°
+          <div className={styles.tempMin}>
+            <FontAwesomeIcon icon={faArrowDown} style={{ color: "blue" }} />
+            {tempMin}°
+          </div>
+          <div className={styles.tempMax}>
+            <FontAwesomeIcon icon={faArrowUp} style={{ color: "red" }} />
+            {tempMax}°
+          </div>
         </span>
       </div>
     ))}

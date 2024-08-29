@@ -1,34 +1,42 @@
 .currentWeather {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-  padding: 20px;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: stretch;
 }
 
-h2,
-h3 {
+.currentWeather h2,
+.currentWeather h3 {
   font-size: 1.5rem;
+  margin-bottom: 0.5em;
 }
 
 .temp {
-  font-size: 7rem;
-  display: flex;
-  align-items: center;
+  font-size: 5rem;
+  margin: 0.5em 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-@media (max-width: 600px) {
-  .currentWeather {
-    align-items: center;
-  }
-}
-
-@media (min-width: 1440px) {
-  h2,
-  h3 {
-    font-size: 3.5rem;
+@media (min-width: 1024px) {
+  .currentWeather h2,
+  .currentWeather h3 {
+    font-size: 1.5rem;
   }
 
   .temp {
-    font-size: 9.5rem;
+    font-size: 4rem;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .temp {
+    font-size: 4rem;
+  }
+  .currentWeather h2,
+  .currentWeather h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5em;
   }
 }

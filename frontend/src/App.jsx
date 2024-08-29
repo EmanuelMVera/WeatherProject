@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 const apiUrl = import.meta.env.VITE_API_URL;
 import "./App.css";
 import CitySearch from "./components/CitySearch";
-import WeatherInfo from "./components/WeatherInfo";
+// import WeatherInfo from "./components/WeatherInfo";
+import CurrentWeather from "./components/CurrentWeather";
+import HourlyForecast from "./components/HourlyForecast";
+import DailyForecast from "./components/DailyForecast";
+import WeatherDetail from "./components/WeatherDetail";
 import ErrorModal from "./components/ErrorModal";
 
 function App() {
@@ -10,6 +14,15 @@ function App() {
   const [error, setError] = useState(null);
   const [showErrorModal, setShowErrorModal] = useState(false);
   console.log("API URL:", apiUrl);
+
+  // Ejemplo de lista de ciudades
+  const cityList = [
+    { label: "New York" },
+    { label: "Guernica" },
+    { label: "Los Angeles" },
+    { label: "Chicago" },
+    // Agrega más ciudades según sea necesario
+  ];
 
   useEffect(() => {
     const fetchLocationData = async () => {
@@ -76,15 +89,38 @@ function App() {
 
   return (
     <div className="app-container">
-      <CitySearch fetchWeatherData={fetchWeatherData} />
-      {weatherData ? (
-        <WeatherInfo
-          currentWeather={weatherData.current}
-          hourlyForecast={weatherData.forecast.hourlyForecast}
-          dailyForecast={weatherData.forecast.dailyForecast}
+      <div className="block block1">
+        <CitySearch
+          fetchWeatherData={fetchWeatherData}
+          cityList={cityList}
+          className="block block2"
         />
+      </div>
+
+      {weatherData ? (
+        <>
+          <div className="block block2">
+            <HourlyForecast
+              hourlyForecast={weatherData.forecast.hourlyForecast}
+            />
+          </div>
+          <div className="block block3">
+            <CurrentWeather currentWeather={weatherData.current} />
+          </div>
+          <div className="block block4">
+            <DailyForecast dailyForecast={weatherData.forecast.dailyForecast} />
+          </div>
+          <div className="block block5">
+            <WeatherDetail currentWeather={weatherData.current} />
+          </div>
+        </>
       ) : (
-        <p>Cargando...</p>
+        <>
+          <div className="block block2">2</div>
+          <div className="block block3">3</div>
+          <div className="block block4">4</div>
+          <div className="block block5">5</div>
+        </>
       )}
       <ErrorModal show={showErrorModal} onClose={handleCloseModal}>
         <p>{error}</p>

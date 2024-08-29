@@ -1,122 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
 
-/* Variables de CSS para colores y fuentes */
-:root {
-  --font-family: "Roboto", Arial, sans-serif;
-  --background-color: #030212;
-  --text-color: #f0f0f0;
-  --link-color: #007bff;
-  --error-color: red;
-  --button-bg: #1a1a1a;
-  --button-hover-bg: #505050;
-  --button-border: #ffffff;
-  --input-border: #ccc;
-  --input-focus-border: #9b9b9b;
-}
-
-/* Reset de estilos y configuración global */
-html {
+* {
   box-sizing: border-box;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: inherit;
-}
-
-body,
-h1,
-h2,
-h3,
-p,
-ul,
-ol,
-li,
-figure,
-figcaption,
-blockquote,
-dl,
-dd {
   margin: 0;
   padding: 0;
 }
 
 body {
-  font-family: var(--font-family);
-  line-height: 1.6;
-  background-color: var(--background-color);
-  color: var(--text-color);
-}
-
-a {
-  text-decoration: none;
-  color: var(--link-color);
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-#root {
+  font-family: Roboto, Arial, sans-serif;
   min-height: 100vh;
-}
-
-/* Utilidades */
-.flex-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.flex-column {
-  display: flex;
-  flex-direction: column;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.text-shadow {
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-}
-
-.error-message {
-  color: var(--error-color);
-  margin-top: 10px;
-}
-
-.button {
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  border: 2px solid var(--button-border);
-  border-radius: 0 4px 4px 0;
-  background-color: var(--button-bg);
-  color: var(--text-color);
-  cursor: pointer;
-  transition: background-color 0.3s, border-color 0.3s;
-}
-
-.button:hover {
-  background-color: var(--button-hover-bg);
-}
-
-.input {
-  padding: 0.6em;
-  font-size: 1em;
-  border: 2px solid var(--input-border);
-  border-radius: 4px;
-  background-color: #f0f0f0;
-  transition: border-color 0.3s;
-}
-
-.input:focus {
-  border-color: var(--input-focus-border);
-}
-
-@media (max-width: 768px) {
-  .hidden-overflow-x {
-    overflow-x: hidden;
-  }
+  background-color: rgb(88, 89, 95);
 }

@@ -17,20 +17,15 @@ const CitySearch = ({ fetchWeatherData }) => {
   );
 
   return (
-    <div className={styles.citySearchContainer}>
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <input
-          type="text"
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
-          placeholder="Ingrese nombre de ciudad..."
-          className={styles.input}
-        />
-        <button type="submit" className={styles.button}>
-          Buscar
-        </button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit} className={styles.form}>
+      <input
+        type="text"
+        value={city}
+        onChange={(e) => setCity(e.target.value)}
+        placeholder="Ciudad..."
+        className={styles.input}
+      />
+    </form>
   );
 };
 

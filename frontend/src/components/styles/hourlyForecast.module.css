@@ -1,55 +1,43 @@
 .hourlyForecast {
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  grid-auto-rows: 100px;
-  gap: 10px;
-  background-color: #00000057;
+  width: 100%;
+}
+
+.forecast {
+  display: flex;
+  overflow-x: scroll;
+  scrollbar-color: rgb(79, 85, 139) rgba(14, 17, 43, 0.7);
+  gap: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: rgba(14, 17, 43, 0.8);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  /* Añade white-space: nowrap si quieres que todos los elementos queden en una línea */
+  white-space: nowrap;
 }
 
 .hour {
+  flex: 0 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  line-height: 1;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.weatherIcon {
-  width: 40px;
-  height: 40px;
-}
-
-/* Oculta la barra de desplazamiento en Chrome, Safari y Edge */
 .hourlyForecast::-webkit-scrollbar {
   display: none;
 }
 
-@media (max-width: 768px) {
-  .hourlyForecast {
-    grid-template-columns: repeat(6, 1fr);
-  }
-}
-
-@media (min-width: 1024px) {
-  .hourlyForecast {
-    grid-template-columns: repeat(12, 1fr);
-  }
-}
-
 @media (min-width: 1440px) {
   .hourlyForecast {
-    grid-template-columns: repeat(6, 1fr);
-    grid-auto-rows: auto;
-    gap: 1.5rem;
-    font-size: 2.5rem;
+    font-size: 1.5rem;
   }
 
   .weatherIcon {
-    width: 3.5rem;
-    height: 3.5rem;
-  }
-
-  .hour {
-    line-height: normal;
+    width: 60px;
+    height: 60px;
   }
 }

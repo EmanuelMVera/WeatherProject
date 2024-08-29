@@ -21,16 +21,20 @@ app.use(json({ limit: "10mb" }));
 // Configuración de CORS
 app.use(
   cors({
+
     origin: ALLOWED_ORIGIN,
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
     exposedHeaders: ["Content-Length", "X-Kuma-Revision"],
+
     credentials: true,
     optionsSuccessStatus: 204,
   })
 );
 
+
 // Rutas de la aplicación
+
 app.use("/", routes);
 
 // Manejo de errores

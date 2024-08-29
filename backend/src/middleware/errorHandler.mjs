@@ -1,6 +1,11 @@
 const errorHandler = (err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send("Something broke!");
+  // Registro de errores
+  console.error(err.message);
+
+  // Responder con un mensaje genérico para producción
+  res.status(err.status || 500).json({
+    message: "Internal Server Error",
+  });
 };
 
 export default errorHandler;

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+const apiUrl = import.meta.env.VITE_API_URL;
 import "./App.css";
 import CitySearch from "./components/CitySearch";
 // import WeatherInfo from "./components/WeatherInfo";
@@ -12,6 +13,7 @@ function App() {
   const [weatherData, setWeatherData] = useState(null);
   const [error, setError] = useState(null);
   const [showErrorModal, setShowErrorModal] = useState(false);
+  console.log("API URL:", apiUrl);
 
   // Ejemplo de lista de ciudades
   const cityList = [
@@ -25,7 +27,7 @@ function App() {
   useEffect(() => {
     const fetchLocationData = async () => {
       try {
-        const response = await fetch("http://localhost:3001/ipGeolocation");
+        const response = await fetch(`${apiUrl}/ipGeolocation`);
         if (!response.ok) throw new Error("Failed to fetch location data");
 
         const location = await response.json();
@@ -44,8 +46,8 @@ function App() {
 
     try {
       const urls = [
-        `http://localhost:3001/currentWeather?city=${city}`,
-        `http://localhost:3001/forecastWeather?city=${city}`,
+        `${apiUrl}/currentWeather?city=${city}`,
+        `${apiUrl}/forecastWeather?city=${city}`,
       ];
 
       const responses = await Promise.all(urls.map((url) => fetch(url)));

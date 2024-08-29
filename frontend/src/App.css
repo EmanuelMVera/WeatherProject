@@ -5,23 +5,24 @@
   min-height: 100vh;
   color: white;
   display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-rows: auto auto;
   gap: 10px;
   padding: 20px;
 }
 
 @media (min-width: 768px) {
   .app-container {
-    grid-template-columns: 2fr 1fr;
-    grid-template-rows: auto;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-rows: auto auto auto auto;
     gap: 20px;
+    justify-items: center;
   }
 }
 
 @media (min-width: 1024px) {
   .app-container {
-    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr); /* Tres columnas de igual tamaño */
     grid-template-rows: auto auto;
     gap: 20px;
   }
@@ -36,6 +37,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 .block1 {
@@ -65,7 +67,7 @@
 }
 
 /* Pantallas de más de 1200px - Pantallas grandes (monitores grandes y televisores)*/
-@media only screen and (min-width: 1201px) {
+/* @media only screen and (min-width: 1201px) {
   .block1 {
     min-width: 1161px;
   }
@@ -77,10 +79,10 @@
   .block5 {
     min-width: 580.5px;
   }
-}
+} */
 
 /* Pantallas de hasta 1200px - Desktops estándar */
-@media only screen and (max-width: 1200px) {
+/* @media only screen and (max-width: 1200px) {
   .block1 {
     max-width: 1160px;
   }
@@ -92,10 +94,10 @@
   .block5 {
     max-width: 580px;
   }
-}
+} */
 
 /* Pantallas de hasta 1024px - Dispositivos grandes (laptops y desktops pequeños) */
-@media only screen and (max-width: 1024px) {
+/* @media only screen and (max-width: 1024px) {
   .block1 {
     max-width: 984px;
   }
@@ -107,21 +109,37 @@
   .block5 {
     max-width: 492px;
   }
-}
+} */
 
 /* Pantallas de hasta 768px - Tablets y dispositivos medianos */
-@media only screen and (max-width: 768px) {
-  .block1 {
+@media only screen and (min-width: 768px) {
+  /* .block1 {
     max-width: 728px;
+  } */
+  .block2 {
+    grid-column: 2 / 4;
+    grid-row: 2 / 3;
   }
-  .block3,
+  .block3 {
+    grid-column: 1 / 2;
+    grid-row: 2 / 4;
+  }
+  .block4 {
+    grid-column: 2 / 4;
+    grid-row: 3 / 4;
+  }
   .block5 {
+    grid-column: 1 / 4;
+    grid-row: 4 / 5;
+  }
+  /* .block5, */
+  /* .block3 {
     max-width: 236px;
   }
   .block2,
   .block4 {
     max-width: 472px;
-  }
+  } */
 }
 
 /* Pantallas de hasta 480px - Dispositivos medianos (móviles en modo landscape y tablets pequeñas) */

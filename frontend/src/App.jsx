@@ -13,15 +13,6 @@ function App() {
   const [error, setError] = useState(null);
   const [showErrorModal, setShowErrorModal] = useState(false);
 
-  // Ejemplo de lista de ciudades
-  const cityList = [
-    { label: "New York" },
-    { label: "Guernica" },
-    { label: "Los Angeles" },
-    { label: "Chicago" },
-    // Agrega más ciudades según sea necesario
-  ];
-
   useEffect(() => {
     const fetchLocationData = async () => {
       try {
@@ -88,22 +79,18 @@ function App() {
   return (
     <div className="app-container">
       <div className="block block1">
-        <CitySearch
-          fetchWeatherData={fetchWeatherData}
-          cityList={cityList}
-          className="block block2"
-        />
+        <CitySearch fetchWeatherData={fetchWeatherData} />
       </div>
 
       {weatherData ? (
         <>
+          <div className="block block3">
+            <CurrentWeather currentWeather={weatherData.current} />
+          </div>
           <div className="block block2">
             <HourlyForecast
               hourlyForecast={weatherData.forecast.hourlyForecast}
             />
-          </div>
-          <div className="block block3">
-            <CurrentWeather currentWeather={weatherData.current} />
           </div>
           <div className="block block4">
             <DailyForecast dailyForecast={weatherData.forecast.dailyForecast} />
@@ -114,10 +101,10 @@ function App() {
         </>
       ) : (
         <>
-          <div className="block block2">2</div>
-          <div className="block block3">3</div>
-          <div className="block block4">4</div>
-          <div className="block block5">5</div>
+          <div className="block block2"></div>
+          <div className="block block3"></div>
+          <div className="block block4"></div>
+          <div className="block block5"></div>
         </>
       )}
       <ErrorModal show={showErrorModal} onClose={handleCloseModal}>

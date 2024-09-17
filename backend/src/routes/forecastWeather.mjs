@@ -1,3 +1,6 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 const fetchWeatherData = async (url) => {
   const response = await fetch(url);
   if (!response.ok) throw new Error("Error obteniendo la ubicación");

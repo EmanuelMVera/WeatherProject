@@ -1,6 +1,9 @@
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 
+import dotenv from "dotenv";
+dotenv.config();
+
 const formatTimestamp = (unixTimestamp, timezoneOffset) => {
   const date = new Date((unixTimestamp + timezoneOffset) * 1000);
   return {
@@ -80,7 +83,10 @@ const currentWeather = async (req, res) => {
 
     res.json(currentWeatherData);
   } catch (error) {
-    res.status(404).json({ error: "Ciudad no encontrada" });
+    console.error("Error en currentWeather:", error.message);
+    res
+      .status(404)
+      .json({ error: "Ciudad no encontrada o error procesando los datos" });
   }
 };
 

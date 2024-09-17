@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import CitySearch from "./components/CitySearch";
 import CurrentWeather from "./components/CurrentWeather";
@@ -6,62 +6,63 @@ import HourlyForecast from "./components/HourlyForecast";
 import DailyForecast from "./components/DailyForecast";
 import WeatherDetail from "./components/WeatherDetail";
 import ErrorModal from "./components/ErrorModal";
-import {
-  getCurrentWeatherData,
-  getForecastWeatherData,
-  fetchWeatherData,
-} from "./utils/weatherUtils";
-const ipApiKey = import.meta.env.VITE_IP_API_KEY;
+import DropdownMenu from "./components/DropdownMenu";
 
 function App() {
   const [weatherData, setWeatherData] = useState(null);
   const [error, setError] = useState(null);
   const [showErrorModal, setShowErrorModal] = useState(false);
 
-  const fetchLocationData = useCallback(async () => {
-    try {
-      const locationResponse = await fetchWeatherData(
-        `https://ipinfo.io/json?token=${ipApiKey}`
-      );
-      fetchWeatherDataHandler(locationResponse.city);
-    } catch {
-      fetchWeatherDataHandler("Buenos Aires");
-    }
+  useEffect(() => {
+    const fetchLocationData = async () => {
+      try {
+        const response = await fetch(`http://localhost:3001/ipGeolocation`);
+        if (!response.ok) throw new Error("Failed to fetch location data");
+
+        const location = await response.json();
+        fetchWeatherData(location?.cityName);
+      } catch {
+        setError("Error al obtener ubicación");
+        setShowErrorModal(true);
+      }
+    };
+
+    fetchLocationData();
   }, []);
 
-  useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(async (position) => {
-        try {
-          const { latitude, longitude } = position.coords;
-          const reverseGeolocationUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=es`;
-          const reverseGeolocationResponse = await fetchWeatherData(
-            reverseGeolocationUrl
-          );
-          fetchWeatherDataHandler(reverseGeolocationResponse.city);
-        } catch {
-          fetchLocationData();
-        }
-      }, fetchLocationData);
-    } else {
-      fetchLocationData();
-    }
-  }, [fetchLocationData]);
-
-  const fetchWeatherDataHandler = async (city) => {
+  const fetchWeatherData = async (city) => {
     if (!city) return;
 
     try {
-      const [current, forecast] = await Promise.all([
-        getCurrentWeatherData(city),
-        getForecastWeatherData(city),
-      ]);
+      const urls = [
+        `/api/currentWeather?city=${city}`,
+        `/api/forecastWeather?city=${city}`,
+      ];
 
-      setWeatherData({ current, forecast });
-      setError(null); // Limpiar errores previos
+      const responses = await Promise.all(urls.map((url) => fetch(url)));
+
+      for (const response of responses) {
+        if (!response.ok) {
+          const errorText = await response.text();
+          const errorData = JSON.parse(errorText);
+          throw new Error(errorData.error || "Error al obtener datos");
+        }
+      }
+
+      const [currentWeatherData, forecastWeatherData] = await Promise.all(
+        responses.map((response) => response.json())
+      );
+
+      setWeatherData({
+        current: currentWeatherData,
+        forecast: forecastWeatherData,
+      });
+      setError(null);
     } catch (error) {
-      setError(error.message || "Error al obtener datos.");
-      setShowErrorModal(true); // Mostrar el modal de error
+      error.message === "Ciudad no encontrada"
+        ? setError(error.message)
+        : setError("Error al obtener datos");
+      setShowErrorModal(true);
     }
   };
 
@@ -72,36 +73,35 @@ function App() {
 
   return (
     <div className="app-container">
-      <div className="block block1">
-        <CitySearch fetchWeatherData={fetchWeatherDataHandler} />
-      </div>
+      <DropdownMenu fetchWeatherData={fetchWeatherData} />
       {weatherData ? (
         <>
-          {console.log(weatherData)}
-          <div className="block block3">
-            <CurrentWeather currentWeather={weatherData.current} />
-          </div>
-
           <div className="block block2">
             <HourlyForecast
               hourlyForecast={weatherData.forecast.hourlyForecast}
             />
           </div>
-
+          <div className="block block3">
+            <CurrentWeather currentWeather={weatherData.current} />
+          </div>
           <div className="block block4">
             <DailyForecast dailyForecast={weatherData.forecast.dailyForecast} />
           </div>
-
           <div className="block block5">
             <WeatherDetail currentWeather={weatherData.current} />
           </div>
         </>
       ) : (
-        <div>Loading...</div>
+        <>
+          <div className="block block2"></div>
+          <div className="block block3"></div>
+          <div className="block block4"></div>
+          <div className="block block5"></div>
+        </>
       )}
-      {showErrorModal && (
-        <ErrorModal message={error} onClose={handleCloseModal} />
-      )}
+      <ErrorModal show={showErrorModal} onClose={handleCloseModal}>
+        <p>{error}</p>
+      </ErrorModal>
     </div>
   );
 }

@@ -1,3 +1,6 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 async function ipGeolocation(req, res) {
   const url = `https://ipinfo.io/json?token=${process.env.IP_API_KEY}`;
 

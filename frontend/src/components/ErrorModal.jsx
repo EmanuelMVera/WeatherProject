@@ -1,11 +1,8 @@
-import React from "react";
 import PropTypes from "prop-types";
 import styles from "./styles/modal.module.css";
 
 const ErrorModal = ({ show, onClose, children }) => {
-  if (!show) {
-    return null;
-  }
+  if (!show) return null; // Evita renderizar el modal si no se debe mostrar
 
   return (
     <div className={styles.modalOverlay}>

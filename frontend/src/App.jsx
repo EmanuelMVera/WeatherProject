@@ -1,94 +1,50 @@
-import React, { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
-import CitySearch from "./components/CitySearch";
+import { fetchWeatherWithLocation, hideErrorModal } from "./redux/actions";
+import { selectCurrentWeather, selectForecastWeather } from "./redux/selectors";
 import CurrentWeather from "./components/CurrentWeather";
 import HourlyForecast from "./components/HourlyForecast";
 import DailyForecast from "./components/DailyForecast";
 import WeatherDetail from "./components/WeatherDetail";
 import ErrorModal from "./components/ErrorModal";
-import DropdownMenu from "./components/DropdownMenu";
+import NavBar from "./components/Navbar";
 
 function App() {
-  const [weatherData, setWeatherData] = useState(null);
-  const [error, setError] = useState(null);
-  const [showErrorModal, setShowErrorModal] = useState(false);
+  const dispatch = useDispatch();
+  const currentWeather = useSelector(selectCurrentWeather);
+  const forecastWeather = useSelector(selectForecastWeather);
+  const error = useSelector((state) => state.error);
+  const showErrorModal = useSelector((state) => state.showErrorModal);
 
   useEffect(() => {
-    const fetchLocationData = async () => {
-      try {
-        const response = await fetch(`http://localhost:3001/ipGeolocation`);
-        if (!response.ok) throw new Error("Failed to fetch location data");
-
-        const location = await response.json();
-        fetchWeatherData(location?.cityName);
-      } catch {
-        setError("Error al obtener ubicación");
-        setShowErrorModal(true);
-      }
+    const fetchWeather = () => {
+      dispatch(fetchWeatherWithLocation());
     };
 
-    fetchLocationData();
-  }, []);
-
-  const fetchWeatherData = async (city) => {
-    if (!city) return;
-
-    try {
-      const urls = [
-        `/api/currentWeather?city=${city}`,
-        `/api/forecastWeather?city=${city}`,
-      ];
-
-      const responses = await Promise.all(urls.map((url) => fetch(url)));
-
-      for (const response of responses) {
-        if (!response.ok) {
-          const errorText = await response.text();
-          const errorData = JSON.parse(errorText);
-          throw new Error(errorData.error || "Error al obtener datos");
-        }
-      }
-
-      const [currentWeatherData, forecastWeatherData] = await Promise.all(
-        responses.map((response) => response.json())
-      );
-
-      setWeatherData({
-        current: currentWeatherData,
-        forecast: forecastWeatherData,
-      });
-      setError(null);
-    } catch (error) {
-      error.message === "Ciudad no encontrada"
-        ? setError(error.message)
-        : setError("Error al obtener datos");
-      setShowErrorModal(true);
-    }
-  };
+    fetchWeather();
+  }, [dispatch]);
 
   const handleCloseModal = () => {
-    setShowErrorModal(false);
-    setError(null);
+    dispatch(hideErrorModal());
   };
 
   return (
     <div className="app-container">
-      <DropdownMenu fetchWeatherData={fetchWeatherData} />
-      {weatherData ? (
+      <NavBar />
+      {currentWeather || forecastWeather ? (
         <>
           <div className="block block2">
-            <HourlyForecast
-              hourlyForecast={weatherData.forecast.hourlyForecast}
-            />
+            <HourlyForecast />
           </div>
           <div className="block block3">
-            <CurrentWeather currentWeather={weatherData.current} />
+            <CurrentWeather />
           </div>
           <div className="block block4">
-            <DailyForecast dailyForecast={weatherData.forecast.dailyForecast} />
+            <DailyForecast />
           </div>
           <div className="block block5">
-            <WeatherDetail currentWeather={weatherData.current} />
+            <WeatherDetail />
           </div>
         </>
       ) : (

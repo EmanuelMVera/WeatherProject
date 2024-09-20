@@ -1,12 +1,14 @@
-import React, { useState, useCallback } from "react";
-import PropTypes from "prop-types";
+import { useState, useCallback } from "react";
 import Autosuggest from "react-autosuggest";
 import styles from "./styles/citySearch.module.css";
 import allDivisiones from "../utils/getDivisiones";
+import { useDispatch } from "react-redux";
+import { fetchWeatherData } from "../redux/actions";
 
-const CitySearch = ({ fetchWeatherData }) => {
+const CitySearch = () => {
   const [city, setCity] = useState("");
   const [suggestions, setSuggestions] = useState([]);
+  const dispatch = useDispatch();
 
   const handleSuggestionsFetchRequested = ({ value }) => {
     setSuggestions(getSuggestions(value));
@@ -43,15 +45,15 @@ const CitySearch = ({ fetchWeatherData }) => {
     (event) => {
       event.preventDefault();
       if (city.trim()) {
-        fetchWeatherData(city);
+        dispatch(fetchWeatherData(null, null, city)); // Despacha la acción para buscar el clima
         setCity("");
       }
     },
-    [city, fetchWeatherData]
+    [city, dispatch]
   );
 
   return (
-    <form onSubmit={handleSubmit} className={styles.form}>
+    <form onSubmit={handleSubmit} className={styles["city-search-container"]}>
       <Autosuggest
         suggestions={suggestions}
         onSuggestionsFetchRequested={handleSuggestionsFetchRequested}
@@ -62,7 +64,7 @@ const CitySearch = ({ fetchWeatherData }) => {
           value: city,
           onChange: (e, { newValue }) => setCity(newValue),
           placeholder: "Ciudad...",
-          className: styles.input,
+          className: styles.input, // Usa tus propios estilos de input
         }}
         theme={{
           suggestionsContainer: styles["suggestions-container"],
@@ -73,10 +75,6 @@ const CitySearch = ({ fetchWeatherData }) => {
       />
     </form>
   );
-};
-
-CitySearch.propTypes = {
-  fetchWeatherData: PropTypes.func.isRequired,
 };
 
 export default CitySearch;

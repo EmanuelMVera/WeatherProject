@@ -1,7 +1,13 @@
-import React from "react";
+import { useSelector } from "react-redux";
 import styles from "./styles/currentWeather.module.css";
+import { selectCurrentWeather } from "../redux/selectors";
 
-const CurrentWeather = ({ currentWeather }) => {
+const CurrentWeather = () => {
+  const currentWeather = useSelector(selectCurrentWeather);
+
+  // Manejo de caso nulo para current
+  if (!currentWeather) return null;
+
   const { city, temperature, date } = currentWeather;
   const { current, description } = temperature;
 

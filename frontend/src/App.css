@@ -8,7 +8,15 @@
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   grid-template-rows: auto auto;
   gap: 10px;
-  padding: 20px;
+  padding: 0;
+}
+
+.navbar {
+  grid-column: 1 / -1;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 @media (min-width: 768px) {
@@ -22,12 +30,13 @@
 
 @media (min-width: 1024px) {
   .app-container {
-    grid-template-columns: repeat(3, 1fr); /* Tres columnas de igual tamaño */
+    grid-template-columns: repeat(3, 1fr);
     grid-template-rows: auto auto;
     gap: 20px;
   }
 }
 
+/* Bloques generales */
 .block {
   background-color: rgba(14, 17, 43, 0.7);
   padding: 20px;
@@ -38,10 +47,6 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-}
-
-.block1 {
-  grid-column: 1 / -1;
 }
 
 @media (min-width: 1024px) {
@@ -66,7 +71,7 @@
   }
 }
 
-/* Pantallas de hasta 768px - Tablets y dispositivos medianos */
+/* Ajustes para tablets y móviles */
 @media only screen and (min-width: 768px) {
   .block2 {
     grid-column: 2 / 4;
@@ -86,14 +91,12 @@
   }
 }
 
-/* Pantallas de hasta 480px - Dispositivos medianos (móviles en modo landscape y tablets pequeñas) */
 @media only screen and (max-width: 480px) {
   .block {
     max-width: 440px;
   }
 }
 
-/* Pantallas de hasta 320px - Dispositivos pequeños (móviles en modo portrait) */
 @media only screen and (max-width: 320px) {
   .block {
     max-width: 280px;

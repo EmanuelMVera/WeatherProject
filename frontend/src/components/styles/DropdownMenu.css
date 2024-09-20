@@ -1,53 +1,34 @@
 .dropdown-container {
   position: relative;
-  width: 100%;
-  max-width: 400px;
-  margin: 0 auto;
-}
-
-.search-bar {
-  display: flex;
-  align-items: center;
-}
-
-input[type="text"] {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
 }
 
 .dropdown-toggle {
-  background-color: transparent;
+  padding: 10px 15px;
+  background-color: #f8f9fa;
   border: none;
-  font-size: 18px;
   cursor: pointer;
-  margin-left: 8px;
+  border-radius: 4px;
 }
 
-/* Contenedor desplegable */
 .dropdown-content {
-  position: absolute; /* Hace que se superponga y no mueva los demás elementos */
-  top: 100%; /* Se posiciona justo debajo del buscador */
-  left: 0;
+  position: absolute;
+  top: 100%;
   right: 0;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  flex-direction: column;
   padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  background-color: #f9f9f9;
-  z-index: 1000; /* Asegura que el menú se muestre encima de otros elementos */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombras para dar efecto de elevación */
 }
 
-.card {
-  background-color: #fff;
-  border: 1px solid #ccc;
-  padding: 16px;
-  border-radius: 4px;
-  width: calc(50% - 10px); /* Ajuste para tener 2 columnas */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  text-align: center;
+.dropdown-content .card {
+  padding: 8px 12px;
+  margin: 5px 0;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
+
+.dropdown-content .card:last-child {
+  border-bottom: none;
 }

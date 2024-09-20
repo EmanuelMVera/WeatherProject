@@ -1,0 +1,23 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: rgba(14, 17, 43, 0.9);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-logo img {
+  height: 40px;
+}
+
+.navbar-search {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.navbar-menu {
+  display: flex;
+  justify-content: flex-end;
+}

@@ -31,15 +31,24 @@ const fetchWeatherData = async (url) => {
 };
 
 const currentWeather = async (req, res) => {
-  const { city } = req.query;
+  const { city, lat, lon } = req.query;
 
-  if (!city) {
-    return res.status(400).json({ error: "Ciudad no proporcionada" });
+  if (!city && (!lat || !lon)) {
+    return res
+      .status(400)
+      .json({ error: "Ciudad o coordenadas no proporcionadas" });
   }
 
   try {
-    const urlOpenWeather = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.OPENWEATHER_API_KEY}&lang=es&units=metric`;
-    const urlWeatherAPI = `http://api.weatherapi.com/v1/current.json?key=${process.env.WEATHER_API_KEY}&q=${city}&lang=es`;
+    const urlOpenWeather =
+      lat && lon
+        ? `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.OPENWEATHER_API_KEY}&lang=es&units=metric`
+        : `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.OPENWEATHER_API_KEY}&lang=es&units=metric`;
+
+    const urlWeatherAPI =
+      lat && lon
+        ? `http://api.weatherapi.com/v1/current.json?key=${process.env.WEATHER_API_KEY}&q=${lat},${lon}&lang=es`
+        : `http://api.weatherapi.com/v1/current.json?key=${process.env.WEATHER_API_KEY}&q=${city}&lang=es`;
 
     const [dataOpenWeather, dataWeatherAPI] = await Promise.all([
       fetchWeatherData(urlOpenWeather),

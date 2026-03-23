@@ -6,6 +6,7 @@ import routes from "./routes/index.mjs";
 import errorHandler from "./middleware/errorHandler.mjs";
 
 const app = express();
+app.set("trust proxy", 1);
 const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN;
 
 // Middleware de seguridad
@@ -33,12 +34,12 @@ app.use(
 // Rutas de la aplicación
 app.use("/", routes);
 
-// Manejo de errores
-app.use(errorHandler);
-
-// Manejo de rutas no encontradas (404)
-app.use((req, res, next) => {
+// Rutas no encontradas (404) antes del manejador global de errores
+app.use((req, res) => {
   res.status(404).json({ error: "Not Found" });
 });
+
+// Manejo de errores (debe ir al final)
+app.use(errorHandler);
 
 export default app;

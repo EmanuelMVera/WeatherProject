@@ -1,8 +1,4 @@
-const fetchWeatherData = async (url) => {
-  const response = await fetch(url);
-  if (!response.ok) throw new Error("Error obteniendo la ubicación");
-  return response.json();
-};
+import { fetchJson } from "../lib/fetchJson.mjs";
 
 const getDailyWeather = (data) => {
   const dailyWeather = {};
@@ -66,8 +62,8 @@ const forecastWeather = async (req, res) => {
     const urlWeatherAPI = `http://api.weatherapi.com/v1/forecast.json?key=${weatherApiKey}&q=${city}&days=3&lang=es`;
     const urlOpenWeather = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${openWeatherApiKey}&lang=es&units=metric`;
     const [dataHourly, dataDaily] = await Promise.all([
-      fetchWeatherData(urlWeatherAPI),
-      fetchWeatherData(urlOpenWeather),
+      fetchJson(urlWeatherAPI),
+      fetchJson(urlOpenWeather),
     ]);
 
     const dailyForecast = getDailyWeather(dataDaily);

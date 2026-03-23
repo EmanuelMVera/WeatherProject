@@ -1,0 +1,53 @@
+.block {
+  padding: 1rem;
+  border-radius: 16px;
+  border: 1px solid rgba(167, 205, 255, 0.2);
+  background: rgba(8, 17, 37, 0.8);
+}
+
+.title {
+  margin-bottom: 0.8rem;
+  font-size: 1.02rem;
+}
+
+.hourlyForecast {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(88px, 1fr);
+  gap: 0.6rem;
+  overflow-x: auto;
+  padding-bottom: 0.25rem;
+}
+
+.hourlyForecast::-webkit-scrollbar {
+  height: 7px;
+}
+
+.hourlyForecast::-webkit-scrollbar-thumb {
+  background: rgba(155, 191, 241, 0.5);
+  border-radius: 999px;
+}
+
+.hour {
+  padding: 0.7rem 0.5rem;
+  border-radius: 12px;
+  text-align: center;
+  background: rgba(24, 44, 80, 0.58);
+  border: 1px solid rgba(152, 194, 250, 0.2);
+}
+
+.time {
+  font-size: 0.86rem;
+  color: #cae0ff;
+}
+
+.weatherIcon {
+  width: 44px;
+  height: 44px;
+  margin: 0.2rem auto 0.05rem;
+}
+
+.temp {
+  font-size: 1rem;
+  font-weight: 600;
+}

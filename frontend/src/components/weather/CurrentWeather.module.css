@@ -1,0 +1,51 @@
+.currentWeather {
+  padding: 1.1rem;
+  border-radius: 16px;
+  border: 1px solid rgba(167, 205, 255, 0.2);
+  background: linear-gradient(165deg, rgba(30, 56, 102, 0.66), rgba(10, 20, 44, 0.88));
+  backdrop-filter: blur(6px);
+}
+
+.kicker {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #9bc8ff;
+}
+
+.city {
+  margin-top: 0.2rem;
+  font-size: clamp(1.35rem, 3vw, 2rem);
+  line-height: 1.15;
+}
+
+.date {
+  margin-top: 0.3rem;
+  color: #c6dbff;
+  font-size: 0.95rem;
+}
+
+.mainRow {
+  margin-top: 0.7rem;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.weatherIcon {
+  width: 84px;
+  height: 84px;
+}
+
+.temp {
+  font-size: clamp(3rem, 11vw, 4.6rem);
+  line-height: 0.9;
+  font-weight: 700;
+}
+
+.description {
+  margin-top: 0.45rem;
+  font-size: 1rem;
+  color: #e2edff;
+  text-transform: capitalize;
+}

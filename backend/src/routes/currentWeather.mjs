@@ -1,5 +1,6 @@
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
+import { fetchJson } from "../lib/fetchJson.mjs";
 
 const formatTimestamp = (unixTimestamp, timezoneOffset) => {
   const date = new Date((unixTimestamp + timezoneOffset) * 1000);
@@ -21,12 +22,6 @@ const formatFullDate = (unixTimestamp, timezoneOffset) => {
   return formattedDate.replace(/(^\w|\s\w)/g, (m) => m.toUpperCase());
 };
 
-const fetchWeatherData = async (url) => {
-  const response = await fetch(url);
-  if (!response.ok) throw new Error("Error obteniendo la ubicación");
-  return response.json();
-};
-
 const currentWeather = async (req, res) => {
   const { city } = req.query;
 
@@ -39,8 +34,8 @@ const currentWeather = async (req, res) => {
     const urlWeatherAPI = `http://api.weatherapi.com/v1/current.json?key=${process.env.WEATHER_API_KEY}&q=${city}&lang=es`;
 
     const [dataOpenWeather, dataWeatherAPI] = await Promise.all([
-      fetchWeatherData(urlOpenWeather),
-      fetchWeatherData(urlWeatherAPI),
+      fetchJson(urlOpenWeather),
+      fetchJson(urlWeatherAPI),
     ]);
 
     const { main, weather, wind, clouds, sys, visibility, timezone, dt, name } =

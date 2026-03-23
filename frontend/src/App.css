@@ -1,28 +1,75 @@
 .app-container {
-  display: flex;
-  flex-direction: column;
-  width: 100vw;
+  position: relative;
   min-height: 100vh;
+  padding: 1rem;
   background-image: url(/src/assets/fondo.png);
   background-size: cover;
   background-position: center;
-  align-items: stretch;
-  justify-content: space-between;
+  overflow-x: hidden;
 }
 
-.error-message {
-  color: red;
-  margin-top: 10px;
+.backdrop {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, rgba(6, 15, 38, 0.72), rgba(2, 8, 20, 0.9));
 }
 
-@media (max-width: 768px) {
+.app-shell {
+  position: relative;
+  z-index: 1;
+  width: min(1160px, 100%);
+  margin: 0 auto;
+  display: grid;
+  gap: 1rem;
+}
+
+.app-header {
+  padding: 1rem;
+  border-radius: 16px;
+  backdrop-filter: blur(8px);
+  background: rgba(12, 23, 47, 0.6);
+  border: 1px solid rgba(174, 210, 255, 0.25);
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  font-size: 0.74rem;
+  color: #9dc8ff;
+}
+
+.app-header h1 {
+  margin-top: 0.15rem;
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  line-height: 1.1;
+}
+
+.subtext {
+  margin-top: 0.35rem;
+  max-width: 65ch;
+  color: rgba(233, 241, 255, 0.9);
+  font-size: 0.96rem;
+}
+
+.status-message {
+  text-align: center;
+  padding: 1rem;
+  border-radius: 12px;
+  background: rgba(8, 18, 40, 0.62);
+  border: 1px solid rgba(158, 203, 255, 0.2);
+  color: #dce9ff;
+}
+
+@media (min-width: 768px) {
   .app-container {
-    overflow-x: hidden;
+    padding: 1.3rem;
+  }
+
+  .app-shell {
+    gap: 1.2rem;
+  }
+
+  .app-header {
+    padding: 1.2rem 1.3rem;
   }
 }
-
-/* @media (min-width: 1440px) {
-  .app-container {
-    font-size: 3.5rem;
-  }
-} */

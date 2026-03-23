@@ -1,0 +1,51 @@
+.block {
+  padding: 1rem;
+  border-radius: 16px;
+  border: 1px solid rgba(167, 205, 255, 0.2);
+  background: rgba(8, 17, 37, 0.8);
+}
+
+.title {
+  margin-bottom: 0.8rem;
+  font-size: 1.02rem;
+}
+
+.dailyForecast {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.day {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.55rem 0.65rem;
+  border-radius: 12px;
+  background: rgba(24, 44, 80, 0.58);
+  border: 1px solid rgba(152, 194, 250, 0.2);
+}
+
+.weatherIcon {
+  width: 34px;
+  height: 34px;
+}
+
+.dayText {
+  font-weight: 600;
+}
+
+.temperature {
+  display: flex;
+  gap: 0.55rem;
+  align-items: center;
+  font-size: 0.92rem;
+}
+
+.min {
+  color: #8dc0ff;
+}
+
+.max {
+  color: #ff9ea2;
+}

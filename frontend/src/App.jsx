@@ -1,8 +1,10 @@
 import "./App.css";
+import { Suspense, lazy } from "react";
 import CitySearch from "./components/weather/CitySearch";
 import WeatherInfo from "./components/weather/WeatherInfo";
-import ErrorModal from "./components/ErrorModal";
 import { useWeather } from "./hooks/useWeather";
+
+const ErrorModal = lazy(() => import("./components/ErrorModal"));
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -14,6 +16,7 @@ function App() {
     loading,
     fetchWeatherData,
     handleCloseModal,
+    handleRetry,
   } = useWeather(apiUrl);
 
   return (
@@ -22,14 +25,16 @@ function App() {
       <div className="app-shell">
         <header className="app-header">
           <p className="eyebrow">Pronostico en tiempo real</p>
-          <h1>WeatherProject</h1>
+          <h1>Lugia</h1>
           <p className="subtext">
             Consulta clima actual, pronostico por horas y proximos dias con una
             vista simple y clara.
           </p>
         </header>
 
-        <CitySearch fetchWeatherData={fetchWeatherData} />
+        <div className="citySearchWrapper">
+          <CitySearch fetchWeatherData={fetchWeatherData} />
+        </div>
 
         {loading && (
           <p className="status-message">Cargando datos meteorologicos...</p>
@@ -48,9 +53,28 @@ function App() {
         )}
       </div>
 
-      <ErrorModal show={showErrorModal} onClose={handleCloseModal}>
-        <p>{error}</p>
-      </ErrorModal>
+      <Suspense fallback={null}>
+        <ErrorModal show={showErrorModal} onClose={handleCloseModal}>
+          <div style={{ textAlign: "center" }}>
+            <p>{error}</p>
+            <button
+              onClick={handleRetry}
+              style={{
+                marginTop: "1rem",
+                padding: "0.5rem 1.5rem",
+                backgroundColor: "#ff8c00",
+                color: "white",
+                border: "none",
+                borderRadius: "4px",
+                cursor: "pointer",
+                fontSize: "1rem",
+              }}
+            >
+              Reintentar
+            </button>
+          </div>
+        </ErrorModal>
+      </Suspense>
     </div>
   );
 }

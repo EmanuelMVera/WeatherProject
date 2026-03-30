@@ -1,12 +1,4 @@
-async function parseErrorBody(response) {
-  const text = await response.text();
-  try {
-    const data = JSON.parse(text);
-    return data.error || "Error al obtener datos";
-  } catch {
-    return text || "Error al obtener datos";
-  }
-}
+import { parseErrorBody, fetchWithTimeout } from "../utils/http.js";
 
 /**
  * @param {string} apiUrl
@@ -19,23 +11,43 @@ export async function fetchWeatherBundle(apiUrl, city) {
     `${apiUrl}/forecastWeather?city=${q}`,
   ];
 
-  const responses = await Promise.all(urls.map((url) => fetch(url)));
+  try {
+    const responses = await Promise.all(
+      urls.map((url) => fetchWithTimeout(url, 10000))
+    );
 
-  for (const response of responses) {
-    if (!response.ok) {
-      const message = await parseErrorBody(response);
-      throw new Error(message);
+    for (const response of responses) {
+      if (!response.ok) {
+        const message = await parseErrorBody(response);
+        // Handle specific status codes
+        if (response.status === 429) {
+          throw new Error(
+            "Demasiadas solicitudes. Por favor, espera un momento antes de reintentar."
+          );
+        } else if (response.status === 404) {
+          throw new Error("Ciudad no encontrada");
+        }
+        throw new Error(message);
+      }
     }
+
+    const [currentWeatherData, forecastWeatherData] = await Promise.all(
+      responses.map((response) => response.json())
+    );
+
+    return {
+      current: currentWeatherData,
+      forecast: forecastWeatherData,
+    };
+  } catch (err) {
+    // Re-throw with context
+    if (err.message.includes("Timeout")) {
+      throw new Error(
+        "La solicitud tardó demasiado. Por favor, verifica tu conexión."
+      );
+    }
+    throw err;
   }
-
-  const [currentWeatherData, forecastWeatherData] = await Promise.all(
-    responses.map((response) => response.json())
-  );
-
-  return {
-    current: currentWeatherData,
-    forecast: forecastWeatherData,
-  };
 }
 
 /**
@@ -43,11 +55,25 @@ export async function fetchWeatherBundle(apiUrl, city) {
  * @returns {Promise<string|undefined>}
  */
 export async function fetchCityFromIp(apiUrl) {
-  const response = await fetch(`${apiUrl}/ipGeolocation`);
-  if (!response.ok) {
-    const message = await parseErrorBody(response);
-    throw new Error(message || "Error al obtener ubicación");
+  try {
+    const response = await fetchWithTimeout(`${apiUrl}/ipGeolocation`, 10000);
+    if (!response.ok) {
+      const message = await parseErrorBody(response);
+      if (response.status === 429) {
+        throw new Error(
+          "Demasiadas solicitudes de ubicación. Usando ubicación predeterminada."
+        );
+      }
+      throw new Error(message || "Error al obtener ubicación");
+    }
+    const location = await response.json();
+    return location?.cityName;
+  } catch (err) {
+    if (err.message.includes("Timeout")) {
+      throw new Error(
+        "Timeout al obtener ubicación. Usando ubicación predeterminada."
+      );
+    }
+    throw err;
   }
-  const location = await response.json();
-  return location?.cityName;
 }

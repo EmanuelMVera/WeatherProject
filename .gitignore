@@ -38,6 +38,7 @@ logs/
 
 # Environment variables
 .env
+.env.local
 
 # Local files
 .local

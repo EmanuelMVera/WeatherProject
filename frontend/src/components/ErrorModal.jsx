@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+import React from "react";
 import styles from "./ErrorModal.module.css";
 
 const ErrorModal = ({ show, onClose, children }) => {
@@ -18,10 +18,4 @@ const ErrorModal = ({ show, onClose, children }) => {
   );
 };
 
-ErrorModal.propTypes = {
-  show: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-  children: PropTypes.node,
-};
-
-export default ErrorModal;
+export default React.memo(ErrorModal);

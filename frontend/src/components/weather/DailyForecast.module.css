@@ -3,6 +3,7 @@
   border-radius: 16px;
   border: 1px solid rgba(167, 205, 255, 0.2);
   background: rgba(8, 17, 37, 0.8);
+  min-height: 180px;
 }
 
 .title {
@@ -24,11 +25,35 @@
   border-radius: 12px;
   background: rgba(24, 44, 80, 0.58);
   border: 1px solid rgba(152, 194, 250, 0.2);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.day {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.25s ease;
+}
+
+.day:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 22px rgba(0, 0, 0, 0.22);
+  background: rgba(27, 49, 88, 0.72);
 }
 
 .weatherIcon {
   width: 34px;
   height: 34px;
+  font-size: 1.6rem;
+  color: #f5fbff;
+  transition: transform 0.2s ease, filter 0.2s ease, color 0.2s ease;
+}
+
+.weatherIcon:hover {
+  transform: scale(1.15);
+  color: #dff1ff;
+}
+
+.weatherIcon:hover {
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 9px rgba(255, 255, 255, 0.7));
 }
 
 .dayText {
@@ -49,3 +74,42 @@
 .max {
   color: #ff9ea2;
 }
+
+@media (max-width: 767px) {
+  .dailyForecast {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.45rem;
+  }
+
+  .day {
+    grid-template-columns: 1fr auto;
+    padding: 0.5rem 0.6rem;
+  }
+
+  .weatherIcon {
+    font-size: 1.25rem;
+  }
+
+  .dayText {
+    font-size: 0.9rem;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .dailyForecast {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+
+@media (min-width: 641px) and (max-width: 920px) {
+  .dailyForecast {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .day {
+    padding: 0.6rem;
+  }
+}
+

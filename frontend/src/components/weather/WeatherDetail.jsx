@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+import React, { useMemo } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTemperatureHalf,
@@ -18,7 +18,7 @@ const WeatherDetail = ({ currentWeather }) => {
     wind: { speed },
   } = currentWeather;
 
-  const rows = [
+  const rows = useMemo(() => [
     {
       icon: faTemperatureHalf,
       label: "Sensacion termica",
@@ -28,7 +28,7 @@ const WeatherDetail = ({ currentWeather }) => {
     { icon: faSun, label: "Amanecer", value: sunrise },
     { icon: faMoon, label: "Atardecer", value: sunset },
     { icon: faWind, label: "Viento", value: `${speed} km/h` },
-  ];
+  ], [feelsLike, humidity, sunrise, sunset, speed]);
 
   return (
     <section className={styles.block}>
@@ -48,18 +48,4 @@ const WeatherDetail = ({ currentWeather }) => {
   );
 };
 
-WeatherDetail.propTypes = {
-  currentWeather: PropTypes.shape({
-    humidity: PropTypes.number.isRequired,
-    sunrise: PropTypes.string.isRequired,
-    sunset: PropTypes.string.isRequired,
-    temperature: PropTypes.shape({
-      feelsLike: PropTypes.number.isRequired,
-    }).isRequired,
-    wind: PropTypes.shape({
-      speed: PropTypes.number.isRequired,
-    }).isRequired,
-  }).isRequired,
-};
-
-export default WeatherDetail;
+export default React.memo(WeatherDetail);

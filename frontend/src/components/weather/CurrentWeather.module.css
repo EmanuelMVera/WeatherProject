@@ -4,6 +4,12 @@
   border: 1px solid rgba(167, 205, 255, 0.2);
   background: linear-gradient(165deg, rgba(30, 56, 102, 0.66), rgba(10, 20, 44, 0.88));
   backdrop-filter: blur(6px);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.currentWeather:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 28px rgba(0, 0, 0, 0.24);
 }
 
 .kicker {
@@ -32,9 +38,41 @@
   gap: 0.45rem;
 }
 
+.weatherIconWrapper {
+  width: clamp(70px, 16vw, 100px);
+  height: clamp(70px, 16vw, 100px);
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 0 40px rgba(108, 163, 255, 0.23);
+  background: linear-gradient(140deg, rgba(7, 17, 45, 0.85), rgba(24, 54, 96, 0.69));
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.weatherIconWrapper {
+  animation: floatMotion 6.5s ease-in-out infinite;
+}
+
+.weatherIconWrapper:hover {
+  transform: scale(1.07);
+  filter: brightness(1.18);
+}
+
 .weatherIcon {
-  width: 84px;
-  height: 84px;
+  width: clamp(58px, 14vw, 84px);
+  height: clamp(58px, 14vw, 84px);
+  font-size: clamp(2.2rem, 10vw, 3.5rem);
+  color: #ffeeb8;
+  transition: transform 0.2s ease, filter 0.2s ease, color 0.3s ease;
+}
+
+.weatherIcon:hover {
+  color: #fff;
+}
+
+.weatherIcon:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.65));
 }
 
 .temp {
@@ -49,3 +87,73 @@
   color: #e2edff;
   text-transform: capitalize;
 }
+
+@keyframes floatMotion {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+@media (max-width: 767px) {
+  .mainRow {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.65rem;
+  }
+
+  .weatherIconWrapper {
+    width: 70px;
+    height: 70px;
+  }
+
+  .weatherIcon {
+    font-size: 2rem;
+    width: 52px;
+    height: 52px;
+  }
+
+  .temp {
+    font-size: clamp(2rem, 9vw, 3.4rem);
+  }
+
+  .kicker,
+  .date {
+    font-size: 0.78rem;
+  }
+
+  .description {
+    font-size: 0.9rem;
+  }
+
+  .weatherIconWrapper:hover,
+  .weatherIcon:hover {
+    transform: none;
+    filter: none;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .weatherIconWrapper {
+    width: 86px;
+    height: 86px;
+  }
+  .weatherIcon {
+    font-size: 2.6rem;
+  }
+}
+
+
+@media (min-width: 641px) and (max-width: 920px) {
+  .mainRow {
+    gap: 0.75rem;
+  }
+
+  .weatherIconWrapper {
+    width: 88px;
+    height: 88px;
+  }
+
+  .weatherIcon {
+    font-size: 2.8rem;
+  }
+}
+

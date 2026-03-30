@@ -1,0 +1,9 @@
+# All user agents
+User-agent: *
+Allow: /
+
+# Crawl delay
+Crawl-delay: 1
+
+# Sitemap
+Sitemap: https://yoursite.com/sitemap.xml

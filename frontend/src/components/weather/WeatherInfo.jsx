@@ -1,29 +1,31 @@
-import PropTypes from "prop-types";
+import React, { Suspense, lazy } from "react";
 import CurrentWeather from "./CurrentWeather";
-import HourlyForecast from "./HourlyForecast";
-import DailyForecast from "./DailyForecast";
-import WeatherDetail from "./WeatherDetail";
+import SkeletonLoader from "../SkeletonLoader";
 import styles from "./WeatherInfo.module.css";
+
+const HourlyForecast = lazy(() => import("./HourlyForecast"));
+const DailyForecast = lazy(() => import("./DailyForecast"));
+const WeatherDetail = lazy(() => import("./WeatherDetail"));
 
 function WeatherInfo({ currentWeather, hourlyForecast, dailyForecast }) {
   return (
     <section className={styles.weatherInfoContainer}>
       <div className={styles.topRow}>
         <CurrentWeather currentWeather={currentWeather} />
-        <HourlyForecast hourlyForecast={hourlyForecast} />
+        <Suspense fallback={<SkeletonLoader type="hourly" />}>
+          <HourlyForecast hourlyForecast={hourlyForecast} />
+        </Suspense>
       </div>
       <div className={styles.bottomRow}>
-        <DailyForecast dailyForecast={dailyForecast} />
-        <WeatherDetail currentWeather={currentWeather} />
+        <Suspense fallback={<SkeletonLoader type="daily" />}>
+          <DailyForecast dailyForecast={dailyForecast} />
+        </Suspense>
+        <Suspense fallback={<SkeletonLoader type="detail" />}>
+          <WeatherDetail currentWeather={currentWeather} />
+        </Suspense>
       </div>
     </section>
   );
 }
-
-WeatherInfo.propTypes = {
-  currentWeather: PropTypes.object.isRequired,
-  hourlyForecast: PropTypes.array.isRequired,
-  dailyForecast: PropTypes.array.isRequired,
-};
 
 export default WeatherInfo;

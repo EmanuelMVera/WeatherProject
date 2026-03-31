@@ -43,12 +43,16 @@ async function retryAsync(fn, maxAttempts = 2, delayMs = 2000) {
 /**
  * @param {string|undefined} apiUrl
  */
+ 
+  const FALLBACK_CITY = "Buenos Aires";
+ 
 export function useWeather(apiUrl) {
   const [weatherData, setWeatherData] = useState(null);
   const [error, setError] = useState(null);
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [loading, setLoading] = useState(true);
   const lastCityRef = useRef(null);
+  
 
   const loadWeatherForCity = useCallback(
     async (city) => {
@@ -85,7 +89,6 @@ export function useWeather(apiUrl) {
     }
 
     let cancelled = false;
-    let timeoutId = null;
 
     (async () => {
       setLoading(true);
@@ -102,18 +105,21 @@ export function useWeather(apiUrl) {
 
         await loadWeatherForCity(city);
       } catch (err) {
-        if (!cancelled) {
-          const message = err?.message || "Error al obtener ubicación";
-          setError(message);
-          setShowErrorModal(true);
-          setLoading(false);
-        }
-      }
+  if (!cancelled) {
+    try {
+      await loadWeatherForCity(FALLBACK_CITY);
+    } catch (fallbackErr) {
+      const fallbackMessage = fallbackErr?.message || "Error al obtener datos";
+      setError(fallbackMessage);
+      setShowErrorModal(true);
+      setLoading(false);
+    }
+  }
+}
     })();
 
     return () => {
       cancelled = true;
-      if (timeoutId) clearTimeout(timeoutId);
     };
   }, [apiUrl, loadWeatherForCity]);
 
@@ -123,11 +129,9 @@ export function useWeather(apiUrl) {
   }, []);
 
   const handleRetry = useCallback(() => {
-    handleCloseModal();
-    if (lastCityRef.current) {
-      loadWeatherForCity(lastCityRef.current);
-    }
-  }, [loadWeatherForCity, handleCloseModal]);
+  handleCloseModal();
+  loadWeatherForCity(lastCityRef.current || FALLBACK_CITY);
+}, [loadWeatherForCity, handleCloseModal]);
 
   return {
     weatherData,

@@ -4,11 +4,17 @@ import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import styles from "./DailyForecast.module.css";
 import { weatherIconMap, weatherIconFallback } from "./weatherIconMap";
 
-const DailyForecast = ({ dailyForecast }) => (
+const DailyForecast = ({ dailyForecast }) => {
+  const list = Array.isArray(dailyForecast) ? dailyForecast : [];
+
+  return (
   <section className={styles.block}>
     <h3 className={styles.title}>Proximos dias</h3>
     <div className={styles.dailyForecast}>
-      {dailyForecast.map(({ icon, day, tempMin, tempMax }) => {
+      {list.length === 0 && (
+        <p className={styles.dayText}>Sin datos de pronóstico</p>
+      )}
+      {list.map(({ icon, day, tempMin, tempMax }) => {
         const dayIcon = weatherIconMap[icon] || weatherIconFallback;
 
         return (
@@ -32,6 +38,7 @@ const DailyForecast = ({ dailyForecast }) => (
       })}
     </div>
   </section>
-);
+  );
+};
 
 export default React.memo(DailyForecast);

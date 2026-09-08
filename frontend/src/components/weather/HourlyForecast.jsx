@@ -20,13 +20,17 @@ const formatHourMinute = (time) => {
 };
 
 const HourlyForecast = ({ hourlyForecast }) => {
+  const list = Array.isArray(hourlyForecast) ? hourlyForecast : [];
   const isMobile = typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches;
-  const displayForecast = isMobile ? hourlyForecast.slice(0, 8) : hourlyForecast;
+  const displayForecast = isMobile ? list.slice(0, 8) : list;
 
   return (
     <section className={styles.block}>
       <h3 className={styles.title}>Proximas horas</h3>
       <div className={styles.hourlyForecast}>
+        {displayForecast.length === 0 && (
+          <p className={styles.time}>Sin datos de pronóstico</p>
+        )}
         {displayForecast.map(({ time, icon, temp_c }) => {
           const weatherIcon = weatherApiIconMap[icon] || weatherApiIconFallback;
           return (

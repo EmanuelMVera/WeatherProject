@@ -9,6 +9,33 @@ import { COLD_START_HINT_MS } from "../utils/http.js";
 const FALLBACK_CITY = "Buenos Aires";
 
 /**
+ * Normaliza lo que llega desde la UI (string de ciudad, o place con lat/lon)
+ * a lo que entiende `fetchWeatherBundle`.
+ * @param {string | { name?: string, latitude?: number, longitude?: number }} input
+ * @returns {{ request: object, label: string } | null}
+ */
+function normalizeLocation(input) {
+  if (!input) return null;
+
+  if (typeof input === "string") {
+    const city = input.trim();
+    return city ? { request: { city }, label: city } : null;
+  }
+
+  const lat = Number(input.latitude);
+  const lon = Number(input.longitude);
+  if (Number.isFinite(lat) && Number.isFinite(lon)) {
+    return {
+      request: { lat, lon },
+      label: (input.name && String(input.name).trim()) || `${lat}, ${lon}`,
+    };
+  }
+
+  const city = input.name ? String(input.name).trim() : "";
+  return city ? { request: { city }, label: city } : null;
+}
+
+/**
  * @param {string|undefined} apiUrl
  */
 export function useWeather(apiUrl) {
@@ -19,7 +46,7 @@ export function useWeather(apiUrl) {
   // true cuando la petición se está demorando por el cold start de Render.
   const [wakingUp, setWakingUp] = useState(false);
 
-  const lastCityRef = useRef(null);
+  const lastLocationRef = useRef(null);
   const activeControllerRef = useRef(null);
   const wakingTimerRef = useRef(null);
 
@@ -48,19 +75,20 @@ export function useWeather(apiUrl) {
   }, [clearWakingTimer]);
 
   const loadWeatherForCity = useCallback(
-    async (city) => {
-      if (!city || !apiUrl) return;
+    async (location) => {
+      const normalized = normalizeLocation(location);
+      if (!normalized || !apiUrl) return;
 
-      // Cancela una búsqueda anterior en curso (cambio rápido de ciudad).
+      // Cancela una búsqueda anterior en curso (cambio rápido de ubicación).
       activeControllerRef.current?.abort();
       const controller = new AbortController();
       activeControllerRef.current = controller;
 
-      lastCityRef.current = city;
+      lastLocationRef.current = location;
       beginLoading();
 
       try {
-        const data = await fetchWeatherBundle(apiUrl, city, {
+        const data = await fetchWeatherBundle(apiUrl, normalized.request, {
           signal: controller.signal,
           onWakingUp: () => setWakingUp(true),
         });
@@ -125,7 +153,7 @@ export function useWeather(apiUrl) {
 
   const handleRetry = useCallback(() => {
     handleCloseModal();
-    loadWeatherForCity(lastCityRef.current || FALLBACK_CITY);
+    loadWeatherForCity(lastLocationRef.current || FALLBACK_CITY);
   }, [loadWeatherForCity, handleCloseModal]);
 
   return {

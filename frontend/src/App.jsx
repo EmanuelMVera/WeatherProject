@@ -1,12 +1,19 @@
 import "./App.css";
 import { Suspense, lazy } from "react";
-import LocationCascadeSearch from "./components/weather/LocationCascadeSearch";
+import LocationSearch from "./components/weather/LocationSearch";
 import WeatherInfo from "./components/weather/WeatherInfo";
+import ErrorBoundary from "./components/ErrorBoundary";
 import { useWeather } from "./hooks/useWeather";
 
 const ErrorModal = lazy(() => import("./components/ErrorModal"));
 
 const apiUrl = import.meta.env.VITE_API_URL;
+
+const weatherInfoFallback = (
+  <p className="status-message" role="alert">
+    No pudimos mostrar este pronóstico. Probá con otra búsqueda.
+  </p>
+);
 
 function App() {
   const {
@@ -19,6 +26,11 @@ function App() {
     handleCloseModal,
     handleRetry,
   } = useWeather(apiUrl);
+
+  const current = weatherData?.current ?? null;
+  const hourlyForecast = weatherData?.forecast?.hourlyForecast ?? [];
+  const dailyForecast = weatherData?.forecast?.dailyForecast ?? [];
+  const hasWeather = Boolean(current);
 
   return (
     <div className="app-container">
@@ -34,7 +46,7 @@ function App() {
         </header>
 
         <div className="citySearchWrapper">
-          <LocationCascadeSearch fetchWeatherData={fetchWeatherData} />
+          <LocationSearch onSelectPlace={fetchWeatherData} />
         </div>
 
         {loading && (
@@ -53,15 +65,20 @@ function App() {
           </p>
         )}
 
-        {!loading && weatherData && (
-          <WeatherInfo
-            currentWeather={weatherData.current}
-            hourlyForecast={weatherData.forecast.hourlyForecast}
-            dailyForecast={weatherData.forecast.dailyForecast}
-          />
+        {!loading && hasWeather && (
+          <ErrorBoundary
+            fallback={weatherInfoFallback}
+            resetKeys={[weatherData]}
+          >
+            <WeatherInfo
+              currentWeather={current}
+              hourlyForecast={hourlyForecast}
+              dailyForecast={dailyForecast}
+            />
+          </ErrorBoundary>
         )}
 
-        {!loading && !weatherData && (
+        {!loading && !hasWeather && (
           <p className="status-message">Busca una ciudad para ver el clima.</p>
         )}
       </div>

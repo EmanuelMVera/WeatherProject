@@ -1,9 +1,10 @@
 import { getForecastWeather } from "../controllers/forecastWeatherController.mjs";
 import { cacheMiddleware } from "../middleware/cacheMiddleware.mjs";
 import { CACHE_TTL_FORECAST } from "../config/constants.mjs";
+import { weatherCacheKey } from "../utils/weatherCacheKey.mjs";
 
 const forecastWeather = cacheMiddleware(
-  (req) => `weather_forecast_${req.query.city.toLowerCase()}`,
+  (req) => `weather_forecast_${weatherCacheKey(req.query)}`,
   CACHE_TTL_FORECAST
 )(getForecastWeather);
 

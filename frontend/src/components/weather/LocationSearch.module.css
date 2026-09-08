@@ -1,0 +1,124 @@
+.container {
+  width: 100%;
+  padding: 0.9rem;
+  border-radius: 14px;
+  border: 1px solid rgba(174, 210, 255, 0.25);
+  backdrop-filter: blur(10px);
+  background: rgba(12, 23, 47, 0.68);
+  box-shadow: 0 16px 30px rgba(7, 12, 30, 0.24);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.container:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 22px 35px rgba(7, 12, 30, 0.33);
+  border-color: rgba(170, 208, 255, 0.6);
+}
+
+.inputWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.input {
+  width: 100%;
+  padding: 0.78rem 2.4rem 0.78rem 0.9rem;
+  font-size: 0.95rem;
+  color: #e8f2ff;
+  border: 1px solid rgba(138, 178, 231, 0.55);
+  border-radius: 10px;
+  background-color: rgba(7, 15, 34, 0.78);
+  transition: border-color 0.2s ease, outline-color 0.2s ease;
+}
+
+.input::placeholder {
+  color: rgba(214, 231, 255, 0.66);
+}
+
+.input:focus {
+  outline: 2px solid rgba(150, 201, 255, 0.65);
+  border-color: rgba(150, 201, 255, 0.7);
+}
+
+.clearButton {
+  position: absolute;
+  top: 50%;
+  right: 0.55rem;
+  transform: translateY(-50%);
+  width: 1.6rem;
+  height: 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  line-height: 1;
+  color: #cfe2ff;
+  background: rgba(150, 201, 255, 0.14);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.clearButton:hover {
+  background: rgba(150, 201, 255, 0.28);
+}
+
+.list {
+  position: absolute;
+  top: calc(100% + 0.3rem);
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 0.25rem 0;
+  list-style: none;
+  background-color: rgba(8, 21, 44, 0.98);
+  border: 1px solid rgba(138, 178, 231, 0.55);
+  border-radius: 10px;
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.38);
+  z-index: 40;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.option {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0.5rem 0.85rem;
+  cursor: pointer;
+}
+
+.option:hover,
+.optionActive {
+  background-color: rgba(150, 201, 255, 0.16);
+}
+
+.optionName {
+  color: #eef5ff;
+  font-size: 0.95rem;
+}
+
+.optionMeta {
+  color: rgba(197, 219, 250, 0.72);
+  font-size: 0.8rem;
+}
+
+.hint,
+.hintError {
+  padding: 0.55rem 0.85rem;
+  font-size: 0.88rem;
+}
+
+.hint {
+  color: rgba(214, 231, 255, 0.7);
+}
+
+.hintError {
+  color: #ffb4b4;
+}
+
+@media (max-width: 767px) {
+  .list {
+    max-height: 240px;
+  }
+}

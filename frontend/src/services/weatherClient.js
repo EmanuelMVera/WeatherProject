@@ -20,16 +20,45 @@ function rethrowFriendly(err) {
 }
 
 /**
+ * Construye el query string de ubicación para las rutas de clima.
+ * @param {{ city?: string, lat?: number, lon?: number }} location
+ * @returns {string} ej: "city=Guernica" | "lat=-34.9&lon=-58.15"
+ */
+function locationQuery(location) {
+  if (location && location.lat != null && location.lon != null) {
+    return `lat=${encodeURIComponent(location.lat)}&lon=${encodeURIComponent(
+      location.lon
+    )}`;
+  }
+  return `city=${encodeURIComponent(location?.city ?? "")}`;
+}
+
+/**
+ * Verifica que el bundle tenga la forma mínima esperada antes de entregarlo a
+ * la UI. Así un payload roto cae en el modal de error y no en un crash de render.
+ * @param {any} bundle
+ */
+function assertWeatherShape(bundle) {
+  if (!bundle?.current?.temperature || !bundle?.forecast) {
+    throw new Error("La respuesta del servidor no tiene el formato esperado.");
+  }
+  return bundle;
+}
+
+/**
  * @param {string} apiUrl
- * @param {string} city
+ * @param {string | { city?: string, lat?: number, lon?: number }} location
+ *        Nombre de ciudad o coordenadas.
  * @param {{ signal?: AbortSignal, onWakingUp?: () => void }} [opts]
  */
-export async function fetchWeatherBundle(apiUrl, city, opts = {}) {
+export async function fetchWeatherBundle(apiUrl, location, opts = {}) {
   const { signal, onWakingUp } = opts;
-  const q = encodeURIComponent(city);
+  const normalized =
+    typeof location === "string" ? { city: location } : location ?? {};
+  const q = locationQuery(normalized);
   const urls = [
-    `${apiUrl}/currentWeather?city=${q}`,
-    `${apiUrl}/forecastWeather?city=${q}`,
+    `${apiUrl}/currentWeather?${q}`,
+    `${apiUrl}/forecastWeather?${q}`,
   ];
 
   try {
@@ -60,7 +89,7 @@ export async function fetchWeatherBundle(apiUrl, city, opts = {}) {
         const [current, forecast] = await Promise.all(
           responses.map((response) => response.json())
         );
-        return { current, forecast };
+        return assertWeatherShape({ current, forecast });
       },
       {
         signal,

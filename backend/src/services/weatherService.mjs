@@ -2,9 +2,34 @@ import { fetchJson } from "../lib/fetchJson.mjs";
 import { formatTimestamp, formatFullDate } from "../utils/dateFormatter.mjs";
 import { API_BASE_URL_OPENWEATHER, API_BASE_URL_WEATHERAPI } from "../config/constants.mjs";
 
-export const getCurrentWeatherData = async (city) => {
-  const urlOpenWeather = `${API_BASE_URL_OPENWEATHER}/weather?q=${city}&appid=${process.env.OPENWEATHER_API_KEY}&lang=es&units=metric`;
-  const urlWeatherAPI = `${API_BASE_URL_WEATHERAPI}/current.json?key=${process.env.WEATHER_API_KEY}&q=${city}&lang=es`;
+/**
+ * @typedef {{ city: string } | { lat: number, lon: number }} WeatherLocation
+ */
+
+/**
+ * Fragmento de query para OpenWeather (`q=` o `lat=&lon=`), ya codificado.
+ * @param {WeatherLocation} location
+ */
+const openWeatherQuery = (location) =>
+  "lat" in location && location.lat != null
+    ? `lat=${location.lat}&lon=${location.lon}`
+    : `q=${encodeURIComponent(location.city)}`;
+
+/**
+ * Fragmento de query para WeatherAPI (siempre `q=`), ya codificado.
+ * @param {WeatherLocation} location
+ */
+const weatherApiQuery = (location) =>
+  "lat" in location && location.lat != null
+    ? `q=${location.lat},${location.lon}`
+    : `q=${encodeURIComponent(location.city)}`;
+
+/**
+ * @param {WeatherLocation} location
+ */
+export const getCurrentWeatherData = async (location) => {
+  const urlOpenWeather = `${API_BASE_URL_OPENWEATHER}/weather?${openWeatherQuery(location)}&appid=${process.env.OPENWEATHER_API_KEY}&lang=es&units=metric`;
+  const urlWeatherAPI = `${API_BASE_URL_WEATHERAPI}/current.json?key=${process.env.WEATHER_API_KEY}&${weatherApiQuery(location)}&lang=es`;
 
   const [dataOpenWeather, dataWeatherAPI] = await Promise.all([
     fetchJson(urlOpenWeather),
@@ -104,11 +129,14 @@ const getDailyWeather = (data) => {
     }));
 };
 
-export const getForecastData = async (city) => {
+/**
+ * @param {WeatherLocation} location
+ */
+export const getForecastData = async (location) => {
   const weatherApiKey = process.env.WEATHER_API_KEY;
   const openWeatherApiKey = process.env.OPENWEATHER_API_KEY;
-  const urlWeatherAPI = `${API_BASE_URL_WEATHERAPI}/forecast.json?key=${weatherApiKey}&q=${city}&days=3&lang=es`;
-  const urlOpenWeather = `${API_BASE_URL_OPENWEATHER}/forecast?q=${city}&appid=${openWeatherApiKey}&lang=es&units=metric`;
+  const urlWeatherAPI = `${API_BASE_URL_WEATHERAPI}/forecast.json?key=${weatherApiKey}&${weatherApiQuery(location)}&days=3&lang=es`;
+  const urlOpenWeather = `${API_BASE_URL_OPENWEATHER}/forecast?${openWeatherQuery(location)}&appid=${openWeatherApiKey}&lang=es&units=metric`;
   const [dataHourly, dataDaily] = await Promise.all([
     fetchJson(urlWeatherAPI),
     fetchJson(urlOpenWeather),

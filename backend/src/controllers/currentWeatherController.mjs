@@ -1,19 +1,19 @@
 import { getCurrentWeatherData } from "../services/weatherService.mjs";
-import { validateCity } from "../utils/validators.mjs";
+import { resolveWeatherLocation } from "../utils/validators.mjs";
 
 export const getCurrentWeather = async (req, res) => {
-  const { city } = req.query;
-
-  const validation = validateCity(city);
-  if (!validation.valid) {
-    return res.status(400).json({ error: validation.error });
+  const resolved = resolveWeatherLocation(req.query);
+  if (!resolved.valid) {
+    return res.status(400).json({ error: resolved.error });
   }
 
+  const { location, label } = resolved;
+
   try {
-    const currentWeatherData = await getCurrentWeatherData(validation.city);
+    const currentWeatherData = await getCurrentWeatherData(location);
     res.json(currentWeatherData);
   } catch (error) {
-    console.error(`Error fetching current weather for ${validation.city}:`, error.message);
+    console.error(`Error fetching current weather for ${label}:`, error.message);
     res.status(404).json({ error: "Ciudad no encontrada" });
   }
 };

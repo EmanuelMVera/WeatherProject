@@ -15,14 +15,15 @@ export async function parseErrorBody(response) {
  * Fetch with timeout support
  * @param {string} url
  * @param {number} timeoutMs - Timeout in milliseconds (default 10000)
+ * @param {RequestInit} [options] - Extra fetch options (headers, method, etc.)
  * @returns {Promise<Response>}
  */
-export async function fetchWithTimeout(url, timeoutMs = 10000) {
+export async function fetchWithTimeout(url, timeoutMs = 10000, options = {}) {
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
 
   try {
-    const response = await fetch(url, { signal: controller.signal });
+    const response = await fetch(url, { ...options, signal: controller.signal });
     clearTimeout(timeoutId);
     return response;
   } catch (err) {

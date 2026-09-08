@@ -1,6 +1,6 @@
 import "./App.css";
 import { Suspense, lazy } from "react";
-import CitySearch from "./components/weather/CitySearch";
+import LocationCascadeSearch from "./components/weather/LocationCascadeSearch";
 import WeatherInfo from "./components/weather/WeatherInfo";
 import { useWeather } from "./hooks/useWeather";
 
@@ -25,7 +25,7 @@ function App() {
       <div className="app-shell">
         <header className="app-header">
           <p className="eyebrow">Pronostico en tiempo real</p>
-          <h1>Lugia</h1>
+          <h1>Buen CLima</h1>
           <p className="subtext">
             Consulta clima actual, pronostico por horas y proximos dias con una
             vista simple y clara.
@@ -33,7 +33,7 @@ function App() {
         </header>
 
         <div className="citySearchWrapper">
-          <CitySearch fetchWeatherData={fetchWeatherData} />
+          <LocationCascadeSearch fetchWeatherData={fetchWeatherData} />
         </div>
 
         {loading && (

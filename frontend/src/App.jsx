@@ -14,6 +14,7 @@ function App() {
     error,
     showErrorModal,
     loading,
+    wakingUp,
     fetchWeatherData,
     handleCloseModal,
     handleRetry,
@@ -25,7 +26,7 @@ function App() {
       <div className="app-shell">
         <header className="app-header">
           <p className="eyebrow">Pronostico en tiempo real</p>
-          <h1>Buen CLima</h1>
+          <h1>Buen Clima</h1>
           <p className="subtext">
             Consulta clima actual, pronostico por horas y proximos dias con una
             vista simple y clara.
@@ -37,7 +38,19 @@ function App() {
         </div>
 
         {loading && (
-          <p className="status-message">Cargando datos meteorologicos...</p>
+          <p
+            className={
+              wakingUp
+                ? "status-message status-message--waking"
+                : "status-message"
+            }
+            role="status"
+            aria-live="polite"
+          >
+            {wakingUp
+              ? "El servidor gratuito esta despertando, esto puede tomar hasta un minuto..."
+              : "Cargando datos meteorologicos..."}
+          </p>
         )}
 
         {!loading && weatherData && (

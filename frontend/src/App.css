@@ -127,6 +127,12 @@
   animation: pulseSoft 4s ease-in-out infinite;
 }
 
+.status-message--waking {
+  border-color: rgba(255, 193, 87, 0.45);
+  background: rgba(43, 30, 8, 0.62);
+  color: #ffe4b0;
+}
+
 .app-shell {
   animation: fadeInUp 0.55s ease forwards;
 }

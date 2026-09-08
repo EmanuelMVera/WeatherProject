@@ -1,4 +1,10 @@
-import { fetchWithTimeout, parseErrorBody } from "../utils/http.js";
+import {
+  ensureOk,
+  fetchWithTimeout,
+  friendlyMessage,
+  HttpError,
+  withRetry,
+} from "../utils/http.js";
 
 /**
  * Cliente de la API CountryStateCity (https://countrystatecity.in/).
@@ -35,32 +41,34 @@ async function cscFetch(path) {
     );
   }
 
-  let response;
   try {
-    response = await fetchWithTimeout(
-      `${CSC_BASE_URL}${path}`,
-      REQUEST_TIMEOUT_MS,
-      { headers: { "X-CSCAPI-KEY": CSC_API_KEY } }
+    return await withRetry(
+      async () => {
+        const response = await fetchWithTimeout(
+          `${CSC_BASE_URL}${path}`,
+          REQUEST_TIMEOUT_MS,
+          { headers: { "X-CSCAPI-KEY": CSC_API_KEY } }
+        );
+
+        if (response.status === 401) {
+          throw new HttpError("API Key de ubicaciones inválida o sin permisos.", {
+            status: 401,
+          });
+        }
+        if (response.status === 429) {
+          throw new HttpError(
+            "Demasiadas solicitudes a la API de ubicaciones. Esperá un momento.",
+            { status: 429, retryable: false }
+          );
+        }
+        await ensureOk(response);
+        return response.json();
+      },
+      { retries: 2, baseDelayMs: 1000 }
     );
   } catch (err) {
-    if (err.message.includes("Timeout")) {
-      throw new Error("La API de ubicaciones tardó demasiado en responder.");
-    }
-    throw new Error("No se pudo conectar con la API de ubicaciones.");
+    throw new Error(friendlyMessage(err));
   }
-
-  if (!response.ok) {
-    if (response.status === 401) {
-      throw new Error("API Key de ubicaciones inválida o sin permisos.");
-    }
-    if (response.status === 429) {
-      throw new Error("Demasiadas solicitudes a la API de ubicaciones. Esperá un momento.");
-    }
-    const message = await parseErrorBody(response);
-    throw new Error(message || "Error al obtener datos de ubicaciones.");
-  }
-
-  return response.json();
 }
 
 /**

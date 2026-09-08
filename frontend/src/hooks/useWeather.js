@@ -2,82 +2,80 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import {
   fetchCityFromIp,
   fetchWeatherBundle,
+  warmUpServer,
 } from "../services/weatherClient.js";
+import { COLD_START_HINT_MS } from "../utils/http.js";
 
-/**
- * Retry logic with exponential backoff
- * @param {Function} fn - Async function to retry
- * @param {number} maxAttempts - Maximum retry attempts
- * @param {number} delayMs - Initial delay in milliseconds
- */
-async function retryAsync(fn, maxAttempts = 2, delayMs = 2000) {
-  let lastError;
-
-  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
-    try {
-      return await fn();
-    } catch (err) {
-      lastError = err;
-
-      // Don't retry on "City not found" errors
-      if (err.message === "Ciudad no encontrada") {
-        throw err;
-      }
-
-      // If it's the last attempt, throw
-      if (attempt === maxAttempts) {
-        throw err;
-      }
-
-      // Wait before retrying
-      console.warn(
-        `Attempt ${attempt} failed: ${err.message}. Retrying in ${delayMs}ms...`
-      );
-      await new Promise((resolve) => setTimeout(resolve, delayMs));
-    }
-  }
-
-  throw lastError;
-}
+const FALLBACK_CITY = "Buenos Aires";
 
 /**
  * @param {string|undefined} apiUrl
  */
- 
-  const FALLBACK_CITY = "Buenos Aires";
- 
 export function useWeather(apiUrl) {
   const [weatherData, setWeatherData] = useState(null);
   const [error, setError] = useState(null);
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [loading, setLoading] = useState(true);
+  // true cuando la petición se está demorando por el cold start de Render.
+  const [wakingUp, setWakingUp] = useState(false);
+
   const lastCityRef = useRef(null);
-  
+  const activeControllerRef = useRef(null);
+  const wakingTimerRef = useRef(null);
+
+  const clearWakingTimer = useCallback(() => {
+    if (wakingTimerRef.current) {
+      clearTimeout(wakingTimerRef.current);
+      wakingTimerRef.current = null;
+    }
+  }, []);
+
+  const beginLoading = useCallback(() => {
+    setLoading(true);
+    setWakingUp(false);
+    clearWakingTimer();
+    // Si tarda más de lo normal, avisamos "servidor despertando" sin mostrar error.
+    wakingTimerRef.current = setTimeout(
+      () => setWakingUp(true),
+      COLD_START_HINT_MS
+    );
+  }, [clearWakingTimer]);
+
+  const endLoading = useCallback(() => {
+    clearWakingTimer();
+    setLoading(false);
+    setWakingUp(false);
+  }, [clearWakingTimer]);
 
   const loadWeatherForCity = useCallback(
     async (city) => {
       if (!city || !apiUrl) return;
 
+      // Cancela una búsqueda anterior en curso (cambio rápido de ciudad).
+      activeControllerRef.current?.abort();
+      const controller = new AbortController();
+      activeControllerRef.current = controller;
+
       lastCityRef.current = city;
-      setLoading(true);
+      beginLoading();
+
       try {
-        const data = await retryAsync(
-          () => fetchWeatherBundle(apiUrl, city),
-          2,
-          2000
-        );
+        const data = await fetchWeatherBundle(apiUrl, city, {
+          signal: controller.signal,
+          onWakingUp: () => setWakingUp(true),
+        });
         setWeatherData(data);
         setError(null);
         setShowErrorModal(false);
       } catch (err) {
-        const message = err?.message || "Error al obtener datos";
-        setError(message);
+        if (controller.signal.aborted) return; // reemplazada por otra búsqueda
+        setError(err?.message || "Error al obtener datos");
         setShowErrorModal(true);
       } finally {
-        setLoading(false);
+        if (activeControllerRef.current === controller) endLoading();
       }
     },
-    [apiUrl]
+    [apiUrl, beginLoading, endLoading]
   );
 
   useEffect(() => {
@@ -89,39 +87,36 @@ export function useWeather(apiUrl) {
     }
 
     let cancelled = false;
+    const controller = new AbortController();
 
     (async () => {
-      setLoading(true);
+      // Despierta Render en paralelo (no bloquea, no gasta rate-limit).
+      warmUpServer(apiUrl, { signal: controller.signal });
+
+      beginLoading();
       try {
-        const city = await retryAsync(() => fetchCityFromIp(apiUrl), 2, 1500);
+        const city = await fetchCityFromIp(apiUrl, {
+          signal: controller.signal,
+          onWakingUp: () => {
+            if (!cancelled) setWakingUp(true);
+          },
+        });
         if (cancelled) return;
-
-        if (!city) {
-          setError("No se pudo obtener la ciudad");
-          setShowErrorModal(true);
-          setLoading(false);
-          return;
-        }
-
-        await loadWeatherForCity(city);
-      } catch (err) {
-  if (!cancelled) {
-    try {
-      await loadWeatherForCity(FALLBACK_CITY);
-    } catch (fallbackErr) {
-      const fallbackMessage = fallbackErr?.message || "Error al obtener datos";
-      setError(fallbackMessage);
-      setShowErrorModal(true);
-      setLoading(false);
-    }
-  }
-}
+        await loadWeatherForCity(city || FALLBACK_CITY);
+      } catch {
+        // Falló la geolocalización -> usamos la ciudad por defecto.
+        // loadWeatherForCity maneja su propio error/modal internamente.
+        if (!cancelled) await loadWeatherForCity(FALLBACK_CITY);
+      }
     })();
 
     return () => {
       cancelled = true;
+      controller.abort();
+      activeControllerRef.current?.abort();
+      clearWakingTimer();
     };
-  }, [apiUrl, loadWeatherForCity]);
+  }, [apiUrl, loadWeatherForCity, beginLoading, clearWakingTimer]);
 
   const handleCloseModal = useCallback(() => {
     setShowErrorModal(false);
@@ -129,15 +124,16 @@ export function useWeather(apiUrl) {
   }, []);
 
   const handleRetry = useCallback(() => {
-  handleCloseModal();
-  loadWeatherForCity(lastCityRef.current || FALLBACK_CITY);
-}, [loadWeatherForCity, handleCloseModal]);
+    handleCloseModal();
+    loadWeatherForCity(lastCityRef.current || FALLBACK_CITY);
+  }, [loadWeatherForCity, handleCloseModal]);
 
   return {
     weatherData,
     error,
     showErrorModal,
     loading,
+    wakingUp,
     fetchWeatherData: loadWeatherForCity,
     handleCloseModal,
     handleRetry,

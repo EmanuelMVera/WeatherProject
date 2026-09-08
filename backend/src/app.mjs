@@ -51,6 +51,14 @@ app.use(
   })
 );
 
+// Health check / warm-up endpoint.
+// Va ANTES de los rate limiters para no consumir cuota: el frontend lo usa
+// para "despertar" el free tier de Render sin gastar peticiones de clima.
+app.get(["/health", "/healthz"], (req, res) => {
+  res.set("Cache-Control", "no-store");
+  res.status(200).json({ status: "ok", uptime: process.uptime() });
+});
+
 // Rate limiting configuration
 const globalLimiter = rateLimit({
   ...RATE_LIMIT_GLOBAL,

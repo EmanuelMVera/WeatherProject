@@ -6,7 +6,7 @@
   "main": "server.mjs",
   "type": "module",
   "engines": {
-    "node": ">=20.11"
+    "node": ">=22.12"
   },
   "scripts": {
     "start": "node server.mjs",

@@ -43,9 +43,9 @@ Muchas apps de clima mezclan datos, muestran horarios en la zona del dispositivo
 
 | Capa | Stack |
 | --- | --- |
-| Frontend | React 18, Vite 5, CSS Modules, Font Awesome (íconos individuales) |
-| Backend | Node.js ≥ 20, Express 4, Helmet, CORS, express-rate-limit, compression |
-| Tests | `node:test` (backend), Vitest + Testing Library (frontend), Playwright (E2E) |
+| Frontend | React 18, Vite 7, CSS Modules, Font Awesome 6 (íconos individuales) |
+| Backend | Node.js ≥ 22.12, Express 4, Helmet, CORS, express-rate-limit, compression |
+| Tests | `node:test` (backend), Vitest 4 + Testing Library (frontend), Playwright (E2E) |
 | CI | GitHub Actions: lint, tests, build, auditoría de dependencias y E2E |
 
 ## Arquitectura
@@ -97,7 +97,7 @@ Los datos faltantes son `null` (nunca `0`, que es una medición válida). Errore
 
 ## Requisitos
 
-- Node.js 20.11 o superior (CI usa Node 22).
+- Node.js 22.12 o superior (lo exige Vite 7). El CI prueba con Node 22 y 26.
 - npm 10+.
 
 ## Instalación local
@@ -177,7 +177,7 @@ El puntaje de rendimiento medido localmente no es representativo: la PC de desar
 ## Despliegue
 
 - **Backend en Render**: `render.yaml` define el servicio (raíz `backend`, `npm start`, health check `/health`). Configurar `ALLOWED_ORIGINS` con la URL del frontend.
-- **Frontend en Vercel**: raíz `frontend`, framework Vite. Definir `VITE_API_URL` (URL de Render) y `VITE_SITE_URL`. `vercel.json` agrega caché inmutable para `/assets` y cabeceras de seguridad.
+- **Frontend en Vercel**: Root Directory `frontend`, framework Vite, Node.js 26.x en Project Settings (la 20.x está discontinuada en Vercel). Definir `VITE_API_URL` (URL de Render) y `VITE_SITE_URL`. `vercel.json` agrega caché inmutable para `/assets` y cabeceras de seguridad.
 - El plan gratuito de Render "duerme" el servidor: el frontend lo despierta con `/health`, reintenta con timeouts largos, avisa "Estamos despertando al servidor" y muestra los últimos datos guardados mientras tanto.
 
 ## Decisiones técnicas

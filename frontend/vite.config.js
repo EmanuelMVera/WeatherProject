@@ -66,6 +66,8 @@ export default defineConfig(({ mode }) => {
       include: ["src/**/*.test.{js,jsx}"],
       css: { modules: { classNameStrategy: "non-scoped" } },
       restoreMocks: true,
+      // El primer test de cada archivo carga todos los módulos: margen para equipos lentos.
+      testTimeout: 15_000,
     },
   };
 });

@@ -1,0 +1,122 @@
+.search {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-subtle);
+  pointer-events: none;
+}
+
+.input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 2.9rem 0 2.6rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-strong);
+  background: rgba(6, 14, 34, 0.75);
+  color: var(--text);
+  font-size: 1rem; /* 16 px: evita el zoom automático de iOS */
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.input::placeholder {
+  color: var(--text-subtle);
+}
+
+.input:hover {
+  border-color: rgba(160, 196, 255, 0.5);
+}
+
+.input:focus-visible {
+  border-color: var(--accent);
+  border-radius: 999px;
+}
+
+/* Ocultamos la "x" nativa de type=search: usamos la propia, más grande. */
+.input::-webkit-search-cancel-button {
+  display: none;
+}
+
+.clear {
+  position: absolute;
+  right: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: var(--tap);
+  height: var(--tap);
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-muted);
+}
+
+.clear:hover {
+  color: var(--text);
+}
+
+.list {
+  position: absolute;
+  top: calc(100% + 0.4rem);
+  left: 0;
+  right: 0;
+  z-index: 50;
+  max-height: min(60vh, 340px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0.35rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-strong);
+  background: #0b1835;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
+}
+
+.list[hidden] {
+  display: none;
+}
+
+.option {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.1rem;
+  min-height: 52px;
+  padding: 0.45rem 0.8rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.option:hover,
+.active {
+  background: rgba(124, 196, 255, 0.16);
+}
+
+.active {
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+
+.optionName {
+  font-weight: 600;
+}
+
+.optionMeta {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.hint {
+  padding: 0.75rem 0.8rem;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+
+.hintError {
+  color: var(--danger);
+}

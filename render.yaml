@@ -1,0 +1,21 @@
+# Blueprint de Render para la API de Buen Clima (plan gratuito).
+# Render no aplica cambios hasta que se sincronice el blueprint desde su panel.
+services:
+  - type: web
+    name: buen-clima-api
+    runtime: node
+    plan: free
+    rootDir: backend
+    buildCommand: npm ci --omit=dev
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: "22"
+      - key: TRUST_PROXY
+        value: "1"
+      # Completar en el panel con la URL del frontend (ej: https://buenclima.vercel.app).
+      - key: ALLOWED_ORIGINS
+        sync: false

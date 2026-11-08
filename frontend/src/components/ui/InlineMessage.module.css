@@ -1,0 +1,91 @@
+.message {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-strong);
+  background: rgba(10, 22, 50, 0.9);
+  font-size: 0.92rem;
+}
+
+.icon {
+  margin-top: 0.2rem;
+  flex-shrink: 0;
+}
+
+.body {
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  font-weight: 600;
+}
+
+.text {
+  color: var(--text-muted);
+}
+
+.title + .text {
+  margin-top: 0.15rem;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
+.dismiss {
+  width: var(--tap);
+  height: var(--tap);
+  margin: -0.6rem -0.6rem -0.6rem 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  font-size: 1.4rem;
+  line-height: 1;
+  color: var(--text-muted);
+}
+
+.dismiss:hover {
+  color: var(--text);
+}
+
+.info .icon {
+  color: var(--accent);
+}
+
+.warning {
+  border-color: rgba(255, 181, 71, 0.45);
+}
+
+.warning .icon,
+.waking .icon {
+  color: var(--warning);
+}
+
+.waking {
+  border-color: rgba(255, 181, 71, 0.35);
+}
+
+.error {
+  border-color: rgba(255, 138, 138, 0.5);
+}
+
+.error .icon {
+  color: var(--danger);
+}
+
+@media (max-width: 479px) {
+  .message {
+    flex-wrap: wrap;
+  }
+
+  .actions {
+    width: 100%;
+    padding-left: 1.7rem;
+  }
+}

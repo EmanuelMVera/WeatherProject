@@ -1,54 +1,47 @@
+import { AppError } from "../errors.mjs";
+
 /**
- * Global error handler middleware
- * Handles all uncaught errors and returns appropriate responses
+ * Manejador global de errores. Responde siempre con
+ * `{ error: { code, message } }` y nunca expone detalles internos
+ * (stack, URLs de proveedores) en producción.
+ *
+ * @param {{ isProduction: boolean, logger?: Console }} opts
  */
-const errorHandler = (err, req, res, next) => {
-  // Log error with context
-  console.error({
-    timestamp: new Date().toISOString(),
-    message: err.message,
-    path: req.path,
-    method: req.method,
-    ip: req.ip,
-    stack: err.stack,
-  });
+export function createErrorHandler({ isProduction, logger = console }) {
+  // eslint-disable-next-line no-unused-vars -- Express identifica el handler por su aridad (4).
+  return function errorHandler(err, req, res, next) {
+    const known = err instanceof AppError;
+    const status = known ? err.status : 500;
 
-  // Determine status code
-  const statusCode = err.status || err.statusCode || 500;
+    const logPayload = {
+      level: status >= 500 ? "error" : "warn",
+      code: known ? err.code : "INTERNAL_ERROR",
+      status,
+      method: req.method,
+      path: req.originalUrl.split("?")[0], // sin query string: no registramos coordenadas del usuario
+      provider: err.provider,
+      upstreamStatus: err.upstreamStatus,
+      detail: err.detail,
+      message: err.message,
+    };
+    if (!isProduction && !known) logPayload.stack = err.stack;
+    (status >= 500 ? logger.error : logger.warn).call(logger, JSON.stringify(logPayload));
 
-  // Rate limit errors
-  if (statusCode === 429) {
-    return res.status(429).json({
-      error: "Too Many Requests",
-      message: err.message || "Demasiadas solicitudes. Por favor, intenta más tarde.",
-      retryAfter: res.get("Retry-After"),
+    if (res.headersSent) return;
+
+    res.status(status).json({
+      error: {
+        code: known ? err.code : "INTERNAL_ERROR",
+        message: known
+          ? err.message
+          : isProduction
+            ? "Ocurrió un error inesperado en el servidor."
+            : err.message,
+      },
     });
-  }
+  };
+}
 
-  // Validation errors
-  if (statusCode === 400) {
-    return res.status(400).json({
-      error: "Bad Request",
-      message: err.message || "La solicitud no es válida.",
-    });
-  }
-
-  // Not found errors
-  if (statusCode === 404) {
-    return res.status(404).json({
-      error: "Not Found",
-      message: err.message || "Recurso no encontrado.",
-    });
-  }
-
-  // Generic server error
-  res.status(statusCode).json({
-    error: "Internal Server Error",
-    message:
-      process.env.NODE_ENV === "development"
-        ? err.message
-        : "Ocurrió un error interno del servidor.",
-  });
-};
-
-export default errorHandler;
+export function notFoundHandler(req, res) {
+  res.status(404).json({ error: { code: "NOT_FOUND", message: "Recurso no encontrado." } });
+}

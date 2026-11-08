@@ -1,0 +1,80 @@
+.grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.block {
+  display: grid;
+  gap: 0.75rem;
+  align-content: start;
+  padding: 1.25rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.current {
+  min-height: 540px; /* alto real de la tarjeta principal en el celular */
+}
+
+.side {
+  min-height: 200px;
+}
+
+.wide {
+  min-height: 170px;
+}
+
+.line,
+.hero,
+.chip {
+  border-radius: 8px;
+  background: linear-gradient(90deg, rgba(160, 196, 255, 0.08) 25%, rgba(160, 196, 255, 0.18) 50%, rgba(160, 196, 255, 0.08) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
+.line {
+  height: 0.9rem;
+}
+
+.hero {
+  height: 5rem;
+  width: 70%;
+}
+
+.row {
+  display: flex;
+  gap: 0.6rem;
+  overflow: hidden;
+}
+
+.chip {
+  flex: 0 0 72px;
+  height: 120px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@media (min-width: 1180px) {
+  .grid {
+    grid-template-columns: 2fr 1fr;
+  }
+
+  .wide {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 560px) {
+  .current {
+    min-height: 420px;
+  }
+}

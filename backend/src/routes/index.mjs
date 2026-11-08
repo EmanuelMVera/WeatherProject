@@ -1,12 +1,34 @@
 import express from "express";
-import currentWeather from "./currentWeather.mjs";
-import forecastWeather from "./forecastWeather.mjs";
-import ipGeolocation from "./ipGeolocation.mjs";
+import rateLimit from "express-rate-limit";
+import { createWeatherController } from "../controllers/weatherController.mjs";
+import { createAlertsController } from "../controllers/alertsController.mjs";
 
-const router = express.Router();
+/**
+ * Rutas de la API (montadas bajo /api).
+ * @param {{ weatherService: object, alertsService: object, rateLimit: { windowMs: number, max: number } }} deps
+ */
+export function createApiRouter({ weatherService, alertsService, rateLimit: limits }) {
+  const router = express.Router();
 
-router.get("/currentWeather", currentWeather);
-router.get("/forecastWeather", forecastWeather);
-router.get("/ipGeolocation", ipGeolocation);
+  router.use(
+    rateLimit({
+      windowMs: limits.windowMs,
+      limit: limits.max,
+      standardHeaders: "draft-7",
+      legacyHeaders: false,
+      handler: (req, res, next, options) => {
+        res.status(options.statusCode).json({
+          error: {
+            code: "RATE_LIMITED",
+            message: "Hiciste demasiadas consultas seguidas. Esperá unos minutos y volvé a intentar.",
+          },
+        });
+      },
+    })
+  );
 
-export default router;
+  router.get("/weather", createWeatherController({ weatherService }));
+  router.get("/alerts", createAlertsController({ alertsService }));
+
+  return router;
+}

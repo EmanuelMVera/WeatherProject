@@ -1,0 +1,69 @@
+/* Botones compartidos. Todos respetan el tamaño táctil mínimo (44 px). */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  min-height: var(--tap);
+  padding: 0 1rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-strong);
+  background: var(--surface-raised);
+  color: var(--text);
+  font-weight: 600;
+  font-size: 0.92rem;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+}
+
+.button:hover {
+  border-color: var(--accent);
+  background: rgba(40, 66, 120, 0.8);
+}
+
+.button:active {
+  transform: scale(0.98);
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.primary {
+  border-color: transparent;
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.primary:hover {
+  background: #a3d6ff;
+  border-color: transparent;
+}
+
+.small {
+  min-height: 36px;
+  padding: 0 0.75rem;
+  font-size: 0.85rem;
+}
+
+/* Área táctil de 44 px aunque el botón se vea de 36 px. */
+.small {
+  position: relative;
+}
+
+.small::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+}
+
+.spin {
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

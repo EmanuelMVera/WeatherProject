@@ -4,50 +4,34 @@ import App from "./App.jsx";
 import ErrorBoundary from "./components/ErrorBoundary.jsx";
 import "./index.css";
 
-// Validate required environment variables
-// Note: VITE_API_URL should be set in .env.local
-// For dev mode with Vite proxy, it's typically /api
-// For preview/production, it should point to the actual backend URL
-if (!import.meta.env.VITE_API_URL) {
-  console.warn(
-    "VITE_API_URL is not set. Falling back to window.location.origin for API requests."
-  );
-}
-
-// Fallback de última línea: si App entero explota, mostramos esto (nunca en blanco).
+// Último recurso: si la app entera falla, nunca queda una pantalla en blanco.
 const rootFallback = (
   <div
+    role="alert"
     style={{
       minHeight: "100vh",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
+      display: "grid",
+      placeItems: "center",
       padding: "1.5rem",
-      background: "#030816",
-      color: "#f4f8ff",
-      fontFamily: "Inter, system-ui, sans-serif",
       textAlign: "center",
     }}
   >
     <div style={{ maxWidth: "42ch" }}>
-      <h1 style={{ fontSize: "1.25rem", marginBottom: "0.5rem" }}>
-        La aplicación tuvo un problema
-      </h1>
-      <p style={{ opacity: 0.8, marginBottom: "1rem" }}>
-        Algo falló al cargar la interfaz. Recargá la página para volver a
-        intentarlo.
+      <h1 style={{ fontSize: "1.25rem", marginBottom: "0.5rem" }}>Buen Clima tuvo un problema</h1>
+      <p style={{ color: "#b3c3df", marginBottom: "1rem" }}>
+        Algo falló al cargar la aplicación. Recargá la página para volver a intentarlo.
       </p>
       <button
         type="button"
         onClick={() => window.location.reload()}
         style={{
-          padding: "0.55rem 1.5rem",
+          minHeight: 44,
+          padding: "0 1.5rem",
           fontWeight: 600,
-          color: "#03122b",
-          background: "linear-gradient(135deg, #6a9ff1, #96c9ff)",
+          color: "#04172f",
+          background: "#7cc4ff",
           border: "none",
-          borderRadius: "9px",
-          cursor: "pointer",
+          borderRadius: 999,
         }}
       >
         Recargar
@@ -55,6 +39,15 @@ const rootFallback = (
     </div>
   </div>
 );
+
+// Uso sin conexión: sólo en producción, para no interferir con la recarga de Vite.
+if (import.meta.env.PROD && "serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/sw.js").catch(() => {
+      /* sin service worker la app funciona igual, sólo que no offline */
+    });
+  });
+}
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

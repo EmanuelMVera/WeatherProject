@@ -1,0 +1,35 @@
+.wrapper {
+  position: relative;
+  z-index: 20; /* el desplegable flota sobre las tarjetas */
+  display: grid;
+  gap: 0.6rem;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.locate {
+  flex-shrink: 0;
+  min-height: 48px;
+  min-width: 48px;
+  padding: 0 0.95rem;
+}
+
+.locateText {
+  display: none;
+}
+
+.intro {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  max-width: 70ch;
+}
+
+@media (min-width: 480px) {
+  .locateText {
+    display: inline;
+  }
+}

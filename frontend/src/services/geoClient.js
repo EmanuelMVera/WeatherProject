@@ -1,96 +1,79 @@
-import { fetchWithTimeout, friendlyMessage } from "../utils/http.js";
+import { fetchWithTimeout, friendlyMessage } from "./http.js";
+import { placeId } from "../domain/location.js";
 
 /**
- * Cliente de la API de geocoding de Open-Meteo.
+ * Búsqueda de localidades con la Geocoding API de Open-Meteo (datos de
+ * GeoNames). Se consulta directo desde el navegador: no requiere API key,
+ * tiene CORS habilitado y así la búsqueda funciona aunque el backend esté
+ * iniciándose.
  * https://open-meteo.com/en/docs/geocoding-api
- *
- * Gratis, sin API key, con CORS habilitado y soporte de acentos/eñes.
  */
 
 const GEO_BASE_URL = "https://geocoding-api.open-meteo.com/v1";
 const REQUEST_TIMEOUT_MS = 8000;
-
-// Mínimo de caracteres antes de consultar la API.
 export const MIN_QUERY_LENGTH = 2;
+export const MAX_QUERY_LENGTH = 100;
 
 /**
- * @typedef {Object} Place
- * @property {string|number} id
- * @property {string} name          Nombre de la localidad (ej: "Guernica").
- * @property {string} [admin1]      Provincia/estado (ej: "Buenos Aires").
- * @property {string} [country]     País (ej: "Argentina").
- * @property {string} [countryCode] ISO2 (ej: "AR").
- * @property {number} latitude
- * @property {number} longitude
- * @property {string} label         Texto para mostrar: "Guernica, Buenos Aires, Argentina".
+ * @typedef {import("../domain/location.js").Place & { detail?: string, label: string }} SearchResult
  */
 
-/**
- * Convierte un resultado crudo de Open-Meteo en un `Place` normalizado.
- * @param {Record<string, unknown>} raw
- * @returns {Place | null}
- */
-function toPlace(raw) {
+/** @returns {SearchResult|null} */
+export function toSearchResult(raw) {
   if (!raw || raw.name == null) return null;
-
   const latitude = Number(raw.latitude);
   const longitude = Number(raw.longitude);
   if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) return null;
 
+  const clean = (v) => (v ? String(v).trim() : undefined) || undefined;
   const name = String(raw.name).trim();
-  const admin1 = raw.admin1 ? String(raw.admin1).trim() : "";
-  const country = raw.country ? String(raw.country).trim() : "";
-
-  const label = [name, admin1, country].filter(Boolean).join(", ");
+  const region = clean(raw.admin1);
+  const country = clean(raw.country);
+  // admin2 (partido/departamento) ayuda a distinguir localidades homónimas.
+  const detail = clean(raw.admin2) !== name ? clean(raw.admin2) : undefined;
 
   return {
-    id: raw.id ?? `${latitude},${longitude}`,
+    id: placeId(latitude, longitude),
     name,
-    admin1: admin1 || undefined,
-    country: country || undefined,
-    countryCode: raw.country_code ? String(raw.country_code) : undefined,
+    region,
+    detail,
+    country,
+    countryCode: clean(raw.country_code),
     latitude,
     longitude,
-    label,
+    label: [name, region, country].filter(Boolean).join(", "),
   };
 }
 
 /**
- * Busca localidades por texto libre.
  * @param {string} query
  * @param {{ signal?: AbortSignal }} [opts]
- * @returns {Promise<Place[]>}
+ * @returns {Promise<SearchResult[]>}
  */
-export async function searchPlaces(query, opts = {}) {
-  const term = String(query ?? "").trim();
+export async function searchPlaces(query, { signal } = {}) {
+  const term = String(query ?? "").trim().slice(0, MAX_QUERY_LENGTH);
   if (term.length < MIN_QUERY_LENGTH) return [];
 
-  const url = `${GEO_BASE_URL}/search?name=${encodeURIComponent(
-    term
-  )}&count=8&language=es&format=json`;
+  const params = new URLSearchParams({ name: term, count: "10", language: "es", format: "json" });
 
   let response;
   try {
-    response = await fetchWithTimeout(url, REQUEST_TIMEOUT_MS, {
-      signal: opts.signal,
-    });
+    response = await fetchWithTimeout(`${GEO_BASE_URL}/search?${params}`, REQUEST_TIMEOUT_MS, { signal });
   } catch (err) {
-    // Cancelación pedida por el caller: propagar sin traducir a error visible.
-    if (opts.signal?.aborted) throw err;
+    if (signal?.aborted) throw err;
     throw new Error(friendlyMessage(err));
   }
-
-  if (!response.ok) {
-    throw new Error("No se pudo completar la búsqueda de ubicaciones.");
-  }
+  if (!response.ok) throw new Error("La búsqueda de localidades no está disponible. Probá de nuevo.");
 
   let data;
   try {
     data = await response.json();
   } catch {
-    throw new Error("Respuesta inválida del servicio de ubicaciones.");
+    throw new Error("Recibimos una respuesta inválida del buscador.");
   }
 
-  const results = Array.isArray(data?.results) ? data.results : [];
-  return results.map(toPlace).filter(Boolean);
+  const seen = new Set();
+  return (Array.isArray(data?.results) ? data.results : [])
+    .map(toSearchResult)
+    .filter((place) => place && !seen.has(place.id) && seen.add(place.id));
 }

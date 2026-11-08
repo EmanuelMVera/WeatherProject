@@ -1,0 +1,3569 @@
+{
+ "location": {
+  "latitude": -34.622143,
+  "longitude": -58.40909,
+  "elevation": 37,
+  "timezone": "America/Argentina/Buenos_Aires",
+  "timezoneAbbreviation": "GMT-3"
+ },
+ "units": {
+  "temperature": "°C",
+  "windSpeed": "km/h",
+  "precipitation": "mm",
+  "pressure": "hPa",
+  "humidity": "%",
+  "cloudCover": "%",
+  "precipitationProbability": "%"
+ },
+ "current": {
+  "time": "2026-11-07T04:30:00.000Z",
+  "local": {
+   "date": "2026-11-07",
+   "hour": 1,
+   "minute": 30
+  },
+  "temperature": 15.5,
+  "apparentTemperature": 14.1,
+  "humidity": 81,
+  "weatherCode": 2,
+  "condition": {
+   "code": 2,
+   "description": "Parcialmente nublado",
+   "icon": "partly-cloudy-night"
+  },
+  "isDay": false,
+  "windSpeed": 13.8,
+  "windDirection": 171,
+  "windGusts": 32.8,
+  "pressure": 1017.1,
+  "cloudCover": 66,
+  "uvIndex": 0
+ },
+ "hourly": [
+  {
+   "time": "2026-11-07T04:00:00.000Z",
+   "localDate": "2026-11-07",
+   "localHour": 1,
+   "temperature": 15.7,
+   "apparentTemperature": null,
+   "weatherCode": 3,
+   "condition": {
+    "code": 3,
+    "description": "Nublado",
+    "icon": "overcast"
+   },
+   "isDay": false,
+   "precipitationProbability": 43,
+   "precipitation": 0,
+   "windSpeed": 11.9,
+   "windDirection": 169,
+   "windGusts": 30.6,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-07T05:00:00.000Z",
+   "localDate": "2026-11-07",
+   "localHour": 2,
+   "temperature": 15.1,
+   "apparentTemperature": null,
+   "weatherCode": 1,
+   "condition": {
+    "code": 1,
+    "description": "Mayormente despejado",
+    "icon": "mostly-clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 59,
+   "precipitation": 0,
+   "windSpeed": 16.4,
+   "windDirection": 172,
+   "windGusts": 37.1,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-07T06:00:00.000Z",
+   "localDate": "2026-11-07",
+   "localHour": 3,
+   "temperature": 14.2,
+   "apparentTemperature": null,
+   "weatherCode": 51,
+   "condition": {
+    "code": 51,
+    "description": "Llovizna débil",
+    "icon": "drizzle"
+   },
+   "isDay": false,
+   "precipitationProbability": 65,
+   "precipitation": 0.1,
+   "windSpeed": 20.3,
+   "windDirection": 172,
+   "windGusts": 47.5,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-07T07:00:00.000Z",
+   "localDate": "2026-11-07",
+   "localHour": 4,
+   "temperature": 13.2,
+   "apparentTemperature": null,
+   "weatherCode": 3,
+   "condition": {
+    "code": 3,
+    "description": "Nublado",
+    "icon": "overcast"
+   },
+   "isDay": false,
+   "precipitationProbability": 52,
+   "precipitation": 0,
+   "windSpeed": 19.8,
+   "windDirection": 177,
+   "windGusts": 50,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-07T08:00:00.000Z",
+   "localDate": "2026-11-07",
+   "localHour": 5,
+   "temperature": 12.6,
+   "apparentTemperature": null,
+   "weatherCode": 3,
+   "condition": {
+    "code": 3,
+    "description": "Nublado",
+    "icon": "overcast"
+   },
+   "isDay": false,
+   "precipitationProbability": 30,
+   "precipitation": 0,
+   "windSpeed": 20.8,
+   "windDirection": 175,
+   "windGusts": 48.2,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-07T09:00:00.000Z",
+   "localDate": "2026-11-07",
+   "localHour": 6,
+   "temperature": 12.1,
+   "apparentTemperature": null,
+   "weatherCode": 3,
+   "condition": {
+    "code": 3,
+    "description": "Nublado",
+    "icon": "overcast"
+   },
+   "isDay": true,
+   "precipitationProbability": 12,
+   "precipitation": 0,
+   "windSpeed": 22,
+   "windDirection": 178,
+   "windGusts": 51.8,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-07T10:00:00.000Z",
+   "localDate": "2026-11-07",
+   "localHour": 7,
+   "temperature": 12.2,
+   "apparentTemperature": null,
+   "weatherCode": 3,
+   "condition": {
+    "code": 3,
+    "description": "Nublado",
+    "icon": "overcast"
+   },
+   "isDay": true,
+   "precipitationProbability": 5,
+   "precipitation": 0,
+   "windSpeed": 21.5,
+   "windDirection": 175,
+   "windGusts": 54.7,
+   "uvIndex": 0.2
+  },
+  {
+   "time": "2026-11-07T11:00:00.000Z",
+   "localDate": "2026-11-07",
+   "localHour": 8,
+   "temperature": 12.8,
+   "apparentTemperature": null,
+   "weatherCode": 3,
+   "condition": {
+    "code": 3,
+    "description": "Nublado",
+    "icon": "overcast"
+   },
+   "isDay": true,
+   "precipitationProbability": 2,
+   "precipitation": 0,
+   "windSpeed": 20.9,
+   "windDirection": 178,
+   "windGusts": 51.5,
+   "uvIndex": 0.4
+  },
+  {
+   "time": "2026-11-07T12:00:00.000Z",
+   "localDate": "2026-11-07",
+   "localHour": 9,
+   "temperature": 13.5,
+   "apparentTemperature": null,
+   "weatherCode": 3,
+   "condition": {
+    "code": 3,
+    "description": "Nublado",
+    "icon": "overcast"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 19.3,
+   "windDirection": 177,
+   "windGusts": 51.1,
+   "uvIndex": 1.9
+  },
+  {
+   "time": "2026-11-07T13:00:00.000Z",
+   "localDate": "2026-11-07",
+   "localHour": 10,
+   "temperature": 13.8,
+   "apparentTemperature": null,
+   "weatherCode": 3,
+   "condition": {
+    "code": 3,
+    "description": "Nublado",
+    "icon": "overcast"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 17.7,
+   "windDirection": 184,
+   "windGusts": 47.5,
+   "uvIndex": 4.6
+  },
+  {
+   "time": "2026-11-07T14:00:00.000Z",
+   "localDate": "2026-11-07",
+   "localHour": 11,
+   "temperature": 15,
+   "apparentTemperature": null,
+   "weatherCode": 3,
+   "condition": {
+    "code": 3,
+    "description": "Nublado",
+    "icon": "overcast"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 17.6,
+   "windDirection": 187,
+   "windGusts": 46.1,
+   "uvIndex": 6.1
+  },
+  {
+   "time": "2026-11-07T15:00:00.000Z",
+   "localDate": "2026-11-07",
+   "localHour": 12,
+   "temperature": 16.4,
+   "apparentTemperature": null,
+   "weatherCode": 2,
+   "condition": {
+    "code": 2,
+    "description": "Parcialmente nublado",
+    "icon": "partly-cloudy-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 16.5,
+   "windDirection": 188,
+   "windGusts": 46.1,
+   "uvIndex": 7.9
+  },
+  {
+   "time": "2026-11-07T16:00:00.000Z",
+   "localDate": "2026-11-07",
+   "localHour": 13,
+   "temperature": 18.1,
+   "apparentTemperature": null,
+   "weatherCode": 2,
+   "condition": {
+    "code": 2,
+    "description": "Parcialmente nublado",
+    "icon": "partly-cloudy-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 15.9,
+   "windDirection": 186,
+   "windGusts": 43.9,
+   "uvIndex": 8.4
+  },
+  {
+   "time": "2026-11-07T17:00:00.000Z",
+   "localDate": "2026-11-07",
+   "localHour": 14,
+   "temperature": 18.8,
+   "apparentTemperature": null,
+   "weatherCode": 2,
+   "condition": {
+    "code": 2,
+    "description": "Parcialmente nublado",
+    "icon": "partly-cloudy-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 16.1,
+   "windDirection": 184,
+   "windGusts": 43.6,
+   "uvIndex": 8.2
+  },
+  {
+   "time": "2026-11-07T18:00:00.000Z",
+   "localDate": "2026-11-07",
+   "localHour": 15,
+   "temperature": 18.7,
+   "apparentTemperature": null,
+   "weatherCode": 2,
+   "condition": {
+    "code": 2,
+    "description": "Parcialmente nublado",
+    "icon": "partly-cloudy-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 16.8,
+   "windDirection": 186,
+   "windGusts": 44.3,
+   "uvIndex": 7.2
+  },
+  {
+   "time": "2026-11-07T19:00:00.000Z",
+   "localDate": "2026-11-07",
+   "localHour": 16,
+   "temperature": 18.8,
+   "apparentTemperature": null,
+   "weatherCode": 3,
+   "condition": {
+    "code": 3,
+    "description": "Nublado",
+    "icon": "overcast"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 16,
+   "windDirection": 181,
+   "windGusts": 43.6,
+   "uvIndex": 5.8
+  },
+  {
+   "time": "2026-11-07T20:00:00.000Z",
+   "localDate": "2026-11-07",
+   "localHour": 17,
+   "temperature": 18.3,
+   "apparentTemperature": null,
+   "weatherCode": 3,
+   "condition": {
+    "code": 3,
+    "description": "Nublado",
+    "icon": "overcast"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 16.1,
+   "windDirection": 175,
+   "windGusts": 42.8,
+   "uvIndex": 3.9
+  },
+  {
+   "time": "2026-11-07T21:00:00.000Z",
+   "localDate": "2026-11-07",
+   "localHour": 18,
+   "temperature": 17.4,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 15.5,
+   "windDirection": 172,
+   "windGusts": 41.4,
+   "uvIndex": 2.1
+  },
+  {
+   "time": "2026-11-07T22:00:00.000Z",
+   "localDate": "2026-11-07",
+   "localHour": 19,
+   "temperature": 16.7,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 12.8,
+   "windDirection": 164,
+   "windGusts": 38.2,
+   "uvIndex": 0.7
+  },
+  {
+   "time": "2026-11-07T23:00:00.000Z",
+   "localDate": "2026-11-07",
+   "localHour": 20,
+   "temperature": 16,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 8.7,
+   "windDirection": 159,
+   "windGusts": 30.6,
+   "uvIndex": 0.1
+  },
+  {
+   "time": "2026-11-08T00:00:00.000Z",
+   "localDate": "2026-11-07",
+   "localHour": 21,
+   "temperature": 15.7,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 7.7,
+   "windDirection": 155,
+   "windGusts": 19.1,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-08T01:00:00.000Z",
+   "localDate": "2026-11-07",
+   "localHour": 22,
+   "temperature": 15,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 8.6,
+   "windDirection": 150,
+   "windGusts": 18,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-08T02:00:00.000Z",
+   "localDate": "2026-11-07",
+   "localHour": 23,
+   "temperature": 14.1,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 10,
+   "windDirection": 146,
+   "windGusts": 22.3,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-08T03:00:00.000Z",
+   "localDate": "2026-11-08",
+   "localHour": 0,
+   "temperature": 13.4,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 8.6,
+   "windDirection": 141,
+   "windGusts": 22.3,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-08T04:00:00.000Z",
+   "localDate": "2026-11-08",
+   "localHour": 1,
+   "temperature": 13,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 7.4,
+   "windDirection": 133,
+   "windGusts": 17.6,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-08T05:00:00.000Z",
+   "localDate": "2026-11-08",
+   "localHour": 2,
+   "temperature": 12.6,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 6.4,
+   "windDirection": 122,
+   "windGusts": 14.4,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-08T06:00:00.000Z",
+   "localDate": "2026-11-08",
+   "localHour": 3,
+   "temperature": 12,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 5.5,
+   "windDirection": 126,
+   "windGusts": 11.9,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-08T07:00:00.000Z",
+   "localDate": "2026-11-08",
+   "localHour": 4,
+   "temperature": 11.5,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 6.7,
+   "windDirection": 142,
+   "windGusts": 12.2,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-08T08:00:00.000Z",
+   "localDate": "2026-11-08",
+   "localHour": 5,
+   "temperature": 11.3,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 8.5,
+   "windDirection": 155,
+   "windGusts": 16.6,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-08T09:00:00.000Z",
+   "localDate": "2026-11-08",
+   "localHour": 6,
+   "temperature": 10.5,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 4.2,
+   "windDirection": 185,
+   "windGusts": 16.6,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-08T10:00:00.000Z",
+   "localDate": "2026-11-08",
+   "localHour": 7,
+   "temperature": 11.7,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 3.1,
+   "windDirection": 270,
+   "windGusts": 9,
+   "uvIndex": 0.5
+  },
+  {
+   "time": "2026-11-08T11:00:00.000Z",
+   "localDate": "2026-11-08",
+   "localHour": 8,
+   "temperature": 13.6,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 4.7,
+   "windDirection": 298,
+   "windGusts": 15.5,
+   "uvIndex": 1.7
+  },
+  {
+   "time": "2026-11-08T12:00:00.000Z",
+   "localDate": "2026-11-08",
+   "localHour": 9,
+   "temperature": 15.3,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 4.5,
+   "windDirection": 317,
+   "windGusts": 17.3,
+   "uvIndex": 3.5
+  },
+  {
+   "time": "2026-11-08T13:00:00.000Z",
+   "localDate": "2026-11-08",
+   "localHour": 10,
+   "temperature": 16.8,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 3.5,
+   "windDirection": 348,
+   "windGusts": 17.3,
+   "uvIndex": 5.4
+  },
+  {
+   "time": "2026-11-08T14:00:00.000Z",
+   "localDate": "2026-11-08",
+   "localHour": 11,
+   "temperature": 18,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 4.4,
+   "windDirection": 21,
+   "windGusts": 19.1,
+   "uvIndex": 7
+  },
+  {
+   "time": "2026-11-08T15:00:00.000Z",
+   "localDate": "2026-11-08",
+   "localHour": 12,
+   "temperature": 18.7,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 7.9,
+   "windDirection": 27,
+   "windGusts": 26.3,
+   "uvIndex": 8.2
+  },
+  {
+   "time": "2026-11-08T16:00:00.000Z",
+   "localDate": "2026-11-08",
+   "localHour": 13,
+   "temperature": 18.9,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 11.7,
+   "windDirection": 31,
+   "windGusts": 35.6,
+   "uvIndex": 8.6
+  },
+  {
+   "time": "2026-11-08T17:00:00.000Z",
+   "localDate": "2026-11-08",
+   "localHour": 14,
+   "temperature": 19.1,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 13.4,
+   "windDirection": 37,
+   "windGusts": 38.9,
+   "uvIndex": 8.4
+  },
+  {
+   "time": "2026-11-08T18:00:00.000Z",
+   "localDate": "2026-11-08",
+   "localHour": 15,
+   "temperature": 19.2,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 13.8,
+   "windDirection": 43,
+   "windGusts": 39.2,
+   "uvIndex": 7.4
+  },
+  {
+   "time": "2026-11-08T19:00:00.000Z",
+   "localDate": "2026-11-08",
+   "localHour": 16,
+   "temperature": 19.2,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 13.5,
+   "windDirection": 49,
+   "windGusts": 39.2,
+   "uvIndex": 5.9
+  },
+  {
+   "time": "2026-11-08T20:00:00.000Z",
+   "localDate": "2026-11-08",
+   "localHour": 17,
+   "temperature": 18.8,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 13.7,
+   "windDirection": 55,
+   "windGusts": 38.5,
+   "uvIndex": 4
+  },
+  {
+   "time": "2026-11-08T21:00:00.000Z",
+   "localDate": "2026-11-08",
+   "localHour": 18,
+   "temperature": 18.4,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 12.1,
+   "windDirection": 62,
+   "windGusts": 36.7,
+   "uvIndex": 2.2
+  },
+  {
+   "time": "2026-11-08T22:00:00.000Z",
+   "localDate": "2026-11-08",
+   "localHour": 19,
+   "temperature": 17.8,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 11.9,
+   "windDirection": 68,
+   "windGusts": 32.4,
+   "uvIndex": 0.7
+  },
+  {
+   "time": "2026-11-08T23:00:00.000Z",
+   "localDate": "2026-11-08",
+   "localHour": 20,
+   "temperature": 17.5,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 11.2,
+   "windDirection": 72,
+   "windGusts": 29.9,
+   "uvIndex": 0.1
+  },
+  {
+   "time": "2026-11-09T00:00:00.000Z",
+   "localDate": "2026-11-08",
+   "localHour": 21,
+   "temperature": 17.4,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 11.8,
+   "windDirection": 66,
+   "windGusts": 27,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-09T01:00:00.000Z",
+   "localDate": "2026-11-08",
+   "localHour": 22,
+   "temperature": 17,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 11.4,
+   "windDirection": 61,
+   "windGusts": 27,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-09T02:00:00.000Z",
+   "localDate": "2026-11-08",
+   "localHour": 23,
+   "temperature": 16.8,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 10,
+   "windDirection": 56,
+   "windGusts": 25.6,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-09T03:00:00.000Z",
+   "localDate": "2026-11-09",
+   "localHour": 0,
+   "temperature": 16.4,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 8.9,
+   "windDirection": 56,
+   "windGusts": 20.9,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-09T04:00:00.000Z",
+   "localDate": "2026-11-09",
+   "localHour": 1,
+   "temperature": 16,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 8.8,
+   "windDirection": 49,
+   "windGusts": 18.4,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-09T05:00:00.000Z",
+   "localDate": "2026-11-09",
+   "localHour": 2,
+   "temperature": 15.6,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 8.9,
+   "windDirection": 42,
+   "windGusts": 18,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-09T06:00:00.000Z",
+   "localDate": "2026-11-09",
+   "localHour": 3,
+   "temperature": 15.2,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 8.6,
+   "windDirection": 33,
+   "windGusts": 18,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-09T07:00:00.000Z",
+   "localDate": "2026-11-09",
+   "localHour": 4,
+   "temperature": 14.8,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 7.4,
+   "windDirection": 22,
+   "windGusts": 17.3,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-09T08:00:00.000Z",
+   "localDate": "2026-11-09",
+   "localHour": 5,
+   "temperature": 14.6,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 7.2,
+   "windDirection": 18,
+   "windGusts": 14,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-09T09:00:00.000Z",
+   "localDate": "2026-11-09",
+   "localHour": 6,
+   "temperature": 14.5,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 7.3,
+   "windDirection": 10,
+   "windGusts": 14,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-09T10:00:00.000Z",
+   "localDate": "2026-11-09",
+   "localHour": 7,
+   "temperature": 15.7,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 7.8,
+   "windDirection": 4,
+   "windGusts": 18,
+   "uvIndex": 0.5
+  },
+  {
+   "time": "2026-11-09T11:00:00.000Z",
+   "localDate": "2026-11-09",
+   "localHour": 8,
+   "temperature": 17,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 8.1,
+   "windDirection": 3,
+   "windGusts": 22.7,
+   "uvIndex": 1.8
+  },
+  {
+   "time": "2026-11-09T12:00:00.000Z",
+   "localDate": "2026-11-09",
+   "localHour": 9,
+   "temperature": 18.2,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 9.2,
+   "windDirection": 6,
+   "windGusts": 26.6,
+   "uvIndex": 3.6
+  },
+  {
+   "time": "2026-11-09T13:00:00.000Z",
+   "localDate": "2026-11-09",
+   "localHour": 10,
+   "temperature": 19.2,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 11.2,
+   "windDirection": 15,
+   "windGusts": 32,
+   "uvIndex": 5.5
+  },
+  {
+   "time": "2026-11-09T14:00:00.000Z",
+   "localDate": "2026-11-09",
+   "localHour": 11,
+   "temperature": 20.1,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 12.6,
+   "windDirection": 22,
+   "windGusts": 36,
+   "uvIndex": 7.1
+  },
+  {
+   "time": "2026-11-09T15:00:00.000Z",
+   "localDate": "2026-11-09",
+   "localHour": 12,
+   "temperature": 21,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 13.1,
+   "windDirection": 23,
+   "windGusts": 37.8,
+   "uvIndex": 8.3
+  },
+  {
+   "time": "2026-11-09T16:00:00.000Z",
+   "localDate": "2026-11-09",
+   "localHour": 13,
+   "temperature": 21.8,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 13,
+   "windDirection": 29,
+   "windGusts": 37.8,
+   "uvIndex": 8.7
+  },
+  {
+   "time": "2026-11-09T17:00:00.000Z",
+   "localDate": "2026-11-09",
+   "localHour": 14,
+   "temperature": 22.3,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 12.9,
+   "windDirection": 36,
+   "windGusts": 38.2,
+   "uvIndex": 8.4
+  },
+  {
+   "time": "2026-11-09T18:00:00.000Z",
+   "localDate": "2026-11-09",
+   "localHour": 15,
+   "temperature": 22.8,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 13.2,
+   "windDirection": 34,
+   "windGusts": 38.5,
+   "uvIndex": 7.5
+  },
+  {
+   "time": "2026-11-09T19:00:00.000Z",
+   "localDate": "2026-11-09",
+   "localHour": 16,
+   "temperature": 23.1,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 14,
+   "windDirection": 30,
+   "windGusts": 38.9,
+   "uvIndex": 6
+  },
+  {
+   "time": "2026-11-09T20:00:00.000Z",
+   "localDate": "2026-11-09",
+   "localHour": 17,
+   "temperature": 22.3,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 13.4,
+   "windDirection": 53,
+   "windGusts": 38.9,
+   "uvIndex": 4.1
+  },
+  {
+   "time": "2026-11-09T21:00:00.000Z",
+   "localDate": "2026-11-09",
+   "localHour": 18,
+   "temperature": 21,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 12.7,
+   "windDirection": 72,
+   "windGusts": 35.6,
+   "uvIndex": 2.2
+  },
+  {
+   "time": "2026-11-09T22:00:00.000Z",
+   "localDate": "2026-11-09",
+   "localHour": 19,
+   "temperature": 20.1,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 11,
+   "windDirection": 84,
+   "windGusts": 32.8,
+   "uvIndex": 0.8
+  },
+  {
+   "time": "2026-11-09T23:00:00.000Z",
+   "localDate": "2026-11-09",
+   "localHour": 20,
+   "temperature": 19.6,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 10.5,
+   "windDirection": 94,
+   "windGusts": 27.7,
+   "uvIndex": 0.1
+  },
+  {
+   "time": "2026-11-10T00:00:00.000Z",
+   "localDate": "2026-11-09",
+   "localHour": 21,
+   "temperature": 19.3,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 10.2,
+   "windDirection": 100,
+   "windGusts": 24.8,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-10T01:00:00.000Z",
+   "localDate": "2026-11-09",
+   "localHour": 22,
+   "temperature": 20.5,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 17.5,
+   "windDirection": 37,
+   "windGusts": 36.7,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-10T02:00:00.000Z",
+   "localDate": "2026-11-09",
+   "localHour": 23,
+   "temperature": 19.7,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 19.1,
+   "windDirection": 34,
+   "windGusts": 43.6,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-10T03:00:00.000Z",
+   "localDate": "2026-11-10",
+   "localHour": 0,
+   "temperature": 19.2,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 18.3,
+   "windDirection": 29,
+   "windGusts": 42.1,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-10T04:00:00.000Z",
+   "localDate": "2026-11-10",
+   "localHour": 1,
+   "temperature": 18.9,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 17.3,
+   "windDirection": 23,
+   "windGusts": 40.3,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-10T05:00:00.000Z",
+   "localDate": "2026-11-10",
+   "localHour": 2,
+   "temperature": 18.7,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 17.9,
+   "windDirection": 21,
+   "windGusts": 39.6,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-10T06:00:00.000Z",
+   "localDate": "2026-11-10",
+   "localHour": 3,
+   "temperature": 18.2,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 15.1,
+   "windDirection": 15,
+   "windGusts": 39.2,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-10T07:00:00.000Z",
+   "localDate": "2026-11-10",
+   "localHour": 4,
+   "temperature": 17.8,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 13.8,
+   "windDirection": 15,
+   "windGusts": 32.8,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-10T08:00:00.000Z",
+   "localDate": "2026-11-10",
+   "localHour": 5,
+   "temperature": 17.5,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 13.4,
+   "windDirection": 18,
+   "windGusts": 29.2,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-10T09:00:00.000Z",
+   "localDate": "2026-11-10",
+   "localHour": 6,
+   "temperature": 17.1,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 13.3,
+   "windDirection": 27,
+   "windGusts": 28.4,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-10T10:00:00.000Z",
+   "localDate": "2026-11-10",
+   "localHour": 7,
+   "temperature": 17.6,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 14.1,
+   "windDirection": 28,
+   "windGusts": 32.4,
+   "uvIndex": 0.5
+  },
+  {
+   "time": "2026-11-10T11:00:00.000Z",
+   "localDate": "2026-11-10",
+   "localHour": 8,
+   "temperature": 18.1,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 14.9,
+   "windDirection": 31,
+   "windGusts": 37.1,
+   "uvIndex": 1.8
+  },
+  {
+   "time": "2026-11-10T12:00:00.000Z",
+   "localDate": "2026-11-10",
+   "localHour": 9,
+   "temperature": 18.8,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 15.5,
+   "windDirection": 31,
+   "windGusts": 40.7,
+   "uvIndex": 3.6
+  },
+  {
+   "time": "2026-11-10T13:00:00.000Z",
+   "localDate": "2026-11-10",
+   "localHour": 10,
+   "temperature": 20,
+   "apparentTemperature": null,
+   "weatherCode": 1,
+   "condition": {
+    "code": 1,
+    "description": "Mayormente despejado",
+    "icon": "mostly-clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 14.9,
+   "windDirection": 30,
+   "windGusts": 41.8,
+   "uvIndex": 5.5
+  },
+  {
+   "time": "2026-11-10T14:00:00.000Z",
+   "localDate": "2026-11-10",
+   "localHour": 11,
+   "temperature": 21.4,
+   "apparentTemperature": null,
+   "weatherCode": 2,
+   "condition": {
+    "code": 2,
+    "description": "Parcialmente nublado",
+    "icon": "partly-cloudy-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 13.8,
+   "windDirection": 28,
+   "windGusts": 41.4,
+   "uvIndex": 7.2
+  },
+  {
+   "time": "2026-11-10T15:00:00.000Z",
+   "localDate": "2026-11-10",
+   "localHour": 12,
+   "temperature": 22.6,
+   "apparentTemperature": null,
+   "weatherCode": 3,
+   "condition": {
+    "code": 3,
+    "description": "Nublado",
+    "icon": "overcast"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 12.8,
+   "windDirection": 28,
+   "windGusts": 40.7,
+   "uvIndex": 8.3
+  },
+  {
+   "time": "2026-11-10T16:00:00.000Z",
+   "localDate": "2026-11-10",
+   "localHour": 13,
+   "temperature": 23.6,
+   "apparentTemperature": null,
+   "weatherCode": 3,
+   "condition": {
+    "code": 3,
+    "description": "Nublado",
+    "icon": "overcast"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 12.3,
+   "windDirection": 30,
+   "windGusts": 40,
+   "uvIndex": 8.8
+  },
+  {
+   "time": "2026-11-10T17:00:00.000Z",
+   "localDate": "2026-11-10",
+   "localHour": 14,
+   "temperature": 24.4,
+   "apparentTemperature": null,
+   "weatherCode": 2,
+   "condition": {
+    "code": 2,
+    "description": "Parcialmente nublado",
+    "icon": "partly-cloudy-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 11.6,
+   "windDirection": 35,
+   "windGusts": 38.9,
+   "uvIndex": 8.4
+  },
+  {
+   "time": "2026-11-10T18:00:00.000Z",
+   "localDate": "2026-11-10",
+   "localHour": 15,
+   "temperature": 24.8,
+   "apparentTemperature": null,
+   "weatherCode": 1,
+   "condition": {
+    "code": 1,
+    "description": "Mayormente despejado",
+    "icon": "mostly-clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 11,
+   "windDirection": 41,
+   "windGusts": 37.8,
+   "uvIndex": 7.5
+  },
+  {
+   "time": "2026-11-10T19:00:00.000Z",
+   "localDate": "2026-11-10",
+   "localHour": 16,
+   "temperature": 24.6,
+   "apparentTemperature": null,
+   "weatherCode": 1,
+   "condition": {
+    "code": 1,
+    "description": "Mayormente despejado",
+    "icon": "mostly-clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 9.6,
+   "windDirection": 50,
+   "windGusts": 37.1,
+   "uvIndex": 4
+  },
+  {
+   "time": "2026-11-10T20:00:00.000Z",
+   "localDate": "2026-11-10",
+   "localHour": 17,
+   "temperature": 24,
+   "apparentTemperature": null,
+   "weatherCode": 1,
+   "condition": {
+    "code": 1,
+    "description": "Mayormente despejado",
+    "icon": "mostly-clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 8.5,
+   "windDirection": 63,
+   "windGusts": 36.4,
+   "uvIndex": 3.3
+  },
+  {
+   "time": "2026-11-10T21:00:00.000Z",
+   "localDate": "2026-11-10",
+   "localHour": 18,
+   "temperature": 23.3,
+   "apparentTemperature": null,
+   "weatherCode": 1,
+   "condition": {
+    "code": 1,
+    "description": "Mayormente despejado",
+    "icon": "mostly-clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 8.1,
+   "windDirection": 78,
+   "windGusts": 34.6,
+   "uvIndex": 2.1
+  },
+  {
+   "time": "2026-11-10T22:00:00.000Z",
+   "localDate": "2026-11-10",
+   "localHour": 19,
+   "temperature": 22.6,
+   "apparentTemperature": null,
+   "weatherCode": 2,
+   "condition": {
+    "code": 2,
+    "description": "Parcialmente nublado",
+    "icon": "partly-cloudy-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 2,
+   "precipitation": 0,
+   "windSpeed": 8.8,
+   "windDirection": 89,
+   "windGusts": 31.3,
+   "uvIndex": 0.6
+  },
+  {
+   "time": "2026-11-10T23:00:00.000Z",
+   "localDate": "2026-11-10",
+   "localHour": 20,
+   "temperature": 21.8,
+   "apparentTemperature": null,
+   "weatherCode": 3,
+   "condition": {
+    "code": 3,
+    "description": "Nublado",
+    "icon": "overcast"
+   },
+   "isDay": false,
+   "precipitationProbability": 4,
+   "precipitation": 0,
+   "windSpeed": 10.1,
+   "windDirection": 94,
+   "windGusts": 27,
+   "uvIndex": 0.1
+  },
+  {
+   "time": "2026-11-11T00:00:00.000Z",
+   "localDate": "2026-11-10",
+   "localHour": 21,
+   "temperature": 21.2,
+   "apparentTemperature": null,
+   "weatherCode": 3,
+   "condition": {
+    "code": 3,
+    "description": "Nublado",
+    "icon": "overcast"
+   },
+   "isDay": false,
+   "precipitationProbability": 6,
+   "precipitation": 0,
+   "windSpeed": 10.3,
+   "windDirection": 97,
+   "windGusts": 24.1,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-11T01:00:00.000Z",
+   "localDate": "2026-11-10",
+   "localHour": 22,
+   "temperature": 20.9,
+   "apparentTemperature": null,
+   "weatherCode": 3,
+   "condition": {
+    "code": 3,
+    "description": "Nublado",
+    "icon": "overcast"
+   },
+   "isDay": false,
+   "precipitationProbability": 7,
+   "precipitation": 0,
+   "windSpeed": 9,
+   "windDirection": 102,
+   "windGusts": 23.4,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-11T02:00:00.000Z",
+   "localDate": "2026-11-10",
+   "localHour": 23,
+   "temperature": 20.9,
+   "apparentTemperature": null,
+   "weatherCode": 3,
+   "condition": {
+    "code": 3,
+    "description": "Nublado",
+    "icon": "overcast"
+   },
+   "isDay": false,
+   "precipitationProbability": 7,
+   "precipitation": 0,
+   "windSpeed": 6.9,
+   "windDirection": 105,
+   "windGusts": 23.8,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-11T03:00:00.000Z",
+   "localDate": "2026-11-11",
+   "localHour": 0,
+   "temperature": 20.9,
+   "apparentTemperature": null,
+   "weatherCode": 3,
+   "condition": {
+    "code": 3,
+    "description": "Nublado",
+    "icon": "overcast"
+   },
+   "isDay": false,
+   "precipitationProbability": 8,
+   "precipitation": 0,
+   "windSpeed": 4.7,
+   "windDirection": 99,
+   "windGusts": 23.8,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-11T04:00:00.000Z",
+   "localDate": "2026-11-11",
+   "localHour": 1,
+   "temperature": 20.9,
+   "apparentTemperature": null,
+   "weatherCode": 3,
+   "condition": {
+    "code": 3,
+    "description": "Nublado",
+    "icon": "overcast"
+   },
+   "isDay": false,
+   "precipitationProbability": 12,
+   "precipitation": 0,
+   "windSpeed": 4.8,
+   "windDirection": 48,
+   "windGusts": 23,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-11T05:00:00.000Z",
+   "localDate": "2026-11-11",
+   "localHour": 2,
+   "temperature": 20.8,
+   "apparentTemperature": null,
+   "weatherCode": 3,
+   "condition": {
+    "code": 3,
+    "description": "Nublado",
+    "icon": "overcast"
+   },
+   "isDay": false,
+   "precipitationProbability": 17,
+   "precipitation": 0,
+   "windSpeed": 8.7,
+   "windDirection": 18,
+   "windGusts": 22.3,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-11T06:00:00.000Z",
+   "localDate": "2026-11-11",
+   "localHour": 3,
+   "temperature": 20.7,
+   "apparentTemperature": null,
+   "weatherCode": 3,
+   "condition": {
+    "code": 3,
+    "description": "Nublado",
+    "icon": "overcast"
+   },
+   "isDay": false,
+   "precipitationProbability": 20,
+   "precipitation": 0,
+   "windSpeed": 10.7,
+   "windDirection": 8,
+   "windGusts": 21.6,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-11T07:00:00.000Z",
+   "localDate": "2026-11-11",
+   "localHour": 4,
+   "temperature": 20.4,
+   "apparentTemperature": null,
+   "weatherCode": 2,
+   "condition": {
+    "code": 2,
+    "description": "Parcialmente nublado",
+    "icon": "partly-cloudy-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 17,
+   "precipitation": 0,
+   "windSpeed": 7.5,
+   "windDirection": 352,
+   "windGusts": 21.6,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-11T08:00:00.000Z",
+   "localDate": "2026-11-11",
+   "localHour": 5,
+   "temperature": 20.1,
+   "apparentTemperature": null,
+   "weatherCode": 1,
+   "condition": {
+    "code": 1,
+    "description": "Mayormente despejado",
+    "icon": "mostly-clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 13,
+   "precipitation": 0,
+   "windSpeed": 4.1,
+   "windDirection": 293,
+   "windGusts": 21.6,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-11T09:00:00.000Z",
+   "localDate": "2026-11-11",
+   "localHour": 6,
+   "temperature": 20,
+   "apparentTemperature": null,
+   "weatherCode": 1,
+   "condition": {
+    "code": 1,
+    "description": "Mayormente despejado",
+    "icon": "mostly-clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 10,
+   "precipitation": 0,
+   "windSpeed": 5.6,
+   "windDirection": 248,
+   "windGusts": 21.6,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-11T10:00:00.000Z",
+   "localDate": "2026-11-11",
+   "localHour": 7,
+   "temperature": 20.2,
+   "apparentTemperature": null,
+   "weatherCode": 1,
+   "condition": {
+    "code": 1,
+    "description": "Mayormente despejado",
+    "icon": "mostly-clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 13,
+   "precipitation": 0,
+   "windSpeed": 4.2,
+   "windDirection": 252,
+   "windGusts": 20.2,
+   "uvIndex": 0.5
+  },
+  {
+   "time": "2026-11-11T11:00:00.000Z",
+   "localDate": "2026-11-11",
+   "localHour": 8,
+   "temperature": 20.7,
+   "apparentTemperature": null,
+   "weatherCode": 3,
+   "condition": {
+    "code": 3,
+    "description": "Nublado",
+    "icon": "overcast"
+   },
+   "isDay": true,
+   "precipitationProbability": 18,
+   "precipitation": 0,
+   "windSpeed": 2.3,
+   "windDirection": 328,
+   "windGusts": 18.7,
+   "uvIndex": 1.8
+  },
+  {
+   "time": "2026-11-11T12:00:00.000Z",
+   "localDate": "2026-11-11",
+   "localHour": 9,
+   "temperature": 21.4,
+   "apparentTemperature": null,
+   "weatherCode": 3,
+   "condition": {
+    "code": 3,
+    "description": "Nublado",
+    "icon": "overcast"
+   },
+   "isDay": true,
+   "precipitationProbability": 22,
+   "precipitation": 0,
+   "windSpeed": 4.8,
+   "windDirection": 15,
+   "windGusts": 18.7,
+   "uvIndex": 3.6
+  },
+  {
+   "time": "2026-11-11T13:00:00.000Z",
+   "localDate": "2026-11-11",
+   "localHour": 10,
+   "temperature": 22.3,
+   "apparentTemperature": null,
+   "weatherCode": 2,
+   "condition": {
+    "code": 2,
+    "description": "Parcialmente nublado",
+    "icon": "partly-cloudy-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 22,
+   "precipitation": 0,
+   "windSpeed": 7.1,
+   "windDirection": 24,
+   "windGusts": 22.3,
+   "uvIndex": 5.5
+  },
+  {
+   "time": "2026-11-11T14:00:00.000Z",
+   "localDate": "2026-11-11",
+   "localHour": 11,
+   "temperature": 23.5,
+   "apparentTemperature": null,
+   "weatherCode": 1,
+   "condition": {
+    "code": 1,
+    "description": "Mayormente despejado",
+    "icon": "mostly-clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 21,
+   "precipitation": 0,
+   "windSpeed": 8.9,
+   "windDirection": 29,
+   "windGusts": 27.7,
+   "uvIndex": 7.2
+  },
+  {
+   "time": "2026-11-11T15:00:00.000Z",
+   "localDate": "2026-11-11",
+   "localHour": 12,
+   "temperature": 24.4,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 20,
+   "precipitation": 0,
+   "windSpeed": 10.2,
+   "windDirection": 34,
+   "windGusts": 31.7,
+   "uvIndex": 8.3
+  },
+  {
+   "time": "2026-11-11T16:00:00.000Z",
+   "localDate": "2026-11-11",
+   "localHour": 13,
+   "temperature": 25,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 21,
+   "precipitation": 0,
+   "windSpeed": 10.8,
+   "windDirection": 42,
+   "windGusts": 33.5,
+   "uvIndex": 8.8
+  },
+  {
+   "time": "2026-11-11T17:00:00.000Z",
+   "localDate": "2026-11-11",
+   "localHour": 14,
+   "temperature": 25.3,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 22,
+   "precipitation": 0,
+   "windSpeed": 11.1,
+   "windDirection": 50,
+   "windGusts": 33.8,
+   "uvIndex": 8.5
+  },
+  {
+   "time": "2026-11-11T18:00:00.000Z",
+   "localDate": "2026-11-11",
+   "localHour": 15,
+   "temperature": 25.3,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 24,
+   "precipitation": 0,
+   "windSpeed": 11.1,
+   "windDirection": 58,
+   "windGusts": 34.2,
+   "uvIndex": 7.2
+  },
+  {
+   "time": "2026-11-11T19:00:00.000Z",
+   "localDate": "2026-11-11",
+   "localHour": 16,
+   "temperature": 25,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 27,
+   "precipitation": 0,
+   "windSpeed": 10.8,
+   "windDirection": 64,
+   "windGusts": 34.6,
+   "uvIndex": 5.3
+  },
+  {
+   "time": "2026-11-11T20:00:00.000Z",
+   "localDate": "2026-11-11",
+   "localHour": 17,
+   "temperature": 24.4,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 31,
+   "precipitation": 0,
+   "windSpeed": 10.4,
+   "windDirection": 72,
+   "windGusts": 34.2,
+   "uvIndex": 3.7
+  },
+  {
+   "time": "2026-11-11T21:00:00.000Z",
+   "localDate": "2026-11-11",
+   "localHour": 18,
+   "temperature": 23.8,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 31,
+   "precipitation": 0,
+   "windSpeed": 9.9,
+   "windDirection": 78,
+   "windGusts": 33.5,
+   "uvIndex": 2.1
+  },
+  {
+   "time": "2026-11-11T22:00:00.000Z",
+   "localDate": "2026-11-11",
+   "localHour": 19,
+   "temperature": 23.1,
+   "apparentTemperature": null,
+   "weatherCode": 1,
+   "condition": {
+    "code": 1,
+    "description": "Mayormente despejado",
+    "icon": "mostly-clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 23,
+   "precipitation": 0,
+   "windSpeed": 9.2,
+   "windDirection": 84,
+   "windGusts": 32,
+   "uvIndex": 0.8
+  },
+  {
+   "time": "2026-11-11T23:00:00.000Z",
+   "localDate": "2026-11-11",
+   "localHour": 20,
+   "temperature": 22.4,
+   "apparentTemperature": null,
+   "weatherCode": 1,
+   "condition": {
+    "code": 1,
+    "description": "Mayormente despejado",
+    "icon": "mostly-clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 11,
+   "precipitation": 0,
+   "windSpeed": 8.3,
+   "windDirection": 90,
+   "windGusts": 29.9,
+   "uvIndex": 0.1
+  },
+  {
+   "time": "2026-11-12T00:00:00.000Z",
+   "localDate": "2026-11-11",
+   "localHour": 21,
+   "temperature": 21.7,
+   "apparentTemperature": null,
+   "weatherCode": 2,
+   "condition": {
+    "code": 2,
+    "description": "Parcialmente nublado",
+    "icon": "partly-cloudy-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 2,
+   "precipitation": 0,
+   "windSpeed": 7.8,
+   "windDirection": 95,
+   "windGusts": 27.4,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-12T01:00:00.000Z",
+   "localDate": "2026-11-11",
+   "localHour": 22,
+   "temperature": 21.3,
+   "apparentTemperature": null,
+   "weatherCode": 1,
+   "condition": {
+    "code": 1,
+    "description": "Mayormente despejado",
+    "icon": "mostly-clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 8,
+   "windDirection": 98,
+   "windGusts": 24.5,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-12T02:00:00.000Z",
+   "localDate": "2026-11-11",
+   "localHour": 23,
+   "temperature": 21,
+   "apparentTemperature": null,
+   "weatherCode": 1,
+   "condition": {
+    "code": 1,
+    "description": "Mayormente despejado",
+    "icon": "mostly-clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 8.5,
+   "windDirection": 97,
+   "windGusts": 21.2,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-12T03:00:00.000Z",
+   "localDate": "2026-11-12",
+   "localHour": 0,
+   "temperature": 20.7,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 8.5,
+   "windDirection": 97,
+   "windGusts": 19.1,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-12T04:00:00.000Z",
+   "localDate": "2026-11-12",
+   "localHour": 1,
+   "temperature": 20.3,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 7.6,
+   "windDirection": 98,
+   "windGusts": 18.7,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-12T05:00:00.000Z",
+   "localDate": "2026-11-12",
+   "localHour": 2,
+   "temperature": 19.9,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 6.4,
+   "windDirection": 100,
+   "windGusts": 19.1,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-12T06:00:00.000Z",
+   "localDate": "2026-11-12",
+   "localHour": 3,
+   "temperature": 19.6,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 5.5,
+   "windDirection": 103,
+   "windGusts": 18.7,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-12T07:00:00.000Z",
+   "localDate": "2026-11-12",
+   "localHour": 4,
+   "temperature": 19.1,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 1,
+   "precipitation": 0,
+   "windSpeed": 5.3,
+   "windDirection": 108,
+   "windGusts": 16.2,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-12T08:00:00.000Z",
+   "localDate": "2026-11-12",
+   "localHour": 5,
+   "temperature": 18.7,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 1,
+   "precipitation": 0,
+   "windSpeed": 5.5,
+   "windDirection": 113,
+   "windGusts": 13,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-12T09:00:00.000Z",
+   "localDate": "2026-11-12",
+   "localHour": 6,
+   "temperature": 18.8,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 2,
+   "precipitation": 0,
+   "windSpeed": 5.6,
+   "windDirection": 112,
+   "windGusts": 11.5,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-12T10:00:00.000Z",
+   "localDate": "2026-11-12",
+   "localHour": 7,
+   "temperature": 19.8,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 2,
+   "precipitation": 0,
+   "windSpeed": 5.5,
+   "windDirection": 101,
+   "windGusts": 13.7,
+   "uvIndex": 0.7
+  },
+  {
+   "time": "2026-11-12T11:00:00.000Z",
+   "localDate": "2026-11-12",
+   "localHour": 8,
+   "temperature": 21.4,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 2,
+   "precipitation": 0,
+   "windSpeed": 5.8,
+   "windDirection": 83,
+   "windGusts": 18,
+   "uvIndex": 2.2
+  },
+  {
+   "time": "2026-11-12T12:00:00.000Z",
+   "localDate": "2026-11-12",
+   "localHour": 9,
+   "temperature": 22.8,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 2,
+   "precipitation": 0,
+   "windSpeed": 6.8,
+   "windDirection": 73,
+   "windGusts": 22,
+   "uvIndex": 3.8
+  },
+  {
+   "time": "2026-11-12T13:00:00.000Z",
+   "localDate": "2026-11-12",
+   "localHour": 10,
+   "temperature": 24,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 1,
+   "precipitation": 0,
+   "windSpeed": 7.9,
+   "windDirection": 73,
+   "windGusts": 25.6,
+   "uvIndex": 5.7
+  },
+  {
+   "time": "2026-11-12T14:00:00.000Z",
+   "localDate": "2026-11-12",
+   "localHour": 11,
+   "temperature": 25,
+   "apparentTemperature": null,
+   "weatherCode": 1,
+   "condition": {
+    "code": 1,
+    "description": "Mayormente despejado",
+    "icon": "mostly-clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 9.1,
+   "windDirection": 75,
+   "windGusts": 29.2,
+   "uvIndex": 7.1
+  },
+  {
+   "time": "2026-11-12T15:00:00.000Z",
+   "localDate": "2026-11-12",
+   "localHour": 12,
+   "temperature": 25.8,
+   "apparentTemperature": null,
+   "weatherCode": 1,
+   "condition": {
+    "code": 1,
+    "description": "Mayormente despejado",
+    "icon": "mostly-clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 10.5,
+   "windDirection": 78,
+   "windGusts": 32.4,
+   "uvIndex": 8.1
+  },
+  {
+   "time": "2026-11-12T16:00:00.000Z",
+   "localDate": "2026-11-12",
+   "localHour": 13,
+   "temperature": 26.2,
+   "apparentTemperature": null,
+   "weatherCode": 1,
+   "condition": {
+    "code": 1,
+    "description": "Mayormente despejado",
+    "icon": "mostly-clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 0,
+   "precipitation": 0,
+   "windSpeed": 11.8,
+   "windDirection": 81,
+   "windGusts": 35.6,
+   "uvIndex": 9.2
+  },
+  {
+   "time": "2026-11-12T17:00:00.000Z",
+   "localDate": "2026-11-12",
+   "localHour": 14,
+   "temperature": 26.3,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 1,
+   "precipitation": 0,
+   "windSpeed": 13.2,
+   "windDirection": 85,
+   "windGusts": 38.5,
+   "uvIndex": 8.5
+  },
+  {
+   "time": "2026-11-12T18:00:00.000Z",
+   "localDate": "2026-11-12",
+   "localHour": 15,
+   "temperature": 26.3,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 2,
+   "precipitation": 0,
+   "windSpeed": 14.1,
+   "windDirection": 87,
+   "windGusts": 40.7,
+   "uvIndex": 6.9
+  },
+  {
+   "time": "2026-11-12T19:00:00.000Z",
+   "localDate": "2026-11-12",
+   "localHour": 16,
+   "temperature": 26.2,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 2,
+   "precipitation": 0,
+   "windSpeed": 15.5,
+   "windDirection": 91,
+   "windGusts": 43.2,
+   "uvIndex": 4.6
+  },
+  {
+   "time": "2026-11-12T20:00:00.000Z",
+   "localDate": "2026-11-12",
+   "localHour": 17,
+   "temperature": 25.4,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 1,
+   "precipitation": 0,
+   "windSpeed": 15.8,
+   "windDirection": 97,
+   "windGusts": 44.6,
+   "uvIndex": 3.2
+  },
+  {
+   "time": "2026-11-12T21:00:00.000Z",
+   "localDate": "2026-11-12",
+   "localHour": 18,
+   "temperature": 24.4,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 1,
+   "precipitation": 0,
+   "windSpeed": 16.2,
+   "windDirection": 104,
+   "windGusts": 45.4,
+   "uvIndex": 2
+  },
+  {
+   "time": "2026-11-12T22:00:00.000Z",
+   "localDate": "2026-11-12",
+   "localHour": 19,
+   "temperature": 23.3,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 1,
+   "precipitation": 0,
+   "windSpeed": 16.6,
+   "windDirection": 111,
+   "windGusts": 45.7,
+   "uvIndex": 0.9
+  },
+  {
+   "time": "2026-11-12T23:00:00.000Z",
+   "localDate": "2026-11-12",
+   "localHour": 20,
+   "temperature": 22.3,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 2,
+   "precipitation": 0,
+   "windSpeed": 16.8,
+   "windDirection": 116,
+   "windGusts": 45.7,
+   "uvIndex": 0.1
+  },
+  {
+   "time": "2026-11-13T00:00:00.000Z",
+   "localDate": "2026-11-12",
+   "localHour": 21,
+   "temperature": 21.6,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 2,
+   "precipitation": 0,
+   "windSpeed": 17,
+   "windDirection": 118,
+   "windGusts": 45.7,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-13T01:00:00.000Z",
+   "localDate": "2026-11-12",
+   "localHour": 22,
+   "temperature": 21.1,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 2,
+   "precipitation": 0,
+   "windSpeed": 16.8,
+   "windDirection": 118,
+   "windGusts": 45,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-13T02:00:00.000Z",
+   "localDate": "2026-11-12",
+   "localHour": 23,
+   "temperature": 20.7,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 2,
+   "precipitation": 0,
+   "windSpeed": 16.1,
+   "windDirection": 117,
+   "windGusts": 43.9,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-13T03:00:00.000Z",
+   "localDate": "2026-11-13",
+   "localHour": 0,
+   "temperature": 20.4,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 2,
+   "precipitation": 0,
+   "windSpeed": 15.2,
+   "windDirection": 113,
+   "windGusts": 42.5,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-13T04:00:00.000Z",
+   "localDate": "2026-11-13",
+   "localHour": 1,
+   "temperature": 20.2,
+   "apparentTemperature": null,
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 2,
+   "precipitation": 0,
+   "windSpeed": 14.4,
+   "windDirection": 108,
+   "windGusts": 41,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-13T05:00:00.000Z",
+   "localDate": "2026-11-13",
+   "localHour": 2,
+   "temperature": 20.1,
+   "apparentTemperature": null,
+   "weatherCode": 1,
+   "condition": {
+    "code": 1,
+    "description": "Mayormente despejado",
+    "icon": "mostly-clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 2,
+   "precipitation": 0,
+   "windSpeed": 13.9,
+   "windDirection": 103,
+   "windGusts": 40,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-13T06:00:00.000Z",
+   "localDate": "2026-11-13",
+   "localHour": 3,
+   "temperature": 20.1,
+   "apparentTemperature": null,
+   "weatherCode": 1,
+   "condition": {
+    "code": 1,
+    "description": "Mayormente despejado",
+    "icon": "mostly-clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 2,
+   "precipitation": 0,
+   "windSpeed": 13.7,
+   "windDirection": 100,
+   "windGusts": 39.2,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-13T07:00:00.000Z",
+   "localDate": "2026-11-13",
+   "localHour": 4,
+   "temperature": 20.2,
+   "apparentTemperature": null,
+   "weatherCode": 1,
+   "condition": {
+    "code": 1,
+    "description": "Mayormente despejado",
+    "icon": "mostly-clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 2,
+   "precipitation": 0,
+   "windSpeed": 13.8,
+   "windDirection": 97,
+   "windGusts": 39.2,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-13T08:00:00.000Z",
+   "localDate": "2026-11-13",
+   "localHour": 5,
+   "temperature": 20.4,
+   "apparentTemperature": null,
+   "weatherCode": 1,
+   "condition": {
+    "code": 1,
+    "description": "Mayormente despejado",
+    "icon": "mostly-clear-night"
+   },
+   "isDay": false,
+   "precipitationProbability": 3,
+   "precipitation": 0,
+   "windSpeed": 13.9,
+   "windDirection": 94,
+   "windGusts": 39.2,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-13T09:00:00.000Z",
+   "localDate": "2026-11-13",
+   "localHour": 6,
+   "temperature": 20.6,
+   "apparentTemperature": null,
+   "weatherCode": 1,
+   "condition": {
+    "code": 1,
+    "description": "Mayormente despejado",
+    "icon": "mostly-clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 3,
+   "precipitation": 0,
+   "windSpeed": 14.2,
+   "windDirection": 93,
+   "windGusts": 40,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-13T10:00:00.000Z",
+   "localDate": "2026-11-13",
+   "localHour": 7,
+   "temperature": 21,
+   "apparentTemperature": null,
+   "weatherCode": 1,
+   "condition": {
+    "code": 1,
+    "description": "Mayormente despejado",
+    "icon": "mostly-clear-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 3,
+   "precipitation": 0,
+   "windSpeed": 14.8,
+   "windDirection": 91,
+   "windGusts": 40.7,
+   "uvIndex": 0.4
+  },
+  {
+   "time": "2026-11-13T11:00:00.000Z",
+   "localDate": "2026-11-13",
+   "localHour": 8,
+   "temperature": 21.3,
+   "apparentTemperature": null,
+   "weatherCode": 2,
+   "condition": {
+    "code": 2,
+    "description": "Parcialmente nublado",
+    "icon": "partly-cloudy-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 4,
+   "precipitation": 0,
+   "windSpeed": 15.3,
+   "windDirection": 91,
+   "windGusts": 41.4,
+   "uvIndex": 1.2
+  },
+  {
+   "time": "2026-11-13T12:00:00.000Z",
+   "localDate": "2026-11-13",
+   "localHour": 9,
+   "temperature": 21.6,
+   "apparentTemperature": null,
+   "weatherCode": 2,
+   "condition": {
+    "code": 2,
+    "description": "Parcialmente nublado",
+    "icon": "partly-cloudy-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 4,
+   "precipitation": 0,
+   "windSpeed": 15.8,
+   "windDirection": 91,
+   "windGusts": 42.5,
+   "uvIndex": 2.5
+  },
+  {
+   "time": "2026-11-13T13:00:00.000Z",
+   "localDate": "2026-11-13",
+   "localHour": 10,
+   "temperature": 22,
+   "apparentTemperature": null,
+   "weatherCode": 2,
+   "condition": {
+    "code": 2,
+    "description": "Parcialmente nublado",
+    "icon": "partly-cloudy-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 4,
+   "precipitation": 0,
+   "windSpeed": 16.6,
+   "windDirection": 93,
+   "windGusts": 43.9,
+   "uvIndex": 4.3
+  },
+  {
+   "time": "2026-11-13T14:00:00.000Z",
+   "localDate": "2026-11-13",
+   "localHour": 11,
+   "temperature": 22.4,
+   "apparentTemperature": null,
+   "weatherCode": 2,
+   "condition": {
+    "code": 2,
+    "description": "Parcialmente nublado",
+    "icon": "partly-cloudy-day"
+   },
+   "isDay": true,
+   "precipitationProbability": 5,
+   "precipitation": 0,
+   "windSpeed": 17.5,
+   "windDirection": 95,
+   "windGusts": 45.7,
+   "uvIndex": 5.6
+  },
+  {
+   "time": "2026-11-13T15:00:00.000Z",
+   "localDate": "2026-11-13",
+   "localHour": 12,
+   "temperature": 22.9,
+   "apparentTemperature": null,
+   "weatherCode": 3,
+   "condition": {
+    "code": 3,
+    "description": "Nublado",
+    "icon": "overcast"
+   },
+   "isDay": true,
+   "precipitationProbability": 5,
+   "precipitation": 0,
+   "windSpeed": 18.7,
+   "windDirection": 98,
+   "windGusts": 47.5,
+   "uvIndex": 6.6
+  },
+  {
+   "time": "2026-11-13T16:00:00.000Z",
+   "localDate": "2026-11-13",
+   "localHour": 13,
+   "temperature": 23.2,
+   "apparentTemperature": null,
+   "weatherCode": 3,
+   "condition": {
+    "code": 3,
+    "description": "Nublado",
+    "icon": "overcast"
+   },
+   "isDay": true,
+   "precipitationProbability": 5,
+   "precipitation": 0,
+   "windSpeed": 19.8,
+   "windDirection": 100,
+   "windGusts": 49.7,
+   "uvIndex": 7.8
+  },
+  {
+   "time": "2026-11-13T17:00:00.000Z",
+   "localDate": "2026-11-13",
+   "localHour": 14,
+   "temperature": 23.5,
+   "apparentTemperature": null,
+   "weatherCode": 3,
+   "condition": {
+    "code": 3,
+    "description": "Nublado",
+    "icon": "overcast"
+   },
+   "isDay": true,
+   "precipitationProbability": 6,
+   "precipitation": 0,
+   "windSpeed": 20.7,
+   "windDirection": 103,
+   "windGusts": 51.5,
+   "uvIndex": 7.5
+  },
+  {
+   "time": "2026-11-13T18:00:00.000Z",
+   "localDate": "2026-11-13",
+   "localHour": 15,
+   "temperature": 23.5,
+   "apparentTemperature": null,
+   "weatherCode": 3,
+   "condition": {
+    "code": 3,
+    "description": "Nublado",
+    "icon": "overcast"
+   },
+   "isDay": true,
+   "precipitationProbability": 6,
+   "precipitation": 0,
+   "windSpeed": 21,
+   "windDirection": 104,
+   "windGusts": 52.6,
+   "uvIndex": 6.5
+  },
+  {
+   "time": "2026-11-13T19:00:00.000Z",
+   "localDate": "2026-11-13",
+   "localHour": 16,
+   "temperature": 23.2,
+   "apparentTemperature": null,
+   "weatherCode": 3,
+   "condition": {
+    "code": 3,
+    "description": "Nublado",
+    "icon": "overcast"
+   },
+   "isDay": true,
+   "precipitationProbability": 6,
+   "precipitation": 0,
+   "windSpeed": 20.7,
+   "windDirection": 106,
+   "windGusts": 53.3,
+   "uvIndex": 4.6
+  },
+  {
+   "time": "2026-11-13T20:00:00.000Z",
+   "localDate": "2026-11-13",
+   "localHour": 17,
+   "temperature": 22.6,
+   "apparentTemperature": null,
+   "weatherCode": 3,
+   "condition": {
+    "code": 3,
+    "description": "Nublado",
+    "icon": "overcast"
+   },
+   "isDay": true,
+   "precipitationProbability": 6,
+   "precipitation": 0,
+   "windSpeed": 19.9,
+   "windDirection": 108,
+   "windGusts": 54,
+   "uvIndex": 3.2
+  },
+  {
+   "time": "2026-11-13T21:00:00.000Z",
+   "localDate": "2026-11-13",
+   "localHour": 18,
+   "temperature": 22,
+   "apparentTemperature": null,
+   "weatherCode": 3,
+   "condition": {
+    "code": 3,
+    "description": "Nublado",
+    "icon": "overcast"
+   },
+   "isDay": true,
+   "precipitationProbability": 6,
+   "precipitation": 0,
+   "windSpeed": 18.9,
+   "windDirection": 109,
+   "windGusts": 54.4,
+   "uvIndex": 1.9
+  },
+  {
+   "time": "2026-11-13T22:00:00.000Z",
+   "localDate": "2026-11-13",
+   "localHour": 19,
+   "temperature": 21.2,
+   "apparentTemperature": null,
+   "weatherCode": 3,
+   "condition": {
+    "code": 3,
+    "description": "Nublado",
+    "icon": "overcast"
+   },
+   "isDay": true,
+   "precipitationProbability": 6,
+   "precipitation": 0,
+   "windSpeed": 17.8,
+   "windDirection": 111,
+   "windGusts": 54.4,
+   "uvIndex": 0.8
+  },
+  {
+   "time": "2026-11-13T23:00:00.000Z",
+   "localDate": "2026-11-13",
+   "localHour": 20,
+   "temperature": 20.6,
+   "apparentTemperature": null,
+   "weatherCode": 3,
+   "condition": {
+    "code": 3,
+    "description": "Nublado",
+    "icon": "overcast"
+   },
+   "isDay": false,
+   "precipitationProbability": 6,
+   "precipitation": 0,
+   "windSpeed": 16.7,
+   "windDirection": 112,
+   "windGusts": 54,
+   "uvIndex": 0.1
+  },
+  {
+   "time": "2026-11-14T00:00:00.000Z",
+   "localDate": "2026-11-13",
+   "localHour": 21,
+   "temperature": 20.2,
+   "apparentTemperature": null,
+   "weatherCode": 3,
+   "condition": {
+    "code": 3,
+    "description": "Nublado",
+    "icon": "overcast"
+   },
+   "isDay": false,
+   "precipitationProbability": 6,
+   "precipitation": 0,
+   "windSpeed": 16,
+   "windDirection": 111,
+   "windGusts": 53.3,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-14T01:00:00.000Z",
+   "localDate": "2026-11-13",
+   "localHour": 22,
+   "temperature": 20,
+   "apparentTemperature": null,
+   "weatherCode": 3,
+   "condition": {
+    "code": 3,
+    "description": "Nublado",
+    "icon": "overcast"
+   },
+   "isDay": false,
+   "precipitationProbability": 7,
+   "precipitation": 0,
+   "windSpeed": 15.7,
+   "windDirection": 108,
+   "windGusts": 51.8,
+   "uvIndex": 0
+  },
+  {
+   "time": "2026-11-14T02:00:00.000Z",
+   "localDate": "2026-11-13",
+   "localHour": 23,
+   "temperature": 19.9,
+   "apparentTemperature": null,
+   "weatherCode": 3,
+   "condition": {
+    "code": 3,
+    "description": "Nublado",
+    "icon": "overcast"
+   },
+   "isDay": false,
+   "precipitationProbability": 7,
+   "precipitation": 0,
+   "windSpeed": 15.7,
+   "windDirection": 103,
+   "windGusts": 49.3,
+   "uvIndex": 0
+  }
+ ],
+ "daily": [
+  {
+   "date": "2026-11-07",
+   "time": "2026-11-07T03:00:00.000Z",
+   "weatherCode": 51,
+   "condition": {
+    "code": 51,
+    "description": "Llovizna débil",
+    "icon": "drizzle"
+   },
+   "temperatureMax": 18.9,
+   "temperatureMin": 12,
+   "apparentTemperatureMax": 16.7,
+   "apparentTemperatureMin": 8.5,
+   "precipitationSum": 0.1,
+   "precipitationProbabilityMax": 65,
+   "precipitationHours": 1,
+   "windSpeedMax": 22,
+   "windGustsMax": 54.7,
+   "windDirectionDominant": 175,
+   "uvIndexMax": 8.4,
+   "sunrise": "2026-11-07T08:46:23.000Z",
+   "sunset": "2026-11-07T22:28:52.000Z",
+   "daylightDuration": 49344.36
+  },
+  {
+   "date": "2026-11-08",
+   "time": "2026-11-08T03:00:00.000Z",
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "temperatureMax": 19.3,
+   "temperatureMin": 10.5,
+   "apparentTemperatureMax": 19.7,
+   "apparentTemperatureMin": 9.3,
+   "precipitationSum": 0,
+   "precipitationProbabilityMax": 0,
+   "precipitationHours": 0,
+   "windSpeedMax": 13.8,
+   "windGustsMax": 39.2,
+   "windDirectionDominant": 64,
+   "uvIndexMax": 8.6,
+   "sunrise": "2026-11-08T08:45:32.000Z",
+   "sunset": "2026-11-08T22:29:51.000Z",
+   "daylightDuration": 49454.08
+  },
+  {
+   "date": "2026-11-09",
+   "time": "2026-11-09T03:00:00.000Z",
+   "weatherCode": 0,
+   "condition": {
+    "code": 0,
+    "description": "Despejado",
+    "icon": "clear-day"
+   },
+   "temperatureMax": 23.1,
+   "temperatureMin": 14.5,
+   "apparentTemperatureMax": 22.1,
+   "apparentTemperatureMin": 13.6,
+   "precipitationSum": 0,
+   "precipitationProbabilityMax": 0,
+   "precipitationHours": 0,
+   "windSpeedMax": 19.1,
+   "windGustsMax": 43.6,
+   "windDirectionDominant": 38,
+   "uvIndexMax": 8.7,
+   "sunrise": "2026-11-09T08:44:42.000Z",
+   "sunset": "2026-11-09T22:30:50.000Z",
+   "daylightDuration": 49562.45
+  },
+  {
+   "date": "2026-11-10",
+   "time": "2026-11-10T03:00:00.000Z",
+   "weatherCode": 3,
+   "condition": {
+    "code": 3,
+    "description": "Nublado",
+    "icon": "overcast"
+   },
+   "temperatureMax": 25.4,
+   "temperatureMin": 17.1,
+   "apparentTemperatureMax": 25.1,
+   "apparentTemperatureMin": 15.9,
+   "precipitationSum": 0,
+   "precipitationProbabilityMax": 7,
+   "precipitationHours": 0,
+   "windSpeedMax": 18.3,
+   "windGustsMax": 42.1,
+   "windDirectionDominant": 39,
+   "uvIndexMax": 8.8,
+   "sunrise": "2026-11-10T08:43:54.000Z",
+   "sunset": "2026-11-10T22:31:49.000Z",
+   "daylightDuration": 49669.33
+  },
+  {
+   "date": "2026-11-11",
+   "time": "2026-11-11T03:00:00.000Z",
+   "weatherCode": 3,
+   "condition": {
+    "code": 3,
+    "description": "Nublado",
+    "icon": "overcast"
+   },
+   "temperatureMax": 25.4,
+   "temperatureMin": 20,
+   "apparentTemperatureMax": 27.1,
+   "apparentTemperatureMin": 20.7,
+   "precipitationSum": 0,
+   "precipitationProbabilityMax": 31,
+   "precipitationHours": 0,
+   "windSpeedMax": 11.1,
+   "windGustsMax": 34.6,
+   "windDirectionDominant": 51,
+   "uvIndexMax": 8.8,
+   "sunrise": "2026-11-11T08:43:07.000Z",
+   "sunset": "2026-11-11T22:32:48.000Z",
+   "daylightDuration": 49774.61
+  },
+  {
+   "date": "2026-11-12",
+   "time": "2026-11-12T03:00:00.000Z",
+   "weatherCode": 1,
+   "condition": {
+    "code": 1,
+    "description": "Mayormente despejado",
+    "icon": "mostly-clear-day"
+   },
+   "temperatureMax": 26.6,
+   "temperatureMin": 18.7,
+   "apparentTemperatureMax": 27.9,
+   "apparentTemperatureMin": 20.4,
+   "precipitationSum": 0,
+   "precipitationProbabilityMax": 2,
+   "precipitationHours": 0,
+   "windSpeedMax": 17,
+   "windGustsMax": 45.7,
+   "windDirectionDominant": 99,
+   "uvIndexMax": 9.2,
+   "sunrise": "2026-11-12T08:42:22.000Z",
+   "sunset": "2026-11-12T22:33:47.000Z",
+   "daylightDuration": 49878.13
+  },
+  {
+   "date": "2026-11-13",
+   "time": "2026-11-13T03:00:00.000Z",
+   "weatherCode": 3,
+   "condition": {
+    "code": 3,
+    "description": "Nublado",
+    "icon": "overcast"
+   },
+   "temperatureMax": 23.7,
+   "temperatureMin": 19.6,
+   "apparentTemperatureMax": 23.4,
+   "apparentTemperatureMin": 20.1,
+   "precipitationSum": 0,
+   "precipitationProbabilityMax": 7,
+   "precipitationHours": 0,
+   "windSpeedMax": 21,
+   "windGustsMax": 54.4,
+   "windDirectionDominant": 102,
+   "uvIndexMax": 7.8,
+   "sunrise": "2026-11-13T08:41:39.000Z",
+   "sunset": "2026-11-13T22:34:46.000Z",
+   "daylightDuration": 49979.74
+  }
+ ],
+ "meta": {
+  "source": {
+   "name": "Open-Meteo",
+   "url": "https://open-meteo.com/",
+   "license": "CC BY 4.0",
+   "licenseUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "fetchedAt": "2026-11-07T04:31:00.000Z",
+  "stale": false,
+  "cache": "MISS",
+  "requestedCoordinates": {
+   "lat": -34.61,
+   "lon": -58.38
+  }
+ }
+}

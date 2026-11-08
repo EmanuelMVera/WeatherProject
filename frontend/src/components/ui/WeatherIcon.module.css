@@ -1,0 +1,48 @@
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sm {
+  font-size: 1.15rem;
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+.md {
+  font-size: 1.6rem;
+  width: 2.2rem;
+  height: 2.2rem;
+}
+
+.lg {
+  font-size: 3.6rem;
+  width: 4.5rem;
+  height: 4.5rem;
+}
+
+.sun {
+  color: var(--sun);
+}
+
+.moon {
+  color: #dfe7ff;
+}
+
+.cloud {
+  color: #c9d6ee;
+}
+
+.rain {
+  color: var(--rain);
+}
+
+.snow {
+  color: #e8f6ff;
+}
+
+.storm {
+  color: var(--warning);
+}

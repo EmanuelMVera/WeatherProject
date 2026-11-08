@@ -1,100 +1,71 @@
 /* eslint-env node */
-import { defineConfig } from "vite";
+import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react-swc";
-import compression from "vite-plugin-compression";
-import visualizer from "rollup-plugin-visualizer";
-import dotenv from "dotenv";
 
-dotenv.config();
-
-export default defineConfig({
-  plugins: [
-    react(),
-    compression({
-      algorithm: "gzip",
-      ext: ".gz",
-      deleteOriginFile: false,
-    }),
-    visualizer({
-      filename: "dist/stats.html",
-      open: false,
-      gzipSize: true,
-    }),
-  ],
-  
-  // Only expose necessary env vars
-  define: {
-    "process.env": JSON.stringify({
-      VITE_API_URL: process.env.VITE_API_URL,
-    }),
-  },
-
-  server: {
-    proxy: {
-      "/api": {
-        target: "http://localhost:5000",
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ""),
+/**
+ * Inserta la URL pública del sitio (VITE_SITE_URL) en las etiquetas que
+ * necesitan URLs absolutas (canonical, og:url, og:image). Si no está
+ * definida, esas etiquetas se omiten en lugar de publicar un dominio falso.
+ */
+function siteUrlPlugin(siteUrl) {
+  const base = siteUrl ? siteUrl.replace(/\/$/, "") : "";
+  return {
+    name: "buen-clima-site-url",
+    transformIndexHtml: {
+      order: "pre",
+      handler(html) {
+        if (base) return html.replaceAll("__SITE_URL__", base);
+        return html
+          .split("\n")
+          .filter((line) => !line.includes("__SITE_URL__"))
+          .join("\n");
       },
     },
-  },
+  };
+}
 
-  build: {
-    // Optimize output
-    target: "ES2020",
-    minify: "terser",
-    
-    // Enable code splitting for better caching
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          // Split vendor libraries
-          "react-vendor": ["react", "react-dom"],
-          "fontawesome": ["@fortawesome/react-fontawesome", "@fortawesome/free-solid-svg-icons"],
-        },
-        // Chunk naming for cache busting
-        chunkFileNames: "js/[name].[hash].js",
-        entryFileNames: "js/[name].[hash].js",
-        assetFileNames: ({ name }) => {
-          if (/\.css$/.test(name ?? "")) {
-            return "css/[name].[hash][extname]";
-          } else if (/\.(png|jpe?g|gif|svg)$/.test(name ?? "")) {
-            return "images/[name].[hash][extname]";
-          }
-          return "[name].[hash][extname]";
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), "");
+  const devApiTarget = env.DEV_API_PROXY_TARGET || "http://localhost:5000";
+
+  return {
+    plugins: [react(), siteUrlPlugin(env.VITE_SITE_URL)],
+
+    server: {
+      // En desarrollo, el frontend llama a /api/... en su mismo origen y Vite
+      // lo reenvía al backend local: sin CORS ni URLs hardcodeadas.
+      proxy: {
+        "/api": { target: devApiTarget, changeOrigin: true },
+        "/health": { target: devApiTarget, changeOrigin: true },
+      },
+    },
+
+    build: {
+      target: "es2020",
+      sourcemap: false,
+      cssCodeSplit: true,
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            react: ["react", "react-dom"],
+            icons: [
+              "@fortawesome/react-fontawesome",
+              "@fortawesome/fontawesome-svg-core",
+            ],
+          },
         },
       },
     },
 
-    // Optimize build size
-    cssCodeSplit: true,
-    
-    // Inline assets smaller than 4KB
-    assetsInlineLimit: 4096,
+    esbuild: mode === "production" ? { drop: ["console", "debugger"] } : undefined,
 
-    // Disable sourcemaps in production for smaller bundle
-    sourcemap: false,
-
-    // Chunk size warnings
-    chunkSizeWarningLimit: 500,
-
-    // Terser options for better compression
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
-      },
-      format: {
-        comments: false,
-      },
+    test: {
+      environment: "jsdom",
+      globals: true,
+      setupFiles: ["./src/test/setup.js"],
+      include: ["src/**/*.test.{js,jsx}"],
+      css: { modules: { classNameStrategy: "non-scoped" } },
+      restoreMocks: true,
     },
-  },
-
-  // Optimize dependencies
-  optimizeDeps: {
-    include: ["react", "react-dom", "@fortawesome/react-fontawesome"],
-    esbuildOptions: {
-      target: "ES2020",
-    },
-  },
+  };
 });

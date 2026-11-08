@@ -1,44 +1,36 @@
-# Node.js / React.js
+# Dependencias
 node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnp/
-.pnp.js
-
-# Dependency directories
-/node_modules
-/.pnp
-.pnp.js
-
-# Optional npm cache directory
 .npm
+.pnp
+.pnp.js
 
-# OS-specific files
+# Builds y artefactos generados
+dist/
+build/
+coverage/
+*.tsbuildinfo
+vite.config.js.timestamp-*
+stats.html
+
+# Reportes de pruebas (Playwright)
+playwright-report/
+test-results/
+blob-report/
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+
+# Variables de entorno (los .env.example sí se versionan)
+.env
+.env.*
+!.env.example
+
+# Sistema operativo / editores
 .DS_Store
-
-# Editor directories
+Thumbs.db
 .idea/
 .vscode/
 *.suo
-*.ntvs*
-*.njsproj
 *.sln
-
-# Build directories
-/dist
-/.next
-/.nuxt
-/out
-/build
-
-# Log files
-*.log
-logs/
-
-# Environment variables
-.env
-.env.local
-
-# Local files
-.local

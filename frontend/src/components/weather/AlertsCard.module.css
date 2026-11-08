@@ -1,0 +1,158 @@
+.banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 0.75rem 1rem;
+  min-width: 0;
+  padding: 1rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.icon {
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+  font-size: 1.6rem;
+  color: var(--accent);
+}
+
+.body {
+  flex: 1 1 14rem;
+  min-width: 0;
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.text {
+  margin-top: 0.15rem;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+
+.meta {
+  margin-top: 0.2rem;
+  font-size: 0.8rem;
+  color: var(--text-subtle);
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: var(--tap);
+  margin-left: auto;
+  font-weight: 600;
+  font-size: 0.92rem;
+  white-space: nowrap;
+}
+
+/* Tonos */
+.ok {
+  border-color: rgba(111, 227, 165, 0.45);
+  background: linear-gradient(90deg, rgba(111, 227, 165, 0.1), var(--surface) 60%);
+}
+
+.ok .icon {
+  color: var(--good);
+}
+
+.ok .text {
+  color: var(--text);
+}
+
+.warning {
+  border-color: rgba(255, 181, 71, 0.55);
+  background: linear-gradient(90deg, rgba(255, 181, 71, 0.12), var(--surface) 60%);
+}
+
+.warning .icon {
+  color: var(--warning);
+}
+
+.danger {
+  border-color: rgba(255, 138, 138, 0.65);
+  background: linear-gradient(90deg, rgba(255, 138, 138, 0.14), var(--surface) 60%);
+}
+
+.danger .icon {
+  color: var(--danger);
+}
+
+/* Lista de alertas */
+.list {
+  display: grid;
+  gap: 0.6rem;
+  margin-top: 0.5rem;
+}
+
+.alert {
+  padding: 0.65rem 0.8rem;
+  border-radius: var(--radius-md);
+  border-left: 4px solid var(--warning);
+  background: rgba(6, 14, 34, 0.4);
+}
+
+.danger .alert {
+  border-left-color: var(--danger);
+}
+
+.event {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.2rem 0.6rem;
+  font-weight: 700;
+}
+
+.severity {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.period {
+  margin-top: 0.15rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.description {
+  margin-top: 0.35rem;
+  font-size: 0.92rem;
+}
+
+.details {
+  margin-top: 0.3rem;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.details summary {
+  min-height: var(--tap);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .banner {
+    backdrop-filter: none;
+  }
+}
+
+/* En escritorio el banner comparte alto con la tarjeta principal. */
+@media (min-width: 1180px) {
+  .banner {
+    align-items: center;
+    align-content: center;
+  }
+}

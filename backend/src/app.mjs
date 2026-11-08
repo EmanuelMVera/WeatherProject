@@ -1,104 +1,68 @@
-import express, { urlencoded, json } from "express";
+import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import compression from "compression";
-import morgan from "morgan";
-import rateLimit from "express-rate-limit";
-import routes from "./routes/index.mjs";
-import errorHandler from "./middleware/errorHandler.mjs";
-import { RATE_LIMIT_GLOBAL, RATE_LIMIT_WEATHER, RATE_LIMIT_IP } from "./config/constants.mjs";
+import { createApiRouter } from "./routes/index.mjs";
+import { createErrorHandler, notFoundHandler } from "./middleware/errorHandler.mjs";
+import { requestLogger } from "./middleware/requestLogger.mjs";
 
-const app = express();
-app.set("trust proxy", 1);
-const ALLOWED_ORIGINS = process.env.ALLOWED_ORIGINS?.split(",")
-  .map((origin) => origin.trim())
-  .filter((origin) => origin.length > 0) || [];
+/**
+ * Crea la app Express con sus dependencias inyectadas (facilita los tests:
+ * se pueden pasar servicios con proveedores simulados).
+ *
+ * @param {{
+ *   config: ReturnType<typeof import("./config/env.mjs").loadConfig>["config"],
+ *   weatherService: object,
+ *   alertsService: object,
+ *   logger?: Console,
+ * }} deps
+ */
+export function createApp({ config, weatherService, alertsService, logger = console }) {
+  const app = express();
 
-// Middleware de seguridad
-app.use(helmet());
+  app.disable("x-powered-by");
+  // Detrás del proxy de Render: necesario para que el rate limit use la IP real.
+  app.set("trust proxy", config.trustProxy);
+  // Parser simple: `?lat[]=1` no se convierte en objetos/arrays.
+  app.set("query parser", "simple");
 
-// Logging middleware
-app.use(morgan("combined"));
+  // API JSON pura: sin HTML, así que la CSP más estricta posible.
+  app.use(
+    helmet({
+      contentSecurityPolicy: { directives: { defaultSrc: ["'none'"], frameAncestors: ["'none'"] } },
+      crossOriginResourcePolicy: { policy: "cross-origin" },
+    })
+  );
+  app.use(compression());
+  if (config.nodeEnv !== "test") app.use(requestLogger({ logger }));
 
-// Compresión de respuestas
-app.use(compression());
+  app.use(
+    cors({
+      origin(origin, callback) {
+        // Sin Origin (curl, health checks): se permite; el navegador no lo usa.
+        if (!origin || config.allowedOrigins.includes(origin)) return callback(null, true);
+        // Origen no permitido: respondemos sin cabeceras CORS (el navegador bloquea).
+        return callback(null, false);
+      },
+      methods: ["GET", "HEAD", "OPTIONS"],
+      maxAge: 86400,
+    })
+  );
 
-// Middleware de parseo
-app.use(urlencoded({ extended: true, limit: "10mb" }));
-app.use(json({ limit: "10mb" }));
+  // Health check fuera del rate limit: el frontend lo usa para "despertar"
+  // el plan gratuito de Render sin consumir cuota.
+  app.get(["/health", "/healthz"], (req, res) => {
+    res.set("Cache-Control", "no-store");
+    res.json({ status: "ok" });
+  });
 
-// Configuración de CORS
-app.use(
-  cors({
-    origin(origin, callback) {
-      // Allow requests without origin header (local tools, curl, etc.)
-      if (!origin) return callback(null, true);
+  app.use(
+    "/api",
+    createApiRouter({ weatherService, alertsService, rateLimit: config.rateLimit })
+  );
 
-      // Check if origin is in the allowed list
-      if (ALLOWED_ORIGINS.includes(origin)) {
-        return callback(null, true);
-      }
+  app.use(notFoundHandler);
+  app.use(createErrorHandler({ isProduction: config.isProduction, logger }));
 
-      // Log rejected origins for debugging
-      console.warn(`CORS blocked for origin: ${origin}. Allowed: ${ALLOWED_ORIGINS.join(", ")}`);
-      return callback(new Error(`CORS blocked for origin: ${origin}`));
-    },
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    exposedHeaders: ["Content-Length", "X-Kuma-Revision"],
-    credentials: true,
-    optionsSuccessStatus: 204,
-  })
-);
-
-// Health check / warm-up endpoint.
-// Va ANTES de los rate limiters para no consumir cuota: el frontend lo usa
-// para "despertar" el free tier de Render sin gastar peticiones de clima.
-app.get(["/health", "/healthz"], (req, res) => {
-  res.set("Cache-Control", "no-store");
-  res.status(200).json({ status: "ok", uptime: process.uptime() });
-});
-
-// Rate limiting configuration
-const globalLimiter = rateLimit({
-  ...RATE_LIMIT_GLOBAL,
-  message: "Demasiadas solicitudes desde esta IP, por favor intenta más tarde.",
-  standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
-  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
-});
-
-const weatherLimiter = rateLimit({
-  ...RATE_LIMIT_WEATHER,
-  message: "Demasiadas solicitudes de clima, por favor intenta más tarde.",
-  standardHeaders: true,
-  legacyHeaders: false,
-});
-
-const ipLimiter = rateLimit({
-  ...RATE_LIMIT_IP,
-  message: "Demasiadas solicitudes de ubicación, por favor intenta más tarde.",
-  standardHeaders: true,
-  legacyHeaders: false,
-});
-
-//Apply global rate limiter
-app.use(globalLimiter);
-
-//Apply specific rate limiters to weather routes
-app.use("/currentWeather", weatherLimiter);
-app.use("/forecastWeather", weatherLimiter);
-app.use("/ipGeolocation", ipLimiter);
-
-
-// Rutas de la aplicación
-app.use("/", routes);
-
-// Rutas no encontradas (404) antes del manejador global de errores
-app.use((req, res) => {
-  res.status(404).json({ error: "Not Found" });
-});
-
-// Manejo de errores (debe ir al final)
-app.use(errorHandler);
-
-export default app;
+  return app;
+}

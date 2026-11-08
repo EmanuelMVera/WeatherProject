@@ -1,0 +1,108 @@
+.header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: var(--tap);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.brand:hover {
+  color: var(--text);
+}
+
+.name {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.accent {
+  color: var(--accent);
+}
+
+.divider,
+.tagline,
+.nav {
+  display: none;
+}
+
+.divider {
+  width: 1px;
+  height: 1.6rem;
+  background: var(--border-strong);
+}
+
+.tagline {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+
+.nav {
+  margin-left: auto;
+}
+
+.nav ul {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: var(--tap);
+  padding: 0 0.95rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  color: var(--text-muted);
+  font-weight: 500;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.nav a:hover {
+  color: var(--text);
+  background: var(--surface-raised);
+}
+
+.nav a.current {
+  color: var(--text);
+  border-color: rgba(124, 196, 255, 0.45);
+  background: rgba(61, 155, 240, 0.2);
+}
+
+.nav a svg {
+  color: var(--accent);
+}
+
+@media (min-width: 640px) {
+  .divider,
+  .tagline {
+    display: block;
+  }
+}
+
+@media (min-width: 900px) {
+  .nav {
+    display: block;
+  }
+}
+
+/* Entre 900 y 1100 px no entra todo: priorizamos la navegación. */
+@media (min-width: 900px) and (max-width: 1099px) {
+  .divider,
+  .tagline {
+    display: none;
+  }
+}

@@ -1,0 +1,72 @@
+/* Mobile first: una columna, en orden de importancia. */
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    "current"
+    "sun"
+    "uv"
+    "alerts"
+    "hourly"
+    "daily"
+    "rain"
+    "activities";
+  gap: 0.85rem;
+}
+
+.grid > div {
+  min-width: 0;
+  display: grid; /* cada tarjeta ocupa toda su celda */
+}
+
+.current { grid-area: current; }
+.sun { grid-area: sun; }
+.uv { grid-area: uv; }
+.alerts { grid-area: alerts; }
+.hourly { grid-area: hourly; }
+.daily { grid-area: daily; }
+.rain { grid-area: rain; }
+.activities { grid-area: activities; }
+
+/* Sol y UV comparten fila desde pantallas medianas. */
+@media (min-width: 560px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas:
+      "current current"
+      "sun uv"
+      "alerts alerts"
+      "hourly hourly"
+      "daily daily"
+      "rain rain"
+      "activities activities";
+  }
+}
+
+/* Tablet */
+@media (min-width: 900px) {
+  .grid {
+    grid-template-areas:
+      "current current"
+      "sun uv"
+      "alerts alerts"
+      "hourly hourly"
+      "daily daily"
+      "rain activities";
+    gap: 1rem;
+  }
+}
+
+/* Escritorio: tablero como en la referencia visual. */
+@media (min-width: 1180px) {
+  .grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-template-areas:
+      "current current current current current current sun sun sun uv uv uv"
+      "current current current current current current alerts alerts alerts alerts alerts alerts"
+      "hourly hourly hourly hourly hourly hourly daily daily daily daily daily daily"
+      "activities activities activities rain rain rain daily daily daily daily daily daily";
+    grid-template-rows: auto auto auto 1fr;
+    gap: 1.1rem;
+  }
+}

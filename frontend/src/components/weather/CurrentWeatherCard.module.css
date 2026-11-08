@@ -1,0 +1,228 @@
+.card {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 1.1rem 1rem 1rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-strong);
+  background: linear-gradient(160deg, rgba(36, 66, 128, 0.85), rgba(12, 24, 54, 0.9));
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.top {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+}
+
+.pin {
+  margin-top: 0.35rem;
+  font-size: 1.2rem;
+  color: var(--text);
+}
+
+.place {
+  flex: 1;
+  min-width: 0;
+}
+
+.name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+
+.subtitle,
+.date {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.subtitle {
+  margin-top: 0.1rem;
+}
+
+.favorite {
+  flex-shrink: 0;
+  width: var(--tap);
+  height: var(--tap);
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-strong);
+  background: rgba(6, 14, 34, 0.35);
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  transition: color 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.favorite:hover {
+  color: var(--sun);
+  border-color: var(--sun);
+}
+
+.favoriteOn {
+  color: var(--sun);
+  border-color: rgba(255, 195, 92, 0.6);
+  background: rgba(255, 195, 92, 0.12);
+}
+
+.body {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex: 1;
+}
+
+.main {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.temp {
+  font-size: clamp(3.6rem, 18vw, 5.4rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.unit {
+  font-size: 0.35em;
+  font-weight: 600;
+  vertical-align: super;
+  letter-spacing: 0;
+  color: var(--text-muted);
+}
+
+.condition {
+  margin-top: 0.3rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.range {
+  display: flex;
+  gap: 0.9rem;
+  margin-top: 0.3rem;
+  font-weight: 600;
+}
+
+.max {
+  color: var(--temp-max);
+}
+
+.min {
+  color: var(--temp-min);
+}
+
+.missing {
+  color: var(--text-muted);
+}
+
+/* Celular: dos datos cortos por fila se leen mejor juntos. */
+.facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+.fact {
+  padding: 0.55rem 0.7rem;
+  border-radius: var(--radius-sm);
+  background: rgba(6, 14, 34, 0.35);
+  border: 1px solid var(--border);
+}
+
+.fact dt {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.fact dt svg {
+  width: 1em;
+  color: var(--accent);
+}
+
+.fact dd {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  font-size: 1.08rem;
+  font-weight: 600;
+}
+
+.dir {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.dir svg {
+  color: var(--accent);
+}
+
+.windNote {
+  margin-top: 0.75rem;
+  font-size: 0.88rem;
+  color: var(--warning);
+}
+
+/* Pantallas anchas: temperatura a la izquierda, lista de datos a la derecha. */
+@media (min-width: 560px) {
+  .card {
+    padding: 1.4rem 1.5rem 1.2rem;
+  }
+
+  .name {
+    font-size: 1.85rem;
+  }
+
+  .body {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .facts {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding-left: 1.5rem;
+    border-left: 1px solid var(--border-strong);
+  }
+
+  .fact {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.42rem 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+  }
+
+  .fact dt {
+    font-size: 0.92rem;
+    color: var(--text);
+  }
+
+  .fact dd {
+    font-size: 1rem;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .card {
+    backdrop-filter: none;
+  }
+}

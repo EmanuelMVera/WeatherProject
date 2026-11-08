@@ -1,169 +1,174 @@
-import { useState, useEffect, useCallback, useRef } from "react";
-import {
-  fetchCityFromIp,
-  fetchWeatherBundle,
-  warmUpServer,
-} from "../services/weatherClient.js";
-import { COLD_START_HINT_MS } from "../utils/http.js";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { fetchWeather } from "../services/weatherClient.js";
+import { COLD_START_HINT_MS } from "../services/http.js";
+import { readJson, STORAGE_KEYS, writeJson } from "../lib/storage.js";
 
-const FALLBACK_CITY = "Buenos Aires";
+/** Tiempo durante el cual reutilizamos datos ya descargados en esta sesión. */
+const SESSION_FRESH_MS = 10 * 60 * 1000;
+/** A partir de esta antigüedad marcamos los datos como desactualizados. */
+export const STALE_AFTER_MS = 45 * 60 * 1000;
+/** Antigüedad máxima de datos persistidos que vale la pena mostrar al abrir. */
+const PERSISTED_MAX_AGE_MS = 12 * 60 * 60 * 1000;
+/** Al volver a la pestaña, refrescamos si los datos tienen más de esto. */
+const REFRESH_ON_FOCUS_MS = 15 * 60 * 1000;
 
-/**
- * Normaliza lo que llega desde la UI (string de ciudad, o place con lat/lon)
- * a lo que entiende `fetchWeatherBundle`.
- * @param {string | { name?: string, latitude?: number, longitude?: number }} input
- * @returns {{ request: object, label: string } | null}
- */
-function normalizeLocation(input) {
-  if (!input) return null;
+const sessionCache = new Map();
 
-  if (typeof input === "string") {
-    const city = input.trim();
-    return city ? { request: { city }, label: city } : null;
-  }
+/** Sólo para tests. */
+export function clearWeatherSessionCache() {
+  sessionCache.clear();
+}
 
-  const lat = Number(input.latitude);
-  const lon = Number(input.longitude);
-  if (Number.isFinite(lat) && Number.isFinite(lon)) {
-    return {
-      request: { lat, lon },
-      label: (input.name && String(input.name).trim()) || `${lat}, ${lon}`,
-    };
-  }
+/** Cantidad de localidades cuyo último pronóstico se guarda (uso sin conexión). */
+const PERSISTED_PLACES = 6;
 
-  const city = input.name ? String(input.name).trim() : "";
-  return city ? { request: { city }, label: city } : null;
+const isEntry = (v) => v && typeof v.placeId === "string" && typeof v.fetchedAt === "number" && v.data?.location;
+
+function readAllPersisted() {
+  const list = readJson(STORAGE_KEYS.lastWeather, Array.isArray, []);
+  return list.filter(isEntry);
+}
+
+function readPersisted(placeId) {
+  const saved = readAllPersisted().find((entry) => entry.placeId === placeId);
+  if (!saved) return null;
+  if (Date.now() - saved.fetchedAt > PERSISTED_MAX_AGE_MS) return null;
+  return saved;
+}
+
+function writePersisted(entry) {
+  const others = readAllPersisted().filter((e) => e.placeId !== entry.placeId);
+  const next = [entry, ...others].slice(0, PERSISTED_PLACES);
+  // Si no hay espacio, intentamos guardar al menos la localidad actual.
+  if (!writeJson(STORAGE_KEYS.lastWeather, next)) writeJson(STORAGE_KEYS.lastWeather, [entry]);
+}
+
+function initialState(place) {
+  const persisted = place ? readPersisted(place.id) : null;
+  return {
+    placeId: place?.id ?? null,
+    data: persisted?.data ?? null,
+    fetchedAt: persisted?.fetchedAt ?? null,
+    fromPreviousSession: Boolean(persisted),
+    status: place ? "loading" : "idle",
+    error: null,
+    wakingUp: false,
+  };
 }
 
 /**
- * @param {string|undefined} apiUrl
+ * Pronóstico para una localidad, con:
+ * - cancelación al cambiar de localidad (respuestas viejas nunca pisan nuevas),
+ * - caché de sesión para alternar entre favoritos al instante,
+ * - últimos datos persistidos para mostrar algo útil mientras el servidor arranca,
+ * - aviso de "servidor iniciándose" y recarga manual / al volver a la pestaña.
+ *
+ * @param {import("../domain/location.js").Place | null} place
  */
-export function useWeather(apiUrl) {
-  const [weatherData, setWeatherData] = useState(null);
-  const [error, setError] = useState(null);
-  const [showErrorModal, setShowErrorModal] = useState(false);
-  const [loading, setLoading] = useState(true);
-  // true cuando la petición se está demorando por el cold start de Render.
-  const [wakingUp, setWakingUp] = useState(false);
+export function useWeather(place) {
+  const [state, setState] = useState(() => initialState(place));
+  const [reloadToken, setReloadToken] = useState(0);
+  const forceRef = useRef(false);
+  const fetchedAtRef = useRef(state.fetchedAt);
+  fetchedAtRef.current = state.fetchedAt;
 
-  const lastLocationRef = useRef(null);
-  const activeControllerRef = useRef(null);
-  const wakingTimerRef = useRef(null);
-
-  const clearWakingTimer = useCallback(() => {
-    if (wakingTimerRef.current) {
-      clearTimeout(wakingTimerRef.current);
-      wakingTimerRef.current = null;
-    }
-  }, []);
-
-  const beginLoading = useCallback(() => {
-    setLoading(true);
-    setWakingUp(false);
-    clearWakingTimer();
-    // Si tarda más de lo normal, avisamos "servidor despertando" sin mostrar error.
-    wakingTimerRef.current = setTimeout(
-      () => setWakingUp(true),
-      COLD_START_HINT_MS
-    );
-  }, [clearWakingTimer]);
-
-  const endLoading = useCallback(() => {
-    clearWakingTimer();
-    setLoading(false);
-    setWakingUp(false);
-  }, [clearWakingTimer]);
-
-  const loadWeatherForCity = useCallback(
-    async (location) => {
-      const normalized = normalizeLocation(location);
-      if (!normalized || !apiUrl) return;
-
-      // Cancela una búsqueda anterior en curso (cambio rápido de ubicación).
-      activeControllerRef.current?.abort();
-      const controller = new AbortController();
-      activeControllerRef.current = controller;
-
-      lastLocationRef.current = location;
-      beginLoading();
-
-      try {
-        const data = await fetchWeatherBundle(apiUrl, normalized.request, {
-          signal: controller.signal,
-          onWakingUp: () => setWakingUp(true),
-        });
-        setWeatherData(data);
-        setError(null);
-        setShowErrorModal(false);
-      } catch (err) {
-        if (controller.signal.aborted) return; // reemplazada por otra búsqueda
-        setError(err?.message || "Error al obtener datos");
-        setShowErrorModal(true);
-      } finally {
-        if (activeControllerRef.current === controller) endLoading();
-      }
-    },
-    [apiUrl, beginLoading, endLoading]
-  );
+  const placeId = place?.id ?? null;
+  const latitude = place?.latitude;
+  const longitude = place?.longitude;
 
   useEffect(() => {
-    if (!apiUrl) {
-      setLoading(false);
-      setError("API no configurada");
-      setShowErrorModal(true);
-      return;
+    if (!placeId) return undefined;
+
+    const force = forceRef.current;
+    forceRef.current = false;
+
+    const cached = sessionCache.get(placeId);
+    if (!force && cached && Date.now() - cached.fetchedAt < SESSION_FRESH_MS) {
+      setState({
+        placeId,
+        data: cached.data,
+        fetchedAt: cached.fetchedAt,
+        fromPreviousSession: false,
+        status: "success",
+        error: null,
+        wakingUp: false,
+      });
+      return undefined;
     }
 
-    let cancelled = false;
     const controller = new AbortController();
+    setState((prev) => {
+      if (prev.placeId === placeId) return { ...prev, status: "loading", error: null, wakingUp: false };
+      const persisted = readPersisted(placeId);
+      return {
+        placeId,
+        data: cached?.data ?? persisted?.data ?? null,
+        fetchedAt: cached?.fetchedAt ?? persisted?.fetchedAt ?? null,
+        fromPreviousSession: !cached && Boolean(persisted),
+        status: "loading",
+        error: null,
+        wakingUp: false,
+      };
+    });
 
-    (async () => {
-      // Despierta Render en paralelo (no bloquea, no gasta rate-limit).
-      warmUpServer(apiUrl, { signal: controller.signal });
+    const markWaking = () => {
+      if (!controller.signal.aborted) setState((prev) => (prev.wakingUp ? prev : { ...prev, wakingUp: true }));
+    };
+    const wakingTimer = setTimeout(markWaking, COLD_START_HINT_MS);
 
-      beginLoading();
-      try {
-        const city = await fetchCityFromIp(apiUrl, {
-          signal: controller.signal,
-          onWakingUp: () => {
-            if (!cancelled) setWakingUp(true);
-          },
+    fetchWeather({ latitude, longitude }, { signal: controller.signal, onWakingUp: markWaking })
+      .then((data) => {
+        if (controller.signal.aborted) return;
+        const fetchedAt = Date.now();
+        sessionCache.set(placeId, { data, fetchedAt });
+        writePersisted({ placeId, fetchedAt, data });
+        setState({
+          placeId,
+          data,
+          fetchedAt,
+          fromPreviousSession: false,
+          status: "success",
+          error: null,
+          wakingUp: false,
         });
-        if (cancelled) return;
-        await loadWeatherForCity(city || FALLBACK_CITY);
-      } catch {
-        // Falló la geolocalización -> usamos la ciudad por defecto.
-        // loadWeatherForCity maneja su propio error/modal internamente.
-        if (!cancelled) await loadWeatherForCity(FALLBACK_CITY);
-      }
-    })();
+      })
+      .catch((error) => {
+        if (controller.signal.aborted || error?.name === "AbortError") return;
+        setState((prev) => ({ ...prev, status: "error", error, wakingUp: false }));
+      })
+      .finally(() => clearTimeout(wakingTimer));
 
     return () => {
-      cancelled = true;
       controller.abort();
-      activeControllerRef.current?.abort();
-      clearWakingTimer();
+      clearTimeout(wakingTimer);
     };
-  }, [apiUrl, loadWeatherForCity, beginLoading, clearWakingTimer]);
+  }, [placeId, latitude, longitude, reloadToken]);
 
-  const handleCloseModal = useCallback(() => {
-    setShowErrorModal(false);
-    setError(null);
+  const reload = useCallback(() => {
+    forceRef.current = true;
+    setReloadToken((t) => t + 1);
   }, []);
 
-  const handleRetry = useCallback(() => {
-    handleCloseModal();
-    loadWeatherForCity(lastLocationRef.current || FALLBACK_CITY);
-  }, [loadWeatherForCity, handleCloseModal]);
+  // Al volver a la pestaña después de un rato, actualizamos solos.
+  useEffect(() => {
+    const onVisible = () => {
+      if (document.visibilityState !== "visible") return;
+      const fetchedAt = fetchedAtRef.current;
+      if (fetchedAt && Date.now() - fetchedAt > REFRESH_ON_FOCUS_MS) reload();
+    };
+    document.addEventListener("visibilitychange", onVisible);
+    return () => document.removeEventListener("visibilitychange", onVisible);
+  }, [reload]);
 
+  // Si el estado todavía corresponde a otra localidad, no lo exponemos.
+  const matches = state.placeId === placeId;
   return {
-    weatherData,
-    error,
-    showErrorModal,
-    loading,
-    wakingUp,
-    fetchWeatherData: loadWeatherForCity,
-    handleCloseModal,
-    handleRetry,
+    data: matches ? state.data : null,
+    fetchedAt: matches ? state.fetchedAt : null,
+    fromPreviousSession: matches && state.fromPreviousSession,
+    status: matches ? state.status : "loading",
+    error: matches ? state.error : null,
+    wakingUp: matches && state.wakingUp,
+    reload,
   };
 }

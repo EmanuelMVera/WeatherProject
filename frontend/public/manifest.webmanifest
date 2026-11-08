@@ -1,0 +1,14 @@
+{
+  "name": "Buen Clima",
+  "short_name": "Buen Clima",
+  "description": "Tu pronóstico, claro y sin vueltas.",
+  "lang": "es-AR",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b1530",
+  "theme_color": "#0b1530",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}

@@ -1,26 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { MIN_QUERY_LENGTH, searchPlaces } from "../services/geoClient.js";
 
-const DEBOUNCE_MS = 300;
+export const DEBOUNCE_MS = 300;
 
 /**
- * Lógica del buscador predictivo de ubicaciones: debounce, cancelación de
- * peticiones en vuelo y navegación por teclado.
- *
- * @returns {{
- *   query: string,
- *   results: import("../services/geoClient.js").Place[],
- *   open: boolean,
- *   activeIndex: number,
- *   loading: boolean,
- *   error: string | null,
- *   onQueryChange: (value: string) => void,
- *   openList: () => void,
- *   closeList: () => void,
- *   moveActive: (delta: number) => void,
- *   selectAt: (index: number) => (import("../services/geoClient.js").Place | null),
- *   clear: () => void,
- * }}
+ * Lógica del buscador predictivo: debounce, cancelación de peticiones en
+ * vuelo y descarte de respuestas viejas (cada búsqueda tiene un id; sólo la
+ * última puede actualizar el estado).
  */
 export function useLocationSearch() {
   const [query, setQuery] = useState("");
@@ -32,43 +18,41 @@ export function useLocationSearch() {
 
   const debounceRef = useRef(null);
   const controllerRef = useRef(null);
+  const requestIdRef = useRef(0);
 
   const cancelPending = useCallback(() => {
-    if (debounceRef.current) {
-      clearTimeout(debounceRef.current);
-      debounceRef.current = null;
-    }
+    clearTimeout(debounceRef.current);
+    debounceRef.current = null;
     controllerRef.current?.abort();
     controllerRef.current = null;
+    requestIdRef.current += 1; // invalida cualquier respuesta en vuelo
   }, []);
 
-  // Limpieza al desmontar.
   useEffect(() => cancelPending, [cancelPending]);
 
   const runSearch = useCallback((term) => {
-    controllerRef.current?.abort();
+    const requestId = ++requestIdRef.current;
     const controller = new AbortController();
     controllerRef.current = controller;
-
-    setLoading(true);
-    setError(null);
+    const isCurrent = () => requestId === requestIdRef.current && !controller.signal.aborted;
 
     searchPlaces(term, { signal: controller.signal })
       .then((places) => {
-        if (controller.signal.aborted) return;
+        if (!isCurrent()) return;
         setResults(places);
         setActiveIndex(places.length > 0 ? 0 : -1);
+        setError(null);
         setOpen(true);
       })
       .catch((err) => {
-        if (controller.signal.aborted) return;
+        if (!isCurrent()) return;
         setResults([]);
         setActiveIndex(-1);
-        setError(err?.message || "Error al buscar ubicaciones.");
+        setError(err?.message || "No pudimos buscar localidades.");
         setOpen(true);
       })
       .finally(() => {
-        if (!controller.signal.aborted) setLoading(false);
+        if (isCurrent()) setLoading(false);
       });
   }, []);
 
@@ -76,7 +60,6 @@ export function useLocationSearch() {
     (value) => {
       setQuery(value);
       cancelPending();
-
       const term = value.trim();
       if (term.length < MIN_QUERY_LENGTH) {
         setResults([]);
@@ -86,7 +69,6 @@ export function useLocationSearch() {
         setOpen(false);
         return;
       }
-
       setLoading(true);
       setOpen(true);
       debounceRef.current = setTimeout(() => runSearch(term), DEBOUNCE_MS);
@@ -110,23 +92,6 @@ export function useLocationSearch() {
     [results.length]
   );
 
-  const selectAt = useCallback(
-    (index) => {
-      const place = results[index] || null;
-      if (place) {
-        cancelPending();
-        setQuery(place.label);
-        setResults([]);
-        setActiveIndex(-1);
-        setOpen(false);
-        setError(null);
-        setLoading(false);
-      }
-      return place;
-    },
-    [results, cancelPending]
-  );
-
   const clear = useCallback(() => {
     cancelPending();
     setQuery("");
@@ -136,6 +101,16 @@ export function useLocationSearch() {
     setError(null);
     setLoading(false);
   }, [cancelPending]);
+
+  /** Devuelve el resultado elegido y limpia el buscador. */
+  const selectAt = useCallback(
+    (index) => {
+      const place = results[index] ?? null;
+      if (place) clear();
+      return place;
+    },
+    [results, clear]
+  );
 
   return {
     query,

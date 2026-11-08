@@ -1,43 +1,75 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="es-AR">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Check real-time weather forecasts and hourly conditions for any city worldwide. Lugia provides accurate weather data with a beautiful, intuitive interface." />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#1f2937" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    
-    <!-- Open Graph / Social Media -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Buen Clima · Tu pronóstico, claro y sin vueltas</title>
+    <meta
+      name="description"
+      content="Clima actual, pronóstico por hora y de 7 días, lluvia, índice UV, alertas oficiales del SMN y recomendaciones para salir. Para cualquier ciudad del mundo."
+    />
+    <meta name="theme-color" content="#0b1530" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="robots" content="index, follow" />
+    <meta name="application-name" content="Buen Clima" />
+    <meta name="apple-mobile-web-app-title" content="Buen Clima" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="canonical" href="__SITE_URL__/" />
+
+    <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Lugia - Weather Forecast" />
-    <meta property="og:description" content="Check real-time weather forecasts and hourly conditions for any city worldwide." />
-    <meta property="og:url" content="https://yoursite.com" />
-    <meta property="og:image" content="/weather-icon.svg" />
-    
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:site_name" content="Buen Clima" />
+    <meta property="og:title" content="Buen Clima · Tu pronóstico, claro y sin vueltas" />
+    <meta
+      property="og:description"
+      content="Clima actual, pronóstico por hora y de 7 días, lluvia, UV y alertas oficiales, en una vista clara."
+    />
+    <meta property="og:url" content="__SITE_URL__/" />
+    <meta property="og:image" content="__SITE_URL__/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Buen Clima: tarjeta de clima actual sobre un paisaje de montañas al atardecer" />
+
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Lugia - Weather Forecast" />
-    <meta name="twitter:description" content="Check real-time weather forecasts and hourly conditions for any city worldwide." />
-    <meta name="twitter:image" content="/weather-icon.svg" />
-    
-    <!-- Canonical & Preconnect -->
-    <link rel="canonical" href="https://yoursite.com" />
+    <meta name="twitter:title" content="Buen Clima · Tu pronóstico, claro y sin vueltas" />
+    <meta
+      name="twitter:description"
+      content="Clima actual, pronóstico por hora y de 7 días, lluvia, UV y alertas oficiales, en una vista clara."
+    />
+    <meta name="twitter:image" content="__SITE_URL__/og-image.png" />
+
+    <!-- Conexiones anticipadas a la búsqueda de localidades -->
+    <link rel="preconnect" href="https://geocoding-api.open-meteo.com" crossorigin />
+
+    <!-- Tipografía: Inter (display=swap para no bloquear el texto) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" as="style" />
+    <!-- Carga no bloqueante: el texto se muestra enseguida con la fuente del sistema. -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
-      rel="stylesheet"
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'"
     />
-    
-    <!-- DNS prefetch for API -->
-    <link rel="dns-prefetch" href="http://localhost:5000" />
-    
-    <link rel="icon" type="image/svg+xml" href="/weather-icon.svg" />
-    <title>Buen Clima</title>
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      />
+    </noscript>
   </head>
   <body>
+    <noscript>
+      <p style="padding: 1rem; color: #fff; background: #0b1530">
+        Buen Clima necesita JavaScript para mostrar el pronóstico.
+      </p>
+    </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
